@@ -3,41 +3,128 @@ extends CharacterBody2D
 
 @export_group("Physics Variables")
 @export_subgroup("Velocity and Acceleration")
-var linearVelocity : float = 0.0
-var angularVelocity : float = 0.0
-var linearAcceleration : float = 0.0
-var angularAcceleration : float = 0.0
+var angle : float = 0.0
+var linearVelocity : float = 0.0:
+	set(value):
+		var mv : float = maximumLinearVelocity if (turningSlowdownRatio <= 0) else maximumLinearVelocity*(1.0 - turningSlowdownRatio*abs(angularVelocity/maximumAngularVelocity))
+		linearVelocity = clamp(value, -mv, mv)
+	get():
+		var mv : float = maximumLinearVelocity if (turningSlowdownRatio <= 0) else maximumLinearVelocity*(1.0 - turningSlowdownRatio*abs(angularVelocity/maximumAngularVelocity))
+		return clamp(linearVelocity, -mv, mv)
+var angularVelocity : float = 0.0:
+	set(value):
+		angularVelocity = clamp(value, -maximumAngularVelocity, maximumAngularVelocity)
+	get():
+		return clamp(angularVelocity, -maximumAngularVelocity, maximumAngularVelocity)
+var linearAcceleration : float = 0.0:
+	set(value):
+		linearAcceleration = clamp(value, -maximumLinearAcceleration, maximumLinearAcceleration)
+	get():
+		return clamp(linearAcceleration, -maximumLinearAcceleration, maximumLinearAcceleration)
+var angularAcceleration : float = 0.0:
+	set(value):
+		angularAcceleration = clamp(value, -maximumAngularAcceleration, maximumAngularAcceleration)
+	get():
+		return clamp(angularAcceleration, -maximumAngularAcceleration, maximumAngularAcceleration)
 
 @export_range(0.0, 1000.0) var maximumLinearVelocity : float = 0.0
 @export_range(0.0, 1000.0) var maximumAngularVelocity : float = 0.0
-@export_range(0.0, 1000.0) var maximumLinearAcceleration : float = 0.0
-@export_range(0.0, 1000.0) var maximumAngularAcceleration : float = 0.0
+@export_range(0.0, 10000.0) var maximumLinearAcceleration : float = 0.0
+@export_range(0.0, 10000.0) var maximumAngularAcceleration : float = 0.0
+@export_range(0.0, 10000.0) var linearFriction : float = 0.0
+@export_range(0.0, 10000.0) var angularFriction : float = 0.0
 @export_range(0.0, 1.0) var turningSlowdownRatio : float = 0.0 # 0.0 = don't slow down at all, 1.0 = stop to turn
 
-@export_subgroup("Jerk")
+@export_subgroup("Acceleration Curves")
 
-var linearJerk : float = 0.0 # set in code
-var angularJerk : float = 0.0 # set in code
+var linearAccelerationTimer : float = 0.0:
+	set(value):
+		linearAccelerationTimer = clamp(value, -linearAccelerationTime, linearAccelerationTime)
+	get():
+		return clamp(linearAccelerationTimer, -linearAccelerationTime, linearAccelerationTime)
+var angularAccelerationTimer : float = 0.0:
+	set(value):
+		angularAccelerationTimer = clamp(value, -angularAccelerationTime, angularAccelerationTime)
+	get():
+		return clamp(angularAccelerationTimer, -angularAccelerationTime, angularAccelerationTime)
 
-var jerkLinearAccelerateTimer : float = 0.0
-var jerkLinearDeccelerateTimer : float = 0.0
-var jerkAngularAccelerateTimer : float = 0.0
-var jerkAngularDeccelerateTimer : float = 0.0
-
-@export_range(0.0, 10.0) var jerkLinearAccelerateTime : float = 1.0
-@export var jerkLinearAccelerateCurve : Curve
-@export_range(0.0, 10.0) var jerkLinearDeccelerateTime : float = 1.0
-@export var jerkLinearDeccelerateCurve : Curve
-@export_range(0.0, 10.0) var jerkAngularAccelerateTime : float = 1.0
-@export var jerkAngularAccelerateCurve : Curve
-@export_range(0.0, 10.0) var jerkAngularDeccelerateTime : float = 1.0
-@export var jerkAngularDeccelerateCurve : Curve
+@export_range(0.0, 10.0) var linearAccelerationTime : float = 1.0
+@export var linearAccelerationCurve : Curve
+@export_range(0.0, 10.0) var angularAccelerationTime : float = 1.0
+@export var angularAccelerationCurve : Curve
 
 @export_group("Object References")
-
+@export var shipInput : ShipInput
 
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	
+	## handle angle stuff
+	
+	var turnInput : float = shipInput.input.x
+	
+	# find curve amount
+	
+	if abs(turnInput) > 0:
+		angularAccelerationTimer += delta * turnInput
+	else:
+		angularAccelerationTimer -= delta * sign(angularVelocity)
+	
+	var aaccelCurveValue = angularAccelerationCurve.sample(abs(angularAccelerationTimer)/angularAccelerationTime)*sign(angularAccelerationTimer)
+	
+	# turn stuff
+	
+	if abs(turnInput) > 0:
+		if angularVelocity == 0 or sign(angularVelocity) == sign(angularAcceleration):
+			angularAcceleration = maximumAngularAcceleration * aaccelCurveValue
+		else:
+			angularAcceleration = (maximumAngularAcceleration*2.0 + angularFriction) * aaccelCurveValue
+		angularVelocity += angularAcceleration * delta
+	else:
+		angularAccelerationTimer = 0
+		angularAcceleration = angularFriction * -sign(angularVelocity)
+		if (sign(angularVelocity) != sign(angularVelocity + angularAcceleration * delta) or angularVelocity == 0.0):
+			angularVelocity = 0.0
+			angularAcceleration = 0.0
+		else:
+			angularVelocity += angularAcceleration * delta
+	
+	## handle linear velocity
+	
+	var thrustInput : float = -shipInput.input.y
+	
+	# find curve amount
+	
+	if abs(thrustInput) > 0:
+		linearAccelerationTimer += delta * thrustInput
+	
+	var laccelCurveValue = linearAccelerationCurve.sample(abs(linearAccelerationTimer)/linearAccelerationTime)*sign(linearAccelerationTimer)
+	
+	# thrust stuff
+	
+	if abs(thrustInput) > 0:
+		if linearVelocity == 0 or sign(linearVelocity) == sign(linearAcceleration):
+			linearAcceleration = maximumLinearAcceleration * laccelCurveValue
+		else:
+			linearAcceleration = (maximumLinearAcceleration*2.0 + linearFriction) * laccelCurveValue
+		linearVelocity += linearAcceleration * delta
+	else:
+		linearAccelerationTimer = 0
+		linearAcceleration = linearFriction * -sign(linearVelocity)
+		if (sign(linearVelocity) != sign(linearVelocity + linearAcceleration * delta) or linearVelocity == 0.0):
+			linearVelocity = 0.0
+			linearAcceleration = 0.0
+		else:
+			linearVelocity += linearAcceleration * delta
+	
+	#print("linear accel: %.02f, linear velocity: %.02f" % [linearAcceleration, linearVelocity])
+	
+	## actually move
+	
+	angle += angularVelocity * delta
+	rotation_degrees = angle
+	velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
+	
 	move_and_slide()

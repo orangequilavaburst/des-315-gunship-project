@@ -11,10 +11,18 @@ config_version=5
 [application]
 
 config/name="DES-315 Gunship Project"
+run/main_scene="res://Scenes/game_scene.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Sprites/icon.svg"
+
+[display]
+
+window/size/viewport_width=256
+window/size/viewport_height=240
+window/stretch/mode="viewport"
 
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
