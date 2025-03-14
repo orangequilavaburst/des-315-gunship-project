@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bum7516hd3eo3"]
+
+[ext_resource type="FontFile" uid="uid://ohvq3s440tvu" path="res://Fonts/NES Font/nintendo-nes-font.ttf" id="1_oysc4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4uhv"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2hou"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2m1pr"]
+bg_color = Color(1, 1, 1, 1)
+
+[resource]
+default_font = ExtResource("1_oysc4")
+default_font_size = 8
+Label/font_sizes/font_size = 8
+Panel/styles/panel = SubResource("StyleBoxFlat_g4uhv")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_v2hou")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_2m1pr")

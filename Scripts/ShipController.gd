@@ -1,8 +1,8 @@
 class_name ShipController
 extends CharacterBody2D
 
-@export_group("Physics Variables")
-@export_subgroup("Velocity and Acceleration")
+#@export_group("Physics Variables")
+#@export_subgroup("Velocity and Acceleration")
 var angle : float = 0.0
 var linearVelocity : float = 0.0:
 	set(value):
@@ -27,15 +27,22 @@ var angularAcceleration : float = 0.0:
 	get():
 		return clamp(angularAcceleration, -maximumAngularAcceleration, maximumAngularAcceleration)
 
-@export_range(0.0, 1000.0) var maximumLinearVelocity : float = 0.0
-@export_range(0.0, 1000.0) var maximumAngularVelocity : float = 0.0
-@export_range(0.0, 10000.0) var maximumLinearAcceleration : float = 0.0
-@export_range(0.0, 10000.0) var maximumAngularAcceleration : float = 0.0
-@export_range(0.0, 10000.0) var linearFriction : float = 0.0
-@export_range(0.0, 10000.0) var angularFriction : float = 0.0
-@export_range(0.0, 1.0) var turningSlowdownRatio : float = 0.0 # 0.0 = don't slow down at all, 1.0 = stop to turn
+#@export_range(0.0, 1000.0) 
+var maximumLinearVelocity : float = 0.0
+#@export_range(0.0, 1000.0) 
+var maximumAngularVelocity : float = 0.0
+#@export_range(0.0, 10000.0) 
+var maximumLinearAcceleration : float = 0.0
+#@export_range(0.0, 10000.0) 
+var maximumAngularAcceleration : float = 0.0
+#@export_range(0.0, 10000.0) 
+var linearFriction : float = 0.0
+#@export_range(0.0, 10000.0) 
+var angularFriction : float = 0.0
+#@export_range(0.0, 1.0) 
+var turningSlowdownRatio : float = 0.0 # 0.0 = don't slow down at all, 1.0 = stop to turn
 
-@export_subgroup("Acceleration Curves")
+#@export_subgroup("Acceleration Curves")
 
 var linearAccelerationTimer : float = 0.0:
 	set(value):
@@ -48,15 +55,38 @@ var angularAccelerationTimer : float = 0.0:
 	get():
 		return clamp(angularAccelerationTimer, -angularAccelerationTime, angularAccelerationTime)
 
-@export_range(0.0, 10.0) var linearAccelerationTime : float = 1.0
-@export var linearAccelerationCurve : Curve
-@export_range(0.0, 10.0) var angularAccelerationTime : float = 1.0
-@export var angularAccelerationCurve : Curve
+#@export_range(0.0, 10.0) 
+var linearAccelerationTime : float = 1.0
+#@export 
+var linearAccelerationCurve : Curve
+#@export_range(0.0, 10.0) 
+var angularAccelerationTime : float = 1.0
+#@export 
+var angularAccelerationCurve : Curve
 
 @export_group("Object References")
 @export var shipInput : ShipInput
+@export var shipSettings : ShipSettings
+@export var collisionShape : CollisionShape2D
 
 func _ready() -> void:
+	
+	assert(shipInput != null and shipSettings != null and collisionShape != null)
+	
+	maximumLinearVelocity = shipSettings.maximumLinearVelocity
+	maximumAngularVelocity = shipSettings.maximumAngularVelocity
+	maximumLinearAcceleration = shipSettings.maximumLinearAcceleration
+	maximumAngularAcceleration = shipSettings.maximumAngularAcceleration
+	linearFriction = shipSettings.linearFriction
+	angularFriction = shipSettings.angularFriction
+	turningSlowdownRatio = shipSettings.turningSlowdownRatio
+	linearAccelerationTime = shipSettings.linearAccelerationTime
+	linearAccelerationCurve = shipSettings.linearAccelerationCurve
+	angularAccelerationTime = shipSettings.linearAccelerationTime
+	angularAccelerationCurve = shipSettings.angularAccelerationCurve
+	
+	collisionShape.shape = shipSettings.collisionShape
+	
 	pass
 
 func _physics_process(delta: float) -> void:

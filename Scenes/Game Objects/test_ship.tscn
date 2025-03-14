@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://egqbdmophtov"]
+
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
+[ext_resource type="Texture2D" uid="uid://dqan8rl1nnded" path="res://Sprites/Gunships/Players/gunship_player_j8-bit.png" id="2_e6ub6"]
+[ext_resource type="Texture2D" uid="uid://csmhnousfgh1a" path="res://Sprites/Icons/icon_player_placeholder.png" id="2_ekxah"]
+[ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="2_jtsub"]
+[ext_resource type="Script" path="res://Scripts/PlayerInput.gd" id="3_fwrla"]
+
+[sub_resource type="Curve" id="Curve_fr100"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7fh4"]
+radius = 8.0
+
+[sub_resource type="Curve" id="Curve_sb3da"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_uupth"]
+script = ExtResource("2_jtsub")
+playerName = "Test"
+playerShipSprite = ExtResource("2_e6ub6")
+playerIconSprite = ExtResource("2_ekxah")
+maximumLinearVelocity = 100.0
+maximumAngularVelocity = 200.0
+maximumLinearAcceleration = 1000.0
+maximumAngularAcceleration = 2000.0
+linearFriction = 100.0
+angularFriction = 1000.0
+turningSlowdownRatio = 0.25
+linearAccelerationTime = 1.0
+linearAccelerationCurve = SubResource("Curve_sb3da")
+angularAccelerationTime = 0.5
+angularAccelerationCurve = SubResource("Curve_fr100")
+collisionShape = SubResource("CircleShape2D_k7fh4")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
+radius = 8.0
+
+[node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape")]
+motion_mode = 1
+script = ExtResource("1_rkgt1")
+shipInput = NodePath("Ship Input")
+shipSettings = SubResource("Resource_uupth")
+collisionShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wn53n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_e6ub6")
+
+[node name="Ship Input" type="Node2D" parent="."]
+script = ExtResource("3_fwrla")
