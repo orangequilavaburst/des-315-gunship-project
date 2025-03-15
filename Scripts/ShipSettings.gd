@@ -19,3 +19,4 @@ extends Resource
 
 @export_group("Miscellaneous")
 @export var collisionShape : Shape2D
+@export_range(1.0, 10000.0) var maxHealth : float

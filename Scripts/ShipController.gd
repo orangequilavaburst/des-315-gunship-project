@@ -1,9 +1,15 @@
 class_name ShipController
 extends CharacterBody2D
 
+signal ship_settings_changed(new_settings)
+
 #@export_group("Physics Variables")
 #@export_subgroup("Velocity and Acceleration")
-var angle : float = 0.0
+var angle : float = 0.0:
+	set(value):
+		angle = fmod(value + 360.0, 360.0)
+	get():
+		return fmod(angle + 360.0, 360.0)
 var linearVelocity : float = 0.0:
 	set(value):
 		var mv : float = maximumLinearVelocity if (turningSlowdownRatio <= 0) else maximumLinearVelocity*(1.0 - turningSlowdownRatio*abs(angularVelocity/maximumAngularVelocity))
@@ -66,26 +72,19 @@ var angularAccelerationCurve : Curve
 
 @export_group("Object References")
 @export var shipInput : ShipInput
-@export var shipSettings : ShipSettings
+@export var shipSettings : ShipSettings:
+	set(value):
+		shipSettings = value
+		if shipSettings != null:
+			apply_settings(shipSettings)
+		ship_settings_changed.emit(shipSettings)
 @export var collisionShape : CollisionShape2D
+@export var health : Health
+@export var shipSprite : Sprite2D
 
 func _ready() -> void:
 	
-	assert(shipInput != null and shipSettings != null and collisionShape != null)
-	
-	maximumLinearVelocity = shipSettings.maximumLinearVelocity
-	maximumAngularVelocity = shipSettings.maximumAngularVelocity
-	maximumLinearAcceleration = shipSettings.maximumLinearAcceleration
-	maximumAngularAcceleration = shipSettings.maximumAngularAcceleration
-	linearFriction = shipSettings.linearFriction
-	angularFriction = shipSettings.angularFriction
-	turningSlowdownRatio = shipSettings.turningSlowdownRatio
-	linearAccelerationTime = shipSettings.linearAccelerationTime
-	linearAccelerationCurve = shipSettings.linearAccelerationCurve
-	angularAccelerationTime = shipSettings.linearAccelerationTime
-	angularAccelerationCurve = shipSettings.angularAccelerationCurve
-	
-	collisionShape.shape = shipSettings.collisionShape
+	apply_settings(shipSettings)
 	
 	pass
 
@@ -93,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	
 	## handle angle stuff
 	
-	var turnInput : float = shipInput.input.x
+	var turnInput : float = shipInput.input.x if (health == null or health != null and health.healthState == Health.HealthState.ALIVE) else 0.0
 	
 	# find curve amount
 	
@@ -123,7 +122,7 @@ func _physics_process(delta: float) -> void:
 	
 	## handle linear velocity
 	
-	var thrustInput : float = -shipInput.input.y
+	var thrustInput : float = -shipInput.input.y if (health == null or health != null and health.healthState == Health.HealthState.ALIVE) else 0.0
 	
 	# find curve amount
 	
@@ -158,3 +157,27 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
 	
 	move_and_slide()
+
+func apply_settings(settings : ShipSettings) -> void:
+	#assert(shipInput != null and settings != null and collisionShape != null)
+	
+	maximumLinearVelocity = settings.maximumLinearVelocity
+	maximumAngularVelocity = settings.maximumAngularVelocity
+	maximumLinearAcceleration = settings.maximumLinearAcceleration
+	maximumAngularAcceleration = settings.maximumAngularAcceleration
+	linearFriction = settings.linearFriction
+	angularFriction = settings.angularFriction
+	turningSlowdownRatio = settings.turningSlowdownRatio
+	linearAccelerationTime = settings.linearAccelerationTime
+	linearAccelerationCurve = settings.linearAccelerationCurve
+	angularAccelerationTime = settings.linearAccelerationTime
+	angularAccelerationCurve = shipSettings.angularAccelerationCurve
+	
+	if collisionShape != null:
+		collisionShape.shape = settings.collisionShape
+	if health != null:
+		health.set_max_health(settings.maxHealth, true)
+		health.currentHealth = health.maxHealth
+	if shipSprite != null and settings is PlayerShipSettings:
+		shipSprite.texture = settings.playerShipSprite
+	

@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://dd425o17e840r"]
+
+[ext_resource type="Texture2D" uid="uid://csmhnousfgh1a" path="res://Sprites/Icons/icon_player_placeholder.png" id="1_q5do1"]
+[ext_resource type="Texture2D" uid="uid://b6dvmqfupor8w" path="res://Sprites/Gunships/Players/gunship_player_keaton.png" id="2_74dly"]
+[ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_ixw05"]
+
+[sub_resource type="Curve" id="Curve_5gjpg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.82711, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7fh4"]
+
+[sub_resource type="Curve" id="Curve_yvtvy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.98115, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("3_ixw05")
+playerName = "Keaton"
+playerShipSprite = ExtResource("2_74dly")
+playerIconSprite = ExtResource("1_q5do1")
+maximumLinearVelocity = 150.0
+maximumAngularVelocity = 100.0
+maximumLinearAcceleration = 250.0
+maximumAngularAcceleration = 2000.0
+linearFriction = 75.0
+angularFriction = 750.0
+turningSlowdownRatio = 0.0
+linearAccelerationTime = 1.5
+linearAccelerationCurve = SubResource("Curve_yvtvy")
+angularAccelerationTime = 0.25
+angularAccelerationCurve = SubResource("Curve_5gjpg")
+collisionShape = SubResource("CircleShape2D_k7fh4")
+maxHealth = 150.0

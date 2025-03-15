@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://g2ahncgdcfp3"]
+
+[ext_resource type="Texture2D" uid="uid://cdlu3g8oh5pqc" path="res://Sprites/Gunships/Players/gunship_player_flapjack.png" id="1_qgs6j"]
+[ext_resource type="Texture2D" uid="uid://0nxr7u5qnmtv" path="res://Sprites/Icons/icon_player_flapjack.png" id="2_eq3a5"]
+[ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_ms1gm"]
+
+[sub_resource type="Curve" id="Curve_5gjpg"]
+_data = [Vector2(0, 0), 0.0, 2.41313, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7fh4"]
+radius = 6.0
+
+[sub_resource type="Curve" id="Curve_yvtvy"]
+_data = [Vector2(0, 0), 0.0, 2.38483, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("3_ms1gm")
+playerName = "Flapjack"
+playerShipSprite = ExtResource("1_qgs6j")
+playerIconSprite = ExtResource("2_eq3a5")
+maximumLinearVelocity = 250.0
+maximumAngularVelocity = 500.0
+maximumLinearAcceleration = 2000.0
+maximumAngularAcceleration = 4000.0
+linearFriction = 1000.0
+angularFriction = 2000.0
+turningSlowdownRatio = 0.5
+linearAccelerationTime = 1.0
+linearAccelerationCurve = SubResource("Curve_yvtvy")
+angularAccelerationTime = 1.0
+angularAccelerationCurve = SubResource("Curve_5gjpg")
+collisionShape = SubResource("CircleShape2D_k7fh4")
+maxHealth = 80.0
