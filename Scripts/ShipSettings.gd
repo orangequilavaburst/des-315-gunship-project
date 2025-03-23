@@ -1,6 +1,11 @@
 class_name ShipSettings
 extends Resource
 
+enum ShipControlType {
+	TANK,
+	ASTEROIDS
+}
+
 @export_group("Physics Variables")
 @export_subgroup("Velocity and Acceleration")
 @export_range(0.0, 1000.0) var maximumLinearVelocity : float = 0.0
@@ -20,3 +25,4 @@ extends Resource
 @export_group("Miscellaneous")
 @export var collisionShape : Shape2D
 @export_range(1.0, 10000.0) var maxHealth : float
+@export var controlType : ShipControlType

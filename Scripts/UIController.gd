@@ -1,5 +1,5 @@
 class_name UIController
-extends Node
+extends Control
 
 @export var shipSettingsController : ShipController
 var shipSettings : PlayerShipSettings
@@ -14,6 +14,7 @@ var healthDigits : int:
 @export var playerLabel : Label
 @export var healthLabel : Label
 @export var healthBar : ProgressBar
+#@export var controlLabel : Label
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,6 +26,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	global_position = get_viewport().get_camera_2d().global_position - get_viewport_rect().size/2.0
+	
 	pass
 
 func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
@@ -45,6 +49,7 @@ func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
 func update_player_info() -> void:
 	playerIcon.texture = shipSettings.playerIconSprite
 	playerLabel.text = shipSettings.playerName.to_upper()
+	#controlLabel.text = ShipSettings.ShipControlType.keys()[shipSettings.controlType]
 	pass
 
 func update_health_info(old_health : float = health.currentHealth, new_health : float = health.currentHealth) -> void:

@@ -70,6 +70,8 @@ var angularAccelerationTime : float = 1.0
 #@export 
 var angularAccelerationCurve : Curve
 
+var controlType : ShipSettings.ShipControlType
+
 @export_group("Object References")
 @export var shipInput : ShipInput
 @export var shipSettings : ShipSettings:
@@ -95,11 +97,12 @@ func _physics_process(delta: float) -> void:
 	var turnInput : float = shipInput.input.x if (health == null or health != null and health.healthState == Health.HealthState.ALIVE) else 0.0
 	
 	# find curve amount
-	
+		
 	if abs(turnInput) > 0:
-		angularAccelerationTimer += delta * turnInput
-	else:
-		angularAccelerationTimer -= delta * sign(angularVelocity)
+		if (sign(angularAcceleration) == 0 or sign(turnInput) == sign(angularAcceleration)):
+			angularAccelerationTimer += delta * turnInput
+		else:
+			angularAccelerationTimer = 0
 	
 	var aaccelCurveValue = angularAccelerationCurve.sample(abs(angularAccelerationTimer)/angularAccelerationTime)*sign(angularAccelerationTimer)
 	
@@ -109,7 +112,7 @@ func _physics_process(delta: float) -> void:
 		if angularVelocity == 0 or sign(angularVelocity) == sign(angularAcceleration):
 			angularAcceleration = maximumAngularAcceleration * aaccelCurveValue
 		else:
-			angularAcceleration = (maximumAngularAcceleration*2.0 + angularFriction) * aaccelCurveValue
+			angularAcceleration = (maximumAngularAcceleration + angularFriction) * aaccelCurveValue
 		angularVelocity += angularAcceleration * delta
 	else:
 		angularAccelerationTimer = 0
@@ -127,7 +130,11 @@ func _physics_process(delta: float) -> void:
 	# find curve amount
 	
 	if abs(thrustInput) > 0:
-		linearAccelerationTimer += delta * thrustInput
+		if (sign(linearAcceleration) == 0 or sign(thrustInput) == sign(linearAcceleration)):
+			linearAccelerationTimer += delta * thrustInput
+		else:
+			linearAccelerationTimer = 0
+		
 	
 	var laccelCurveValue = linearAccelerationCurve.sample(abs(linearAccelerationTimer)/linearAccelerationTime)*sign(linearAccelerationTimer)
 	
@@ -137,7 +144,7 @@ func _physics_process(delta: float) -> void:
 		if linearVelocity == 0 or sign(linearVelocity) == sign(linearAcceleration):
 			linearAcceleration = maximumLinearAcceleration * laccelCurveValue
 		else:
-			linearAcceleration = (maximumLinearAcceleration*2.0 + linearFriction) * laccelCurveValue
+			linearAcceleration = (maximumLinearAcceleration + linearFriction) * laccelCurveValue
 		linearVelocity += linearAcceleration * delta
 	else:
 		linearAccelerationTimer = 0
@@ -154,7 +161,18 @@ func _physics_process(delta: float) -> void:
 	
 	angle += angularVelocity * delta
 	rotation_degrees = angle
-	velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
+	#velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
+	
+	if controlType != shipSettings.controlType:
+		controlType = shipSettings.controlType
+	match(controlType):
+		ShipSettings.ShipControlType.TANK:
+			velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
+		ShipSettings.ShipControlType.ASTEROIDS:
+			if abs(thrustInput) > 0:
+				velocity += Vector2.from_angle(deg_to_rad(angle)) * linearAcceleration
+				if velocity.length() > maximumLinearVelocity:
+					velocity = velocity.normalized() * maximumLinearVelocity
 	
 	move_and_slide()
 
@@ -172,6 +190,7 @@ func apply_settings(settings : ShipSettings) -> void:
 	linearAccelerationCurve = settings.linearAccelerationCurve
 	angularAccelerationTime = settings.linearAccelerationTime
 	angularAccelerationCurve = shipSettings.angularAccelerationCurve
+	controlType = shipSettings.controlType
 	
 	if collisionShape != null:
 		collisionShape.shape = settings.collisionShape
