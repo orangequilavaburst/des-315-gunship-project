@@ -22,8 +22,8 @@ position = Vector2(127, 120)
 script = ExtResource("2_addrj")
 focus = NodePath("../Player Ship")
 cameraOffset = Vector2(0, -20)
-maxVelocityOffset = 20.0
-offsetSpeed = 10.0
+maxVelocityOffset = 30.0
+offsetSpeed = 40.0
 
 [node name="UI Panel" parent="." node_paths=PackedStringArray("shipSettingsController") instance=ExtResource("2_ggo0f")]
 anchors_preset = 0

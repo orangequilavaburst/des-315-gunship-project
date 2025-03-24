@@ -173,6 +173,9 @@ func _physics_process(delta: float) -> void:
 				velocity += Vector2.from_angle(deg_to_rad(angle)) * linearAcceleration
 				if velocity.length() > maximumLinearVelocity:
 					velocity = velocity.normalized() * maximumLinearVelocity
+			else:
+				if (velocity.length() - linearFriction*delta) > 0.0:
+					velocity = velocity.normalized() * max(0.0, velocity.length() - linearFriction*delta)
 	
 	move_and_slide()
 
