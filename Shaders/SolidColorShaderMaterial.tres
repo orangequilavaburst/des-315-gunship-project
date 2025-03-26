@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://x4rcgui1tl6d"]
+
+[ext_resource type="Shader" path="res://Shaders/SolidColorShader.gdshader" id="1_j27jl"]
+
+[resource]
+shader = ExtResource("1_j27jl")
+shader_parameter/swapColorEnabled = false
+shader_parameter/swapColorMain = null
+shader_parameter/swapColorAlt = null

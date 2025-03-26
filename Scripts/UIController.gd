@@ -19,7 +19,9 @@ var healthDigits : int:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(shipSettingsController != null)
+	
 	update_ship_settings(shipSettings)
+	
 	shipSettingsController.ship_settings_changed.connect(update_ship_settings)
 	
 	pass # Replace with function body.
@@ -54,9 +56,9 @@ func update_player_info() -> void:
 
 func update_health_info(old_health : float = health.currentHealth, new_health : float = health.currentHealth) -> void:
 	
-	var hpText = "%0" + str(healthDigits) + "d"
-	healthLabel.text = ("HEALTH " + hpText + "/" + hpText) % [health.currentHealth, health.maxHealth]
+	var hpText = "%" + str(healthDigits) + "d"
+	healthLabel.text = ("HEALTH " + hpText + "/" + hpText) % [new_health, health.maxHealth]
 	healthBar.min_value = 0.0
 	healthBar.max_value = health.maxHealth
-	healthBar.value = health.currentHealth
+	healthBar.value = new_health
 	pass

@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 signal ship_settings_changed(new_settings)
 
+@onready var gameManager : GameManager = get_tree().root.get_children()[0].get_children().filter(func(element): return (element is GameManager))[0]
+
 #@export_group("Physics Variables")
 #@export_subgroup("Velocity and Acceleration")
 var angle : float = 0.0:
@@ -32,6 +34,7 @@ var angularAcceleration : float = 0.0:
 		angularAcceleration = clamp(value, -maximumAngularAcceleration, maximumAngularAcceleration)
 	get():
 		return clamp(angularAcceleration, -maximumAngularAcceleration, maximumAngularAcceleration)
+var extraVelocity : Vector2 = Vector2.ZERO # used for pushing
 
 #@export_range(0.0, 1000.0) 
 var maximumLinearVelocity : float = 0.0
@@ -89,8 +92,23 @@ func _ready() -> void:
 	apply_settings(shipSettings)
 	
 	pass
+	
+func _process(delta: float) -> void:
+	delta *= gameManager.deltaTimeMultiplier
+	
 
 func _physics_process(delta: float) -> void:
+	handle_ship_movement(delta, gameManager.deltaTimeMultiplier)
+	
+	move_and_slide()
+
+func handle_ship_movement(delta : float, time_scale : float = 1.0) -> void:
+	
+	if time_scale <= 0.0:
+		return
+	
+	velocity = velocity / time_scale
+	delta *= time_scale
 	
 	## handle angle stuff
 	
@@ -159,6 +177,14 @@ func _physics_process(delta: float) -> void:
 	
 	## actually move
 	
+	# define extra velocity
+	if extraVelocity.length() > 0:
+		var newExVel : Vector2 = extraVelocity.move_toward(Vector2.ZERO, delta*linearFriction)
+		if newExVel.length() > delta:
+			extraVelocity = newExVel
+		else:
+			extraVelocity = Vector2.ZERO
+	
 	angle += angularVelocity * delta
 	rotation_degrees = angle
 	#velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
@@ -167,7 +193,7 @@ func _physics_process(delta: float) -> void:
 		controlType = shipSettings.controlType
 	match(controlType):
 		ShipSettings.ShipControlType.TANK:
-			velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
+			velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity + extraVelocity
 		ShipSettings.ShipControlType.ASTEROIDS:
 			if abs(thrustInput) > 0:
 				velocity += Vector2.from_angle(deg_to_rad(angle)) * linearAcceleration
@@ -176,8 +202,9 @@ func _physics_process(delta: float) -> void:
 			else:
 				if (velocity.length() - linearFriction*delta) > 0.0:
 					velocity = velocity.normalized() * max(0.0, velocity.length() - linearFriction*delta)
-	
-	move_and_slide()
+				velocity += extraVelocity
+				
+	velocity *= time_scale
 
 func apply_settings(settings : ShipSettings) -> void:
 	#assert(shipInput != null and settings != null and collisionShape != null)

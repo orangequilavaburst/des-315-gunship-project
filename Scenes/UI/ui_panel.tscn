@@ -7,7 +7,7 @@
 size = Vector2(32, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8t1g"]
-bg_color = Color(1, 0, 0, 1)
+bg_color = Color(0.847059, 0.156863, 0, 1)
 
 [node name="UI Panel" type="Panel" node_paths=PackedStringArray("playerIcon", "playerLabel", "healthLabel", "healthBar")]
 z_index = 200
@@ -22,7 +22,7 @@ script = ExtResource("2_0s6b4")
 playerIcon = NodePath("Player Icon")
 playerLabel = NodePath("Player Name Label")
 healthLabel = NodePath("Health Label")
-healthBar = NodePath("Health Bar")
+healthBar = NodePath("Health Label/Health Bar")
 
 [node name="Player Icon" type="Sprite2D" parent="."]
 z_index = 1
@@ -33,7 +33,7 @@ texture = SubResource("PlaceholderTexture2D_b5mdn")
 layout_mode = 0
 offset_left = 40.0
 offset_top = 4.0
-offset_right = 168.0
+offset_right = 151.0
 offset_bottom = 12.0
 text = "PLAYERNAME"
 
@@ -41,16 +41,55 @@ text = "PLAYERNAME"
 layout_mode = 0
 offset_left = 40.0
 offset_top = 15.0
-offset_right = 168.0
+offset_right = 151.0
 offset_bottom = 27.0
 text = "HEALTH 000\\000"
 
-[node name="Health Bar" type="ProgressBar" parent="."]
+[node name="Health Bar" type="ProgressBar" parent="Health Label"]
 layout_mode = 0
-offset_left = 39.0
-offset_top = 28.0
-offset_right = 167.0
-offset_bottom = 36.0
+offset_left = -1.0
+offset_top = 13.0
+offset_right = 111.0
+offset_bottom = 21.0
+theme = ExtResource("1_b1fh0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e8t1g")
+value = 100.0
+show_percentage = false
+
+[node name="Weapon Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 16.0
+offset_right = 211.0
+offset_bottom = 24.0
+text = "MAIN"
+vertical_alignment = 1
+
+[node name="Health Bar" type="ProgressBar" parent="Weapon Label"]
+layout_mode = 0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 20.0
+theme = ExtResource("1_b1fh0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_e8t1g")
+value = 100.0
+show_percentage = false
+
+[node name="Subweapon Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 16.0
+offset_right = 252.0
+offset_bottom = 24.0
+text = "SPEC"
+vertical_alignment = 1
+
+[node name="Health Bar" type="ProgressBar" parent="Subweapon Label"]
+layout_mode = 0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 20.0
+theme = ExtResource("1_b1fh0")
 theme_override_styles/fill = SubResource("StyleBoxFlat_e8t1g")
 value = 100.0
 show_percentage = false

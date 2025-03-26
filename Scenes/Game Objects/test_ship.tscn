@@ -22,10 +22,11 @@ shipSprite = NodePath("Sprite2D")
 shape = SubResource("CircleShape2D_wn53n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
 texture = ExtResource("2_e6ub6")
 
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("3_fwrla")
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node2D" parent="."]
 script = ExtResource("6_qpi21")
