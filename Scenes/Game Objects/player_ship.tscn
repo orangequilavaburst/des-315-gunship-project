@@ -1,15 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://egqbdmophtov"]
+[gd_scene load_steps=9 format=3 uid="uid://egqbdmophtov"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="2_53ifd"]
 [ext_resource type="Texture2D" uid="uid://dqan8rl1nnded" path="res://Sprites/Gunships/Players/gunship_player_j8-bit.png" id="2_e6ub6"]
 [ext_resource type="Script" path="res://Scripts/PlayerInput.gd" id="3_fwrla"]
+[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="6_0uf70"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="6_qpi21"]
+[ext_resource type="Resource" uid="uid://dyo3n7s0g4vcq" path="res://Resources/Emitter Settings/basic_player_shot.tres" id="7_it5xa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 8.0
 
-[node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+[node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
+collision_mask = 10
 motion_mode = 1
 script = ExtResource("1_rkgt1")
 shipInput = NodePath("Ship Input")
@@ -17,6 +20,7 @@ shipSettings = ExtResource("2_53ifd")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
+mainWeaponEmitter = NodePath("Main Weapon Emitter")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wn53n")
@@ -30,3 +34,7 @@ script = ExtResource("3_fwrla")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("6_qpi21")
+
+[node name="Main Weapon Emitter" type="Node2D" parent="."]
+script = ExtResource("6_0uf70")
+emitterSettings = ExtResource("7_it5xa")

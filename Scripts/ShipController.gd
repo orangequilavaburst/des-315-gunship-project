@@ -86,6 +86,8 @@ var controlType : ShipSettings.ShipControlType
 @export var collisionShape : CollisionShape2D
 @export var health : Health
 @export var shipSprite : Sprite2D
+@export var mainWeaponEmitter : Emitter
+@export var subWeaponEmitter : Emitter
 
 func _ready() -> void:
 	

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://d4habyr4lifuy"]
 
-[ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/test_ship.tscn" id="1_1xd0m"]
+[ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
 [ext_resource type="Script" path="res://Scripts/ShipCameraController.gd" id="2_addrj"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="2_galva"]

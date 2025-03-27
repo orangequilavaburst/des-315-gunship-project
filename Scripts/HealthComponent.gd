@@ -111,6 +111,7 @@ func set_max_health(new_max : float, do_instaheal : bool = true):
 
 func death() -> void:
 	health_death.emit()
+	get_parent().queue_free()
 
 # debug
 '''

@@ -2,6 +2,7 @@ class_name UIController
 extends Control
 
 @export var shipSettingsController : ShipController
+var mainWeaponEmitter : Emitter
 var shipSettings : PlayerShipSettings
 var health : Health
 var healthDigits : int:
@@ -14,6 +15,7 @@ var healthDigits : int:
 @export var playerLabel : Label
 @export var healthLabel : Label
 @export var healthBar : ProgressBar
+@export var mainWeaponBar : ProgressBar
 #@export var controlLabel : Label
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +33,8 @@ func _process(delta: float) -> void:
 	
 	global_position = get_viewport().get_camera_2d().global_position - get_viewport_rect().size/2.0
 	
+	update_weapon_info()
+	
 	pass
 
 func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
@@ -41,6 +45,7 @@ func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
 	shipSettings = settings
 	health = shipSettingsController.health
 	healthDigits = (log(health.maxHealth) / log(10.0)) + 1 if (health != null) else 1
+	mainWeaponEmitter = shipSettingsController.mainWeaponEmitter
 	
 	if health != null:
 		health.health_changed.connect(update_health_info)
@@ -62,3 +67,9 @@ func update_health_info(old_health : float = health.currentHealth, new_health : 
 	healthBar.max_value = health.maxHealth
 	healthBar.value = new_health
 	pass
+
+func update_weapon_info() -> void:
+	if mainWeaponEmitter != null:
+		mainWeaponBar.min_value = 0.0
+		mainWeaponBar.max_value = mainWeaponEmitter.shootTime
+		mainWeaponBar.value = mainWeaponEmitter.shootTime - mainWeaponEmitter.shootTimer
