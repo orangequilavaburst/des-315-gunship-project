@@ -12,7 +12,7 @@
 [ext_resource type="Resource" uid="uid://ncefhfhuw361" path="res://Resources/Ship Settings/Players/ship_player_isaac.tres" id="9_lnkf1"]
 [ext_resource type="Texture2D" uid="uid://c3gpjfrc14gqb" path="res://Sprites/Backgrounds/bg_stars1.png" id="9_uh7mo"]
 [ext_resource type="Resource" uid="uid://cuf6y0prgxfqn" path="res://Resources/Ship Settings/Players/ship_player_roxy.tres" id="10_rtxa4"]
-[ext_resource type="PackedScene" uid="uid://bl5atkgf78gh4" path="res://Scenes/Game Objects/basic_enemy_ship.tscn" id="13_hguvr"]
+[ext_resource type="PackedScene" path="res://Scenes/Game Objects/basic_enemy_ship.tscn" id="13_hguvr"]
 
 [node name="Game Scene" type="Node2D"]
 

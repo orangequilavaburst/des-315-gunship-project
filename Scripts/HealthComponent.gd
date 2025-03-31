@@ -26,6 +26,12 @@ enum HealthState{
 @export_range(0.0, 10.0) var maxIFrames : float = 0.25
 var currentIFrames : float = 0.0
 
+# regeneration stuff
+@export_range(0.0, 1.0) var regenThreshold : float = 0.0
+@export_range(0.0, 10.0) var regenTime : float = 0.0
+@export_range(0.0, 10000.0) var regenPotency : float = 0.0
+var regenTimer : float = 0.0
+
 # for color stuff
 const colorShader : ShaderMaterial = preload("res://Shaders/SolidColorShaderMaterial.tres")
 @export var hurtColors : Array[Color] = [Color.BLACK, Color(216.0/255.0, 40.0/255.0, 0.0), Color(240.0/255.0, 183.0/255.0, 56.0/255.0), Color.WHITE ]
@@ -37,6 +43,8 @@ var hurtColorTimer : float = 0.0
 func _ready() -> void:
 	assert(get_parent() != null) # needs to be attached to something!
 	currentIFrames = 0.0
+	
+	regenTimer = 0.0
 	
 	# shader stuff
 	get_parent().set_material(colorShader)
@@ -69,6 +77,14 @@ func _process(delta: float) -> void:
 					currentIFrames = 0.0
 					hurtColorIndex = 0
 					get_parent().material.set_shader_parameter("swapColorEnabled", false)
+			
+			if currentHealth <= maxHealth*regenThreshold:
+				regenTimer += delta
+				if regenTimer >= regenTime:
+					heal(regenPotency)
+					regenTimer = 0.0
+			else:
+				regenTimer = 0.0
 				
 			pass
 	

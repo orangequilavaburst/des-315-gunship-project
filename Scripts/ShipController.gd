@@ -229,6 +229,10 @@ func apply_settings(settings : ShipSettings) -> void:
 	if health != null:
 		health.set_max_health(settings.maxHealth, true)
 		health.currentHealth = health.maxHealth
+		if settings is PlayerShipSettings:
+			health.regenTime = settings.regenTime
+			health.regenPotency = settings.regenPotency
+			health.regenThreshold = settings.regenThreshold
 	if shipSprite != null and settings is PlayerShipSettings:
 		shipSprite.texture = settings.playerShipSprite
 	
