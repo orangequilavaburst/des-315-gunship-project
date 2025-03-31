@@ -4,6 +4,16 @@ extends ShipInput
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# kinda tired and don't want to do this with areas just yet
+	# so just look for all player ships
+	if targetType == TargetType.PLAYER:
+		var ships : Array = get_tree().root.get_children()[0].get_children().filter(func(element): return (element is ShipController))
+		for ship in ships:
+			if ship.shipSettings is PlayerShipSettings:
+				add_target(ship)
+				break
+	
 	pass # Replace with function body.
 
 

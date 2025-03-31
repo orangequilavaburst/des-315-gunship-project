@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_xt0ru"]
 [ext_resource type="Resource" uid="uid://dqa0npxy25rdt" path="res://Resources/Ship Settings/Enemies/enemy_ship_medium.tres" id="2_ct4j1"]
-[ext_resource type="Texture2D" uid="uid://dqan8rl1nnded" path="res://Sprites/Gunships/Players/gunship_player_j8-bit.png" id="3_7giac"]
+[ext_resource type="Texture2D" uid="uid://b2ana25tmpx3b" path="res://Sprites/Gunships/Enemies/gunship_enemy_small.png" id="3_b85a1"]
 [ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_w1t7c"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_h7rlm"]
 [ext_resource type="Script" path="res://Scripts/Emitter.gd" id="6_0eujq"]
 [ext_resource type="Resource" uid="uid://dyo3n7s0g4vcq" path="res://Resources/Emitter Settings/basic_player_shot.tres" id="7_282uf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
-radius = 8.0
+radius = 6.0
 
 [node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
-collision_mask = 10
+collision_layer = 2
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_xt0ru")
 shipInput = NodePath("Ship Input")
@@ -27,11 +28,12 @@ shape = SubResource("CircleShape2D_wn53n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-texture = ExtResource("3_7giac")
+texture = ExtResource("3_b85a1")
 
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("4_w1t7c")
-targetType = 3
+alwaysMoveForward = false
+targetType = 1
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("5_h7rlm")

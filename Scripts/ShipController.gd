@@ -92,11 +92,17 @@ var controlType : ShipSettings.ShipControlType
 func _ready() -> void:
 	
 	apply_settings(shipSettings)
+	angle = global_rotation_degrees
 	
 	pass
 	
 func _process(delta: float) -> void:
 	delta *= gameManager.deltaTimeMultiplier
+	
+	if mainWeaponEmitter != null:
+		mainWeaponEmitter.global_rotation_degrees = angle
+	if subWeaponEmitter != null:
+		subWeaponEmitter.global_rotation_degrees = angle
 	
 
 func _physics_process(delta: float) -> void:

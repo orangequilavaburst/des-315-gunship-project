@@ -36,6 +36,15 @@ func _draw() -> void:
 		draw_line(Vector2.ZERO, Vector2.RIGHT*(targetPosition - controller.global_position).length(), Color.BLUE)
 		draw_arc(Vector2.ZERO, (targetPosition - controller.global_position).length(), 0.0, angle_difference(controller.global_rotation, (targetPosition - controller.global_position).angle()), 10, Color.RED)
 
+func add_target(new_target : Node2D) -> void:
+	if targets.find(new_target) < 0:
+		targets.push_back(new_target)
+		
+func remove_target(new_target : Node2D) -> void:
+	var index : int = targets.find(new_target)
+	if index >= 0:
+		targets.remove_at(index)
+
 func get_target() -> Node2D:
 	if targets.size() <= 0:
 		return null

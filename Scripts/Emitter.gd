@@ -102,6 +102,7 @@ func shoot() -> void:
 		
 		var projectile = objectToSpawn.instantiate()
 		projectile.global_position = global_position
+		projectile.global_rotation_degrees = shootAngle
 		projectile.angle = shootAngle
 		if projectile is CharacterBody2D and get_parent() is CharacterBody2D:
 			projectile.velocity = get_parent().velocity
