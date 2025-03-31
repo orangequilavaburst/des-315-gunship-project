@@ -9,9 +9,9 @@ signal ship_settings_changed(new_settings)
 #@export_subgroup("Velocity and Acceleration")
 var angle : float = 0.0:
 	set(value):
-		angle = fmod(value + 360.0, 360.0)
+		angle = fposmod(value + 360.0, 360.0)
 	get():
-		return fmod(angle + 360.0, 360.0)
+		return fposmod(angle + 360.0, 360.0)
 var linearVelocity : float = 0.0:
 	set(value):
 		var mv : float = maximumLinearVelocity if (turningSlowdownRatio <= 0) else maximumLinearVelocity*(1.0 - turningSlowdownRatio*abs(angularVelocity/maximumAngularVelocity))

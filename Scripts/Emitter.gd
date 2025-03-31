@@ -31,6 +31,7 @@ var shootTime : float # time between shots
 var shootTimer : float # used to begin shooting
 var burstTimer : float # used for the burst
 var burstsLeft : int # used for the burst
+var shootReady : bool # used for firing
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,36 +53,42 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
-	if shootTimer > 0.0:
+	if shootTimer > 0.0: # time between bursts
 		shootTimer -= delta
 		if shootTimer <= 0.0:
 			shootTimer = 0.0
-			if alwaysFire:
-				begin_burst()
 	else:
-		if burstTimer <= burstShootTime:
-			burstTimer += delta
-			if burstTimer >= burstShootTime:
-				burstTimer = 0.0
-				if burstsLeft >= 0:
+		if burstsLeft > 0: # shooting bursts
+			burstTimer -= delta
+			if burstTimer <= 0.0:
+				if burstsLeft - 1 <= 0:
+					burstsLeft = 0
 					burstTimer = 0.0
-					if burstsLeft == 0:
-						if alwaysFire:
-							shootTimer = shootTime
-					else:
-						burstsLeft -= 1
+					shootTimer = shootTime
+					#print("Burst ended!")
+				else:
 					shoot()
+					burstsLeft -= 1
+					burstTimer = burstShootTime
+					#print("Burst has " + str(burstsLeft) + " bursts left!")
+					
+		else: # doing nothing
+			if shootReady:
+				begin_burst()
 	
 	pass
 	
 func begin_burst(ignoreCurrentlyShooting : bool = false) -> void:
-	if not ignoreCurrentlyShooting and not (shootTimer == 0 and burstTimer == 0):
+	if not (ignoreCurrentlyShooting or emitter_can_fire()):
 		return
 		
 	shootTimer = 0
-	burstTimer = 0
+	burstTimer = burstShootTime
 	burstsLeft = burstCount
 	burst_started.emit()
+	#print("Burst started!")
+	
+	shoot()
 	
 func shoot() -> void:
 	
@@ -136,3 +143,6 @@ func apply_settings(settings : EmitterSettings = emitterSettings) -> void:
 	shootTime = settings.shootTime
 	
 	pass
+
+func emitter_can_fire() -> bool:
+	return shootTimer == 0 and burstTimer == 0
