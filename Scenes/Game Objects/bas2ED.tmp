@@ -10,12 +10,12 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 2.23607
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5rbfa"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_05x3q"]
 radius = 3.16228
 
 [node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 15
 motion_mode = 1
 script = ExtResource("1_7v6lx")
 shipInput = NodePath("Ship Input")
@@ -38,13 +38,10 @@ script = ExtResource("4_7t00d")
 script = ExtResource("5_nftt7")
 maxHealth = 1.0
 maxIFrames = 0.0
-createPopups = false
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 4
-collision_mask = 2
 script = ExtResource("6_6qtud")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
-shape = SubResource("CircleShape2D_5rbfa")
+shape = SubResource("CircleShape2D_05x3q")

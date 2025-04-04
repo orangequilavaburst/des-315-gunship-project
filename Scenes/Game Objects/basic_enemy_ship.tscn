@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bl5atkgf78gh4"]
+[gd_scene load_steps=11 format=3 uid="uid://bl5atkgf78gh4"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_xt0ru"]
 [ext_resource type="Resource" uid="uid://dqa0npxy25rdt" path="res://Resources/Ship Settings/Enemies/enemy_ship_medium.tres" id="2_ct4j1"]
@@ -6,10 +6,14 @@
 [ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_w1t7c"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_h7rlm"]
 [ext_resource type="Script" path="res://Scripts/Emitter.gd" id="6_0eujq"]
-[ext_resource type="Resource" uid="uid://dyo3n7s0g4vcq" path="res://Resources/Emitter Settings/basic_player_shot.tres" id="7_282uf"]
+[ext_resource type="Resource" uid="uid://b3amy6d8iq06p" path="res://Resources/Emitter Settings/basic_enemy_shot.tres" id="7_g8cyv"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="8_8fefe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j2ih1"]
+radius = 8.0
 
 [node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
 collision_layer = 2
@@ -32,12 +36,25 @@ texture = ExtResource("3_b85a1")
 
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("4_w1t7c")
-alwaysMoveForward = false
 targetType = 1
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("5_h7rlm")
+maxHealth = 1.0
 
 [node name="Main Weapon Emitter" type="Node2D" parent="."]
 script = ExtResource("6_0eujq")
-emitterSettings = ExtResource("7_282uf")
+emitterSettings = ExtResource("7_g8cyv")
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("8_8fefe")
+damageAmount = 10.0
+screenShakeAmount = 0.0
+screenShakeTime = 0.0
+selfDamage = 0.0
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_j2ih1")

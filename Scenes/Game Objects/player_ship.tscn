@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://egqbdmophtov"]
+[gd_scene load_steps=10 format=3 uid="uid://egqbdmophtov"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="2_53ifd"]
@@ -9,6 +9,9 @@
 [ext_resource type="Resource" uid="uid://dyo3n7s0g4vcq" path="res://Resources/Emitter Settings/basic_player_shot.tres" id="7_it5xa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_allei"]
 radius = 8.0
 
 [node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
@@ -34,7 +37,14 @@ script = ExtResource("3_fwrla")
 
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("6_qpi21")
+dyingType = 3
 
 [node name="Main Weapon Emitter" type="Node2D" parent="."]
 script = ExtResource("6_0uf70")
 emitterSettings = ExtResource("7_it5xa")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_allei")

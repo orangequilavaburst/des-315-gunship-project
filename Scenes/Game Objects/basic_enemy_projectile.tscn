@@ -1,0 +1,48 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhh0qmvjv3k77"]
+
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_wpkk8"]
+[ext_resource type="Resource" uid="uid://c5v7sxvikql2v" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings.tres" id="2_45tv2"]
+[ext_resource type="Texture2D" uid="uid://eybmodn00yaq" path="res://Sprites/Projectiles/bullet_basic_small.png" id="3_pdi7n"]
+[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_pnjs3"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_lhhkc"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_jalxs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
+radius = 2.23607
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qftqi"]
+radius = 3.16228
+
+[node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_wpkk8")
+shipInput = NodePath("Ship Input")
+shipSettings = ExtResource("2_45tv2")
+collisionShape = NodePath("CollisionShape2D")
+health = NodePath("Health")
+shipSprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wn53n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("3_pdi7n")
+
+[node name="Ship Input" type="Node2D" parent="."]
+script = ExtResource("4_pnjs3")
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("5_lhhkc")
+maxHealth = 1.0
+maxIFrames = 0.0
+createPopups = false
+
+[node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 8
+script = ExtResource("6_jalxs")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
+shape = SubResource("CircleShape2D_qftqi")

@@ -97,6 +97,10 @@ func _ready() -> void:
 	pass
 	
 func _process(delta: float) -> void:
+	
+	if is_queued_for_deletion():
+		return
+	
 	delta *= gameManager.deltaTimeMultiplier
 	
 	if mainWeaponEmitter != null:
@@ -106,6 +110,10 @@ func _process(delta: float) -> void:
 	
 
 func _physics_process(delta: float) -> void:
+	
+	if is_queued_for_deletion():
+		return
+	
 	handle_ship_movement(delta, gameManager.deltaTimeMultiplier)
 	
 	move_and_slide()

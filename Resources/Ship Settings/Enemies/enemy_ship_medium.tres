@@ -23,5 +23,5 @@ linearAccelerationTime = 2.0
 linearAccelerationCurve = SubResource("Curve_mc1ns")
 angularAccelerationTime = 0.25
 angularAccelerationCurve = SubResource("Curve_a2ffe")
-maxHealth = 100.0
+maxHealth = 10.0
 controlType = 0

@@ -15,6 +15,7 @@ var playerShipIndex : int = 0:
 	set(value):
 		playerShipIndex = posmod(value, playerShips.size()) 
 		player.shipSettings = playerShips[playerShipIndex]
+		player.health.healthState = Health.HealthState.ALIVE
 		print_rich("[i]GameManager:[i] Player ship changed to " + str(playerShips[playerShipIndex].playerName))
 
 # Called when the node enters the scene tree for the first time.

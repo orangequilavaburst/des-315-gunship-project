@@ -54,4 +54,6 @@ func get_target() -> Node2D:
 func get_target_position() -> Vector2:
 	if targetType == TargetType.MOUSE:
 		return get_global_mouse_position()
-	return controller.global_position if targets.size() <= 0 else get_target().global_position
+	if controller == null or controller.is_queued_for_deletion():
+		return Vector2.ZERO
+	return controller.global_position if (targets.size() <= 0 or get_target() == null) else get_target().global_position
