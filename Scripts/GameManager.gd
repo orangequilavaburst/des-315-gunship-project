@@ -59,3 +59,5 @@ func _unhandled_input(event: InputEvent) -> void:
 				KEY_PERIOD:
 					playerShipIndex += 1
 					pass
+				KEY_R:
+					get_tree().reload_current_scene()
