@@ -103,14 +103,16 @@ func shoot() -> void:
 		var projectile = objectToSpawn.instantiate()
 		projectile.global_position = global_position
 		projectile.global_rotation_degrees = shootAngle
-		projectile.angle = shootAngle
-		if projectile is CharacterBody2D and get_parent() is CharacterBody2D:
+		if projectile is ShipController and get_parent() is ShipController:
+			projectile.angle = shootAngle
 			projectile.velocity = get_parent().velocity
 			projectile.extraVelocity = get_parent().velocity
 		if parentToRoot:
-			get_tree().root.get_children()[0].add_child(projectile)
+			#get_tree().root.get_children()[0].add_child(projectile)
+			get_tree().root.get_children()[0].call_deferred("add_child", projectile)
 		else:
-			add_child(projectile)
+			#add_child(projectile)
+			call_deferred("add_child", projectile)
 			
 	emitter_shot.emit()
 	

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://b3amy6d8iq06p"]
 
-[ext_resource type="PackedScene" uid="uid://dhh0qmvjv3k77" path="res://Scenes/Game Objects/basic_enemy_projectile.tscn" id="1_hdgk4"]
+[ext_resource type="PackedScene" uid="uid://dhh0qmvjv3k77" path="res://Scenes/Game Objects/Projectiles/basic_enemy_projectile.tscn" id="1_imja2"]
 [ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_cj41d"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
@@ -9,10 +9,10 @@ point_count = 2
 
 [resource]
 script = ExtResource("2_cj41d")
-objectToSpawn = ExtResource("1_hdgk4")
+objectToSpawn = ExtResource("1_imja2")
 parentToRoot = true
 inheritParentVelocity = true
-alwaysFire = false
+alwaysFire = true
 angleJitter = 0.0
 objectCount = 1
 objectAngleSpread = 0.0
@@ -21,4 +21,4 @@ burstCount = 1
 burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.0
-shootTime = 1.0
+shootTime = 1.5

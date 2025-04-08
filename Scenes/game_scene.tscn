@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene load_steps=15 format=3 uid="uid://d4habyr4lifuy"]
 
-[ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/player_ship.tscn" id="1_1xd0m"]
+[ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
 [ext_resource type="Script" path="res://Scripts/ShipCameraController.gd" id="2_addrj"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="2_galva"]
@@ -12,7 +12,10 @@
 [ext_resource type="Resource" uid="uid://ncefhfhuw361" path="res://Resources/Ship Settings/Players/ship_player_isaac.tres" id="9_lnkf1"]
 [ext_resource type="Texture2D" uid="uid://c3gpjfrc14gqb" path="res://Sprites/Backgrounds/bg_stars1.png" id="9_uh7mo"]
 [ext_resource type="Resource" uid="uid://cuf6y0prgxfqn" path="res://Resources/Ship Settings/Players/ship_player_roxy.tres" id="10_rtxa4"]
-[ext_resource type="PackedScene" uid="uid://bl5atkgf78gh4" path="res://Scenes/Game Objects/basic_enemy_ship.tscn" id="13_hguvr"]
+[ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="14_1qxbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
+size = Vector2(255, 199.5)
 
 [node name="Game Scene" type="Node2D"]
 
@@ -43,6 +46,14 @@ playerShips = Array[ExtResource("2_galva")]([ExtResource("3_7aivu"), ExtResource
 player = NodePath("../Player Ship")
 camera = NodePath("../Camera2D")
 
+[node name="Game Area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game Area"]
+position = Vector2(127.5, 140.25)
+shape = SubResource("RectangleShape2D_xcauo")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true
 
@@ -70,14 +81,5 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 25600, 24000)
 
-[node name="Ship" parent="." instance=ExtResource("13_hguvr")]
-position = Vector2(203, 70)
-rotation = 2.35619
-
-[node name="Ship2" parent="." instance=ExtResource("13_hguvr")]
-position = Vector2(188, 56)
-rotation = 2.35619
-
-[node name="Ship3" parent="." instance=ExtResource("13_hguvr")]
-position = Vector2(218, 84)
-rotation = 2.35619
+[node name="Snake Ship Head" parent="." instance=ExtResource("14_1qxbh")]
+position = Vector2(19, 199)

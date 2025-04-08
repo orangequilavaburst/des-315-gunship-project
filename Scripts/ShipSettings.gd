@@ -23,6 +23,7 @@ enum ShipControlType {
 @export var angularAccelerationCurve : Curve
 
 @export_group("Miscellaneous")
+@export var pointAtTarget : bool = false
 @export var collisionShape : Shape2D
 @export_range(1.0, 10000.0) var maxHealth : float
 @export var controlType : ShipControlType

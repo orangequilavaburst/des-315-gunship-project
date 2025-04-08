@@ -9,7 +9,7 @@ size = Vector2(32, 32)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8t1g"]
 bg_color = Color(0.847059, 0.156863, 0, 1)
 
-[node name="UI Panel" type="Panel" node_paths=PackedStringArray("playerIcon", "playerLabel", "healthLabel", "healthBar", "mainWeaponBar")]
+[node name="UI Panel" type="Panel" node_paths=PackedStringArray("playerIcon", "playerLabel", "healthLabel", "healthBar", "mainWeaponBar", "subWeaponBar")]
 z_index = 200
 anchors_preset = 2
 anchor_top = 1.0
@@ -24,6 +24,7 @@ playerLabel = NodePath("Player Name Label")
 healthLabel = NodePath("Health Label")
 healthBar = NodePath("Health Label/Health Bar")
 mainWeaponBar = NodePath("Weapon Label/Main Weapon Bar")
+subWeaponBar = NodePath("Subweapon Label/Sub Weapon Bar")
 
 [node name="Player Icon" type="Sprite2D" parent="."]
 z_index = 1

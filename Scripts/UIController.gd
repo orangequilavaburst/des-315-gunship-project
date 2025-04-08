@@ -3,6 +3,7 @@ extends Control
 
 @export var shipSettingsController : ShipController
 var mainWeaponEmitter : Emitter
+var subWeaponEmitter : Emitter
 var shipSettings : PlayerShipSettings
 var health : Health
 var healthDigits : int:
@@ -16,6 +17,7 @@ var healthDigits : int:
 @export var healthLabel : Label
 @export var healthBar : ProgressBar
 @export var mainWeaponBar : ProgressBar
+@export var subWeaponBar : ProgressBar
 #@export var controlLabel : Label
 
 # Called when the node enters the scene tree for the first time.
@@ -46,6 +48,7 @@ func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
 	health = shipSettingsController.health
 	healthDigits = (log(health.maxHealth) / log(10.0)) + 1 if (health != null) else 1
 	mainWeaponEmitter = shipSettingsController.mainWeaponEmitter
+	subWeaponEmitter = shipSettingsController.subWeaponEmitter
 	
 	if health != null:
 		health.health_changed.connect(update_health_info)
@@ -73,3 +76,7 @@ func update_weapon_info() -> void:
 		mainWeaponBar.min_value = 0.0
 		mainWeaponBar.max_value = mainWeaponEmitter.shootTime
 		mainWeaponBar.value = mainWeaponEmitter.shootTime - mainWeaponEmitter.shootTimer
+	if subWeaponEmitter != null:
+		subWeaponBar.min_value = 0.0
+		subWeaponBar.max_value = subWeaponEmitter.shootTime
+		subWeaponBar.value = subWeaponEmitter.shootTime - subWeaponEmitter.shootTimer

@@ -15,7 +15,7 @@ func _ready():
 	assert(get_parent() != null, "You need a parent!")
 	
 	collision_layer = get_parent().collision_layer
-	collision_mask = get_parent().collision_mask
+	collision_mask = get_parent().collision_mask ^ get_parent().collision_layer
 	
 	area_entered.connect(_on_area_entered)
 	

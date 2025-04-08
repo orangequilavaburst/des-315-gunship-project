@@ -74,6 +74,7 @@ var angularAccelerationTime : float = 1.0
 var angularAccelerationCurve : Curve
 
 var controlType : ShipSettings.ShipControlType
+var pointAtTarget : bool
 
 @export_group("Object References")
 @export var shipInput : ShipInput
@@ -89,10 +90,32 @@ var controlType : ShipSettings.ShipControlType
 @export var mainWeaponEmitter : Emitter
 @export var subWeaponEmitter : Emitter
 
+@export_group("Misc. Stuff")
+@export var dieWithoutTargets : bool = false
+@export var parentDistanceRange : Vector2 = Vector2.ZERO
+@export var bodySegments : int = 0
+@export var bodySegmentScene : PackedScene
+@export var segmentDistanceRange : Vector2 = Vector2.ZERO
+
 func _ready() -> void:
 	
 	apply_settings(shipSettings)
 	angle = global_rotation_degrees
+	
+	if bodySegments > 0:
+		assert(bodySegmentScene != null)
+		var body = bodySegmentScene.instantiate() as ShipController
+		body.global_rotation_degrees = global_rotation_degrees
+		body.global_position = global_position - Vector2.from_angle(deg_to_rad(angle))*parentDistanceRange.y
+		body.angle = angle
+		body.bodySegments = bodySegments - 1
+		body.bodySegmentScene = bodySegmentScene
+		body.parentDistanceRange = segmentDistanceRange
+		body.segmentDistanceRange = segmentDistanceRange
+		body.z_index = z_index - 1
+		get_tree().root.get_children()[0].call_deferred("add_child", body)
+		body.shipInput.targets.clear()
+		body.shipInput.targets.push_back(self)
 	
 	pass
 	
@@ -108,6 +131,16 @@ func _process(delta: float) -> void:
 	if subWeaponEmitter != null:
 		subWeaponEmitter.global_rotation_degrees = angle
 	
+	if dieWithoutTargets:
+		if shipInput.targets.size() <= 0:
+			health.instakill()
+		else:
+			shipInput.clean_up_targets()
+	
+	if parentDistanceRange != Vector2.ZERO:
+		if shipInput.targets.size() > 0.0:
+			var diff = shipInput.get_target_position()-global_position
+			global_position = shipInput.get_target_position() - diff.normalized() * clamp(diff.length(), parentDistanceRange.x, parentDistanceRange.y)
 
 func _physics_process(delta: float) -> void:
 	
@@ -141,21 +174,21 @@ func handle_ship_movement(delta : float, time_scale : float = 1.0) -> void:
 	var aaccelCurveValue = angularAccelerationCurve.sample(abs(angularAccelerationTimer)/angularAccelerationTime)*sign(angularAccelerationTimer)
 	
 	# turn stuff
-	
-	if abs(turnInput) > 0:
-		if angularVelocity == 0 or sign(angularVelocity) == sign(angularAcceleration):
-			angularAcceleration = maximumAngularAcceleration * aaccelCurveValue
-		else:
-			angularAcceleration = (maximumAngularAcceleration + angularFriction) * aaccelCurveValue
-		angularVelocity += angularAcceleration * delta
-	else:
-		angularAccelerationTimer = 0
-		angularAcceleration = angularFriction * -sign(angularVelocity)
-		if (sign(angularVelocity) != sign(angularVelocity + angularAcceleration * delta) or angularVelocity == 0.0):
-			angularVelocity = 0.0
-			angularAcceleration = 0.0
-		else:
+	if not pointAtTarget:
+		if abs(turnInput) > 0:
+			if angularVelocity == 0 or sign(angularVelocity) == sign(angularAcceleration):
+				angularAcceleration = maximumAngularAcceleration * aaccelCurveValue
+			else:
+				angularAcceleration = (maximumAngularAcceleration + angularFriction) * aaccelCurveValue
 			angularVelocity += angularAcceleration * delta
+		else:
+			angularAccelerationTimer = 0
+			angularAcceleration = angularFriction * -sign(angularVelocity)
+			if (sign(angularVelocity) != sign(angularVelocity + angularAcceleration * delta) or angularVelocity == 0.0):
+				angularVelocity = 0.0
+				angularAcceleration = 0.0
+			else:
+				angularVelocity += angularAcceleration * delta
 	
 	## handle linear velocity
 	
@@ -201,7 +234,11 @@ func handle_ship_movement(delta : float, time_scale : float = 1.0) -> void:
 		else:
 			extraVelocity = Vector2.ZERO
 	
-	angle += angularVelocity * delta
+	if not pointAtTarget:
+		angle += angularVelocity * delta
+	else:
+		var diff = shipInput.get_target_position()-global_position
+		angle = rad_to_deg(diff.angle())
 	rotation_degrees = angle
 	#velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity
 	
@@ -237,6 +274,7 @@ func apply_settings(settings : ShipSettings) -> void:
 	angularAccelerationTime = settings.linearAccelerationTime
 	angularAccelerationCurve = shipSettings.angularAccelerationCurve
 	controlType = shipSettings.controlType
+	pointAtTarget = shipSettings.pointAtTarget
 	
 	if collisionShape != null:
 		collisionShape.shape = settings.collisionShape

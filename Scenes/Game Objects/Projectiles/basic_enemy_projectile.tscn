@@ -13,7 +13,7 @@ radius = 2.23607
 [sub_resource type="CircleShape2D" id="CircleShape2D_qftqi"]
 radius = 3.16228
 
-[node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+[node name="Basic Enemy Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
 collision_layer = 8
 motion_mode = 1
 script = ExtResource("1_wpkk8")
@@ -33,11 +33,12 @@ texture = ExtResource("3_pdi7n")
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("4_pnjs3")
 
-[node name="Health" type="Node2D" parent="."]
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
 script = ExtResource("5_lhhkc")
 maxHealth = 1.0
 maxIFrames = 0.0
 createPopups = false
+deathEmitters = [NodePath("")]
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 8

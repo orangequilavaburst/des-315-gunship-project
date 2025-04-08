@@ -51,6 +51,11 @@ var useHurtColor : bool = true
 
 @export var createPopups : bool = true
 
+# emitters
+@export var hurtEmitters : Array[Emitter] = []
+@export var healEmitters : Array[Emitter] = []
+@export var deathEmitters : Array[Emitter] = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	assert(get_parent() != null) # needs to be attached to something!
@@ -114,18 +119,25 @@ func _process(delta: float) -> void:
 			pass
 		HealthState.DEAD:
 			if dyingType != DyingTypes.PLAYER:
-				get_parent().queue_free()
+				#get_parent().queue_free()
+				get_parent().call_deferred("queue_free")
 			pass
 	
 	pass
+
 
 func hurt(damage : float, ignoreIFrames : bool = false, useShader : bool = true) -> float:
 	if (damage <= 0) or (not ignoreIFrames and currentIFrames > 0.0):
 		return currentHealth
 		
+	currentHealth -= damage	
 	if createPopups:
-		print_rich("[b]" + get_parent().name + "[/b]'s health is now " + str(currentHealth) + "!")
-	currentHealth -= damage
+		#print_rich("[b]" + get_parent().name + "[/b]'s health is now " + str(currentHealth) + "!")
+		pass
+		
+	health_hurt.emit(damage, currentHealth)
+	health_hurt_noargs.emit()
+	
 	if healthState == HealthState.ALIVE:
 		if currentHealth <= 0.0:
 			death()
@@ -135,12 +147,13 @@ func hurt(damage : float, ignoreIFrames : bool = false, useShader : bool = true)
 		else:
 			currentIFrames = maxIFrames
 			useHurtColor = useShader
+			
+			for emitter in hurtEmitters:
+				emitter.begin_burst()
+				print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on hurt!")
 	
 	if createPopups:
 		create_popup("%.1d" % [-damage])
-	
-	health_hurt.emit(damage, currentHealth)
-	health_hurt_noargs.emit()
 			
 	return currentHealth
 	
@@ -156,6 +169,8 @@ func heal(amount : float) -> float:
 		
 	currentHealth += amount
 	health_recovered.emit(amount, currentHealth)
+	for emitter in healEmitters:
+		emitter.begin_burst()
 	return currentHealth
 		
 func instakill() -> void:
@@ -170,6 +185,9 @@ func set_max_health(new_max : float, do_instaheal : bool = true):
 		instaheal()
 
 func death() -> void:
+	for emitter in deathEmitters:
+		emitter.begin_burst()
+		print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
 	health_death.emit()
 	healthState = HealthState.DYING
 

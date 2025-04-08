@@ -23,12 +23,19 @@ func _ready() -> void:
 	assert(controller != null, "There's no parent to this ship input!")
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	targetPosition = get_target_position()
 	queue_redraw()
 	pass
+	
+func clean_up_targets() -> void:
+	var index : int = 0
+	while index < targets.size():
+		if targets[index] == null:
+			targets.remove_at(index)
+		else:
+			index += 1
 	
 func _draw() -> void:
 	if targetType != TargetType.NONE and doDebugDraw:

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://dhyjnmlcc4grh"]
+
+[ext_resource type="Script" path="res://Scripts/ShipSettings.gd" id="1_wv2nd"]
+
+[sub_resource type="Curve" id="Curve_iu53x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bxlyd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_wv2nd")
+maximumLinearVelocity = 0.0
+maximumAngularVelocity = 0.0
+maximumLinearAcceleration = 0.0
+maximumAngularAcceleration = 0.0
+linearFriction = 0.0
+angularFriction = 0.0
+turningSlowdownRatio = 0.0
+linearAccelerationTime = 0.0
+linearAccelerationCurve = SubResource("Curve_bxlyd")
+angularAccelerationTime = 0.0
+angularAccelerationCurve = SubResource("Curve_iu53x")
+maxHealth = 0.0
+controlType = 0
