@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene load_steps=16 format=3 uid="uid://d4habyr4lifuy"]
 
 [ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://ncefhfhuw361" path="res://Resources/Ship Settings/Players/ship_player_isaac.tres" id="9_lnkf1"]
 [ext_resource type="Texture2D" uid="uid://c3gpjfrc14gqb" path="res://Sprites/Backgrounds/bg_stars1.png" id="9_uh7mo"]
 [ext_resource type="Resource" uid="uid://cuf6y0prgxfqn" path="res://Resources/Ship Settings/Players/ship_player_roxy.tres" id="10_rtxa4"]
+[ext_resource type="Script" path="res://Scripts/ScreenAreaManager.gd" id="11_wtkdf"]
 [ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="14_1qxbh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
@@ -22,13 +23,25 @@ size = Vector2(255, 199.5)
 [node name="Player Ship" parent="." instance=ExtResource("1_1xd0m")]
 position = Vector2(129, 145)
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("focus")]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("focus", "screenArea")]
 position = Vector2(127, 120)
 script = ExtResource("2_addrj")
 focus = NodePath("../Player Ship")
 cameraOffset = Vector2(0, -20)
 maxVelocityOffset = 30.0
 offsetSpeed = 40.0
+screenArea = NodePath("Game Area")
+
+[node name="Game Area" type="Area2D" parent="Camera2D"]
+position = Vector2(-127, -120)
+collision_layer = 0
+collision_mask = 15
+collision_priority = 2.0
+script = ExtResource("11_wtkdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Game Area"]
+position = Vector2(127.5, 140.25)
+shape = SubResource("RectangleShape2D_xcauo")
 
 [node name="UI Panel" parent="." node_paths=PackedStringArray("shipSettingsController") instance=ExtResource("2_ggo0f")]
 anchors_preset = 0
@@ -45,14 +58,6 @@ script = ExtResource("1_fkfxw")
 playerShips = Array[ExtResource("2_galva")]([ExtResource("3_7aivu"), ExtResource("4_ysg4k"), ExtResource("5_sn3d5"), ExtResource("9_lnkf1"), ExtResource("10_rtxa4")])
 player = NodePath("../Player Ship")
 camera = NodePath("../Camera2D")
-
-[node name="Game Area" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game Area"]
-position = Vector2(127.5, 140.25)
-shape = SubResource("RectangleShape2D_xcauo")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true

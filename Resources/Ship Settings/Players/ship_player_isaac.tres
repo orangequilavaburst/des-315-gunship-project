@@ -36,6 +36,7 @@ linearAccelerationTime = 1.0
 linearAccelerationCurve = SubResource("Curve_yvtvy")
 angularAccelerationTime = 0.1
 angularAccelerationCurve = SubResource("Curve_5gjpg")
+pointAtTarget = false
 collisionShape = SubResource("RectangleShape2D_g1wgs")
 maxHealth = 50.0
 controlType = 0

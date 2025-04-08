@@ -7,6 +7,10 @@ extends Camera2D
 @export var maxVelocityOffset : float
 @export var offsetSpeed : float
 
+@export var screenArea : Area2D
+var enemyAveragePosition : Vector2 = Vector2.ZERO
+var enemyPosOffset : Vector2 = Vector2.ZERO
+
 var currentPosition : Vector2 = Vector2.ZERO
 var currentOffset : Vector2 = Vector2.ZERO
 
@@ -35,6 +39,8 @@ func _process(delta):
 			cameraShakeTimer = 0.0
 	
 	global_position = currentPosition + currentOffset + shakeVector*get_shake_intensity()
+	#if (enemyAveragePosition + global_position) != Vector2.ZERO:
+		#global_position += enemyPosOffset
 	
 	if focus == null:
 		return
@@ -44,6 +50,20 @@ func _process(delta):
 	var targetOffset = get_target_offset()
 	currentOffset = Vector2(move_toward(currentOffset.x, targetOffset.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(currentOffset.y, targetOffset.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
 	
+	#if (enemyAveragePosition + global_position) != Vector2.ZERO:
+		#enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, enemyAveragePosition.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, enemyAveragePosition.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+	
+	pass
+	
+func _physics_process(delta: float) -> void:
+	#if screenArea != null:
+		#screenArea.angular_damp = screenArea.angular_damp
+	#enemyAveragePosition = enemy_screen_average() - global_position
+	#print(enemyAveragePosition)
+	queue_redraw()
+	
+func _draw() -> void:
+	#draw_circle(enemyAveragePosition, 4.0, Color.RED)
 	pass
 
 func handle_new_focus() -> void:
@@ -72,3 +92,23 @@ func get_shake_intensity() -> float:
 	if cameraShakeTime <= 0.0:
 		return 0.0
 	return cameraShakeIntensity*(cameraShakeTimer/cameraShakeTime)
+	
+func enemy_screen_average() -> Vector2:
+	if screenArea == null:
+		return Vector2.ZERO
+	var retval : Vector2 = Vector2.ZERO
+	var body_count : int = 0
+	'''
+	for body in screenArea.get_overlapping_bodies():
+		if body is ShipController:
+			#if not body.shipSettings is PlayerShipSettings:
+			retval += body.global_position
+			body_count += 1
+	'''
+	for child in get_tree().root.get_children()[0].get_children():
+		if child is ShipController:
+			if not (child.shipSettings is PlayerShipSettings) and child.health.maxHealth > 1.0:
+				retval += child.global_position
+				body_count += 1
+	retval *= 1.0/max(1.0, float(body_count))
+	return retval

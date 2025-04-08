@@ -150,7 +150,7 @@ func hurt(damage : float, ignoreIFrames : bool = false, useShader : bool = true)
 			
 			for emitter in hurtEmitters:
 				emitter.begin_burst()
-				print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on hurt!")
+				#print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on hurt!")
 	
 	if createPopups:
 		create_popup("%.1d" % [-damage])
@@ -187,7 +187,7 @@ func set_max_health(new_max : float, do_instaheal : bool = true):
 func death() -> void:
 	for emitter in deathEmitters:
 		emitter.begin_burst()
-		print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
+		#print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
 	health_death.emit()
 	healthState = HealthState.DYING
 

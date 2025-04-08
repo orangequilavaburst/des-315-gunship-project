@@ -23,5 +23,6 @@ linearAccelerationTime = 0.1
 linearAccelerationCurve = SubResource("Curve_bxlyd")
 angularAccelerationTime = 0.1
 angularAccelerationCurve = SubResource("Curve_iu53x")
+pointAtTarget = false
 maxHealth = 0.0
 controlType = 0
