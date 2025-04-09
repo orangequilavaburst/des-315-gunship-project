@@ -28,7 +28,6 @@ health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
 mainWeaponEmitter = NodePath("Main Weapon Emitter")
 dieWithoutTargets = true
-bodySegments = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wn53n")

@@ -33,12 +33,11 @@ texture = ExtResource("3_pdi7n")
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("4_pnjs3")
 
-[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
+[node name="Health" type="Node2D" parent="."]
 script = ExtResource("5_lhhkc")
 maxHealth = 1.0
 maxIFrames = 0.0
 createPopups = false
-deathEmitters = [NodePath("")]
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 8

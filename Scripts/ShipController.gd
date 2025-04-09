@@ -128,8 +128,12 @@ func _process(delta: float) -> void:
 	
 	if mainWeaponEmitter != null:
 		mainWeaponEmitter.global_rotation_degrees = angle
+		if not shipSettings is PlayerShipSettings:
+			mainWeaponEmitter.shootReady = true
 	if subWeaponEmitter != null:
 		subWeaponEmitter.global_rotation_degrees = angle
+		if not shipSettings is PlayerShipSettings:
+			mainWeaponEmitter.shootReady = true
 	
 	if dieWithoutTargets:
 		if shipInput.targets.size() <= 0:

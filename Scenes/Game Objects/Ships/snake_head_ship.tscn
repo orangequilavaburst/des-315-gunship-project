@@ -28,7 +28,7 @@ collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
 mainWeaponEmitter = NodePath("Main Weapon Emitter")
-bodySegments = 50
+bodySegments = 100
 bodySegmentScene = ExtResource("3_281ve")
 segmentDistanceRange = Vector2(6, 8)
 
