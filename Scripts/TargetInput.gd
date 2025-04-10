@@ -1,6 +1,7 @@
 extends ShipInput
 
 @export var alwaysMoveForward : bool = true
+@export var targetArea : Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,6 +14,9 @@ func _ready() -> void:
 			if ship.shipSettings is PlayerShipSettings:
 				add_target(ship)
 				break
+				
+	if targetArea != null:
+		targetArea.area_entered.connect(_on_area_entered)
 	
 	pass # Replace with function body.
 
@@ -32,3 +36,6 @@ func _process(delta: float) -> void:
 						(1.0 if controller.velocity.length() >= ((controller.maximumLinearVelocity*controller.maximumLinearVelocity / (2.0 * controller.linearFriction)) if controller.angularFriction > 0.0 else 0.0) else 0.0))
 	else:
 		input = Vector2.ZERO
+
+func _on_area_entered(other: Area2D) -> void:
+	add_target(other)

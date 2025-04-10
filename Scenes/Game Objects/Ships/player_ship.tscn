@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://egqbdmophtov"]
+[gd_scene load_steps=11 format=3 uid="uid://egqbdmophtov"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="2_53ifd"]
@@ -6,7 +6,8 @@
 [ext_resource type="Script" path="res://Scripts/PlayerInput.gd" id="3_fwrla"]
 [ext_resource type="Script" path="res://Scripts/Emitter.gd" id="6_0uf70"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="6_qpi21"]
-[ext_resource type="Resource" uid="uid://dyo3n7s0g4vcq" path="res://Resources/Emitter Settings/basic_player_shot.tres" id="7_it5xa"]
+[ext_resource type="Resource" uid="uid://f4yhg5wv6e0w" path="res://Resources/Emitter Settings/player_jared_main.tres" id="7_ermc7"]
+[ext_resource type="Resource" uid="uid://dupasxr57byys" path="res://Resources/Emitter Settings/player_jared_sub.tres" id="8_y8v1o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 8.0
@@ -15,7 +16,7 @@ radius = 8.0
 radius = 8.0
 
 [node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter", "subWeaponEmitter")]
-collision_mask = 11
+collision_mask = 10
 motion_mode = 1
 platform_wall_layers = 3
 script = ExtResource("1_rkgt1")
@@ -25,7 +26,7 @@ collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
 mainWeaponEmitter = NodePath("Main Weapon Emitter")
-subWeaponEmitter = NodePath("")
+subWeaponEmitter = NodePath("Sub Weapon Emitter")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wn53n")
@@ -43,7 +44,11 @@ dyingType = 3
 
 [node name="Main Weapon Emitter" type="Node2D" parent="."]
 script = ExtResource("6_0uf70")
-emitterSettings = ExtResource("7_it5xa")
+emitterSettings = ExtResource("7_ermc7")
+
+[node name="Sub Weapon Emitter" type="Node2D" parent="."]
+script = ExtResource("6_0uf70")
+emitterSettings = ExtResource("8_y8v1o")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_mask = 10

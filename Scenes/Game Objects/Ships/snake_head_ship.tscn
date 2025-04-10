@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx8f0pyf2ssoq"]
+[gd_scene load_steps=10 format=3 uid="uid://cx8f0pyf2ssoq"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_emp2e"]
 [ext_resource type="Resource" uid="uid://dj6m5ocnfr0k" path="res://Resources/Ship Settings/Enemies/enemy_ship_snake_head.tres" id="2_shyty"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://d3ionfmabuk3t" path="res://Sprites/Gunships/Enemies/gunship_enemy_snake_head.png" id="3_ok5fo"]
 [ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_tn3n7"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_lhhxe"]
-[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="6_1q66n"]
-[ext_resource type="Resource" uid="uid://b3amy6d8iq06p" path="res://Resources/Emitter Settings/basic_enemy_shot.tres" id="7_xhlmc"]
 [ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="8_3vsun"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
@@ -16,9 +14,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_j2ih1"]
 radius = 8.0
 
-[node name="Snake Ship Head" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
+[node name="Snake Ship Head" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
 collision_layer = 2
-collision_mask = 7
+collision_mask = 5
 motion_mode = 1
 platform_wall_layers = 3
 script = ExtResource("1_emp2e")
@@ -27,7 +25,6 @@ shipSettings = ExtResource("2_shyty")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
-mainWeaponEmitter = NodePath("Main Weapon Emitter")
 bodySegments = 100
 bodySegmentScene = ExtResource("3_281ve")
 segmentDistanceRange = Vector2(6, 8)
@@ -46,10 +43,6 @@ targetType = 1
 [node name="Health" type="Node2D" parent="."]
 script = ExtResource("5_lhhxe")
 maxHealth = 1.0
-
-[node name="Main Weapon Emitter" type="Node2D" parent="."]
-script = ExtResource("6_1q66n")
-emitterSettings = ExtResource("7_xhlmc")
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 2

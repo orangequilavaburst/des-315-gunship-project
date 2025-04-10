@@ -190,6 +190,11 @@ func death() -> void:
 		#print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
 	health_death.emit()
 	healthState = HealthState.DYING
+	
+	for ship in get_tree().root.get_children()[0].get_children():
+		if ship is ShipController:
+			if self in ship.shipInput.targets:
+				ship.shipInput.remove_target(self)
 
 # debug
 '''
