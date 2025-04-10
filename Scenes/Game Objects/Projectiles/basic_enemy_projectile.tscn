@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhh0qmvjv3k77"]
+[gd_scene load_steps=11 format=3 uid="uid://dhh0qmvjv3k77"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_wpkk8"]
 [ext_resource type="Resource" uid="uid://c5v7sxvikql2v" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings.tres" id="2_45tv2"]
@@ -12,6 +12,29 @@ radius = 2.23607
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qftqi"]
 radius = 3.16228
+
+[sub_resource type="Animation" id="Animation_nwngl"]
+resource_name = "default"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instakill"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
+_data = {
+"default": SubResource("Animation_nwngl")
+}
 
 [node name="Basic Enemy Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
 collision_layer = 8
@@ -46,3 +69,9 @@ health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
 shape = SubResource("CircleShape2D_qftqi")
+
+[node name="LifeTimer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7i0mr")
+}
+autoplay = "default"

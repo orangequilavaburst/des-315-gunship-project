@@ -55,15 +55,19 @@ func remove_target(new_target : Node2D) -> void:
 func get_target() -> Node2D:
 	if targets.size() <= 0:
 		return null
-	targets.filter(func(a): return a != null)
-	targets.sort_custom(func(a : Node2D, b : Node2D): (a.global_position - controller.global_position).length() < (b.global_position - controller.global_position).length())
+	targets.filter(func(a): return a != null and not a.is_queued_for_deletion())
+	if targets.size() > 1:
+		clean_up_targets()
+		targets.sort_custom(func(a : Node2D, b : Node2D): (a.global_position - controller.global_position).length() < (b.global_position - controller.global_position).length())
 	return targets[0]
 
 func get_target_position() -> Vector2:
 	if targetType == TargetType.MOUSE:
 		return get_global_mouse_position()
-	if controller == null or controller.is_queued_for_deletion():
+	elif get_parent() == null or controller == null or controller.is_queued_for_deletion():
 		return Vector2.ZERO
-	if get_target() == null:
+	elif (targets.size() <= 0 or targets[0] == null):
+		return controller.global_position + controller.velocity
+	elif get_target() == null or get_target().is_queued_for_deletion():
 		return controller.global_position
-	return controller.global_position if (targets.size() <= 0 or targets[0] == null) else get_target().global_position
+	return get_target().global_position
