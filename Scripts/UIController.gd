@@ -75,8 +75,8 @@ func update_weapon_info() -> void:
 	if mainWeaponEmitter != null:
 		mainWeaponBar.min_value = 0.0
 		mainWeaponBar.max_value = mainWeaponEmitter.shootTime
-		mainWeaponBar.value = mainWeaponEmitter.shootTime - mainWeaponEmitter.shootTimer
+		mainWeaponBar.value = mainWeaponEmitter.shootTime - mainWeaponEmitter.shootTimer if mainWeaponEmitter.burstsLeft == 0 else 0.0
 	if subWeaponEmitter != null:
 		subWeaponBar.min_value = 0.0
 		subWeaponBar.max_value = subWeaponEmitter.shootTime
-		subWeaponBar.value = subWeaponEmitter.shootTime - subWeaponEmitter.shootTimer
+		subWeaponBar.value = subWeaponEmitter.shootTime - subWeaponEmitter.shootTimer if subWeaponEmitter.burstsLeft == 0 else 0.0
