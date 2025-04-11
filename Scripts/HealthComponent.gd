@@ -127,6 +127,9 @@ func _process(delta: float) -> void:
 
 
 func hurt(damage : float, ignoreIFrames : bool = false, useShader : bool = true) -> float:
+	if healthState != HealthState.ALIVE:
+		return 0.0
+	
 	if (damage <= 0) or (not ignoreIFrames and currentIFrames > 0.0):
 		return currentHealth
 		

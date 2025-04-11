@@ -1,0 +1,198 @@
+[gd_scene load_steps=10 format=3 uid="uid://bpm1hm4quify"]
+
+[ext_resource type="Texture2D" uid="uid://duudn4senmuux" path="res://Sprites/Projectiles/bullet_player_isaac_brimstone.png" id="3_hquet"]
+[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_3u50k"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_022m3"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_mq58m"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rcbfv"]
+radius = 6.0
+height = 256.0
+
+[sub_resource type="Animation" id="Animation_77y6b"]
+resource_name = "DIE"
+length = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instakill"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_fw1ky"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(256, 12)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LifeTimer:current_animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+
+[sub_resource type="Animation" id="Animation_nwngl"]
+resource_name = "default"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instakill"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(0.406126, 0.406126, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(256, 12), Vector2(8, 28), Vector2(256, 12), Vector2(256, 18), Vector2(256, 12), Vector2(256, 18), Vector2(256, 12), Vector2(256, 18), Vector2(8, 8)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(0.406126, 0.406126, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -6), Vector2(0, -14), Vector2(0, -6), Vector2(0, -9), Vector2(0, -6), Vector2(0, -9), Vector2(0, -6), Vector2(0, -9), Vector2(0, -4)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LifeTimer:current_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"DIE"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
+_data = {
+"DIE": SubResource("Animation_77y6b"),
+"RESET": SubResource("Animation_fw1ky"),
+"default": SubResource("Animation_nwngl")
+}
+
+[node name="Brimstone" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(128, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rcbfv")
+
+[node name="Sprite2D" type="NinePatchRect" parent="."]
+use_parent_material = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -6.0
+offset_right = 256.0
+offset_bottom = 6.0
+grow_vertical = 2
+texture = ExtResource("3_hquet")
+region_rect = Rect2(0, 0, 12, 12)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Ship Input" type="Node2D" parent="."]
+script = ExtResource("4_3u50k")
+canMove = false
+
+[node name="Health" type="Node2D" parent="."]
+script = ExtResource("5_022m3")
+maxHealth = 500.0
+currentHealth = 500.0
+maxIFrames = 0.05
+createPopups = false
+
+[node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("6_mq58m")
+damageAmount = 10.0
+screenShakeAmount = 3.0
+selfDamage = 0.0
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
+position = Vector2(128, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_rcbfv")
+
+[node name="LifeTimer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7i0mr")
+}
+autoplay = "default"

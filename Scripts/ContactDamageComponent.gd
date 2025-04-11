@@ -41,7 +41,8 @@ func _on_area_entered(other: Area2D) -> void:
 		var hp : Health = hps[0]
 		if hp.hurt(damageAmount, ignoreIFrames) > 0.0:
 			health.hurt(selfDamage, false, false)
-			get_parent().gameManager.camera.create_camera_shake(screenShakeAmount, screenShakeTime)
-			if knockbackSpeed > 0 and get_parent() is ShipController and other.get_parent() is ShipController:
-				other.get_parent().extraVelocity = (get_parent().velocity).normalized() * knockbackSpeed
+			if get_parent() is ShipController:
+				get_parent().gameManager.camera.create_camera_shake(screenShakeAmount, screenShakeTime)
+				if knockbackSpeed > 0 and get_parent() is ShipController and other.get_parent() is ShipController:
+					other.get_parent().extraVelocity = (get_parent().velocity).normalized() * knockbackSpeed
 	pass # Replace with function body.

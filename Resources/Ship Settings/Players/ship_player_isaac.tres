@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://ncefhfhuw361"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=8 format=3 uid="uid://ncefhfhuw361"]
 
 [ext_resource type="Texture2D" uid="uid://bv753pokh7vef" path="res://Sprites/Icons/icon_player_isaac.png" id="1_n2i4n"]
 [ext_resource type="Texture2D" uid="uid://hdjnh85joegg" path="res://Sprites/Gunships/Players/gunship_player_isaac.png" id="2_51rk6"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_72ajr"]
+[ext_resource type="Resource" uid="uid://crblmfk01viox" path="res://Resources/Emitter Settings/player_isaac_sub.tres" id="4_s1u30"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]
 _data = [Vector2(0, 0), 0.0, 2.41313, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -25,6 +26,7 @@ regenTime = 0.0
 regenPotency = 0.0
 bulletTimeThreshold = 0.0
 bulletTimeMaxMultiplier = 1.0
+subWeaponSettings = ExtResource("4_s1u30")
 maximumLinearVelocity = 175.0
 maximumAngularVelocity = 500.0
 maximumLinearAcceleration = 500.0
@@ -40,3 +42,5 @@ pointAtTarget = false
 collisionShape = SubResource("RectangleShape2D_g1wgs")
 maxHealth = 50.0
 controlType = 0
+explosionTime = 0.0
+explosionMagnitude = 0.0

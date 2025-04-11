@@ -40,3 +40,5 @@ pointAtTarget = false
 collisionShape = SubResource("RectangleShape2D_1uah0")
 maxHealth = 75.0
 controlType = 1
+explosionTime = 0.0
+explosionMagnitude = 0.0

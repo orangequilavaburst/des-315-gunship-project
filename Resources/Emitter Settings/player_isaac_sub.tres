@@ -1,17 +1,17 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bc1xhey1oq5b6"]
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://crblmfk01viox"]
 
-[ext_resource type="PackedScene" uid="uid://352v532iaw06" path="res://Scenes/VFX/vfx_basic_projectile_hit.tscn" id="1_yecbx"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_g07wl"]
+[ext_resource type="PackedScene" uid="uid://bpm1hm4quify" path="res://Scenes/Game Objects/Projectiles/player_brimstone_isaac.tscn" id="1_xh6ic"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_yiwq4"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
 point_count = 2
 
 [resource]
-script = ExtResource("2_g07wl")
-objectToSpawn = ExtResource("1_yecbx")
-parentToRoot = true
-inheritParentVelocity = true
+script = ExtResource("2_yiwq4")
+objectToSpawn = ExtResource("1_xh6ic")
+parentToRoot = false
+inheritParentVelocity = false
 alwaysFire = false
 angleJitter = 0.0
 objectCount = 1
@@ -25,4 +25,4 @@ positionOffset = Vector2(0, 0)
 positionOffsetJitter = Vector2(0, 0)
 positionOffsetRotated = true
 positionOffsetFromCenter = false
-shootTime = 0.1
+shootTime = 5.0

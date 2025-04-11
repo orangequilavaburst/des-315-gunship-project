@@ -93,6 +93,7 @@ var explosionMagnitude : float = 0.0
 @export var shipSprite : Sprite2D
 @export var mainWeaponEmitter : Emitter
 @export var subWeaponEmitter : Emitter
+@export var smokeEmitter : Emitter
 
 @export_group("Misc. Stuff")
 @export var dieWithoutTargets : bool = false
@@ -137,7 +138,11 @@ func _process(delta: float) -> void:
 	if subWeaponEmitter != null:
 		subWeaponEmitter.global_rotation_degrees = angle
 		if not shipSettings is PlayerShipSettings:
-			mainWeaponEmitter.shootReady = true
+			subWeaponEmitter.shootReady = true
+	if smokeEmitter != null:
+		var regen : bool = health.currentHealth <= health.maxHealth*health.regenThreshold
+		smokeEmitter.shootReady = regen
+		smokeEmitter.alwaysFire = regen
 	
 	if dieWithoutTargets:
 		if shipInput.targets.size() <= 0:

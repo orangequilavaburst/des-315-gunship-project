@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bawxbs4n1qdgw"]
+[gd_scene load_steps=16 format=3 uid="uid://bawxbs4n1qdgw"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_6a8kv"]
 [ext_resource type="Resource" uid="uid://cve16xoeemuuf" path="res://Resources/Ship Settings/Projectiles/bullet_missile_jared.tres" id="2_br0w1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_kab68"]
 [ext_resource type="Resource" uid="uid://bc1xhey1oq5b6" path="res://Resources/Emitter Settings/basic_player_shot_vfx.tres" id="8_6ndjb"]
 [ext_resource type="Resource" uid="uid://dwmnud2m2wfrd" path="res://Resources/Emitter Settings/basic_player_shot_flash_vfx.tres" id="9_wv06k"]
+[ext_resource type="Resource" uid="uid://bxx82xvp1pjv3" path="res://Resources/Emitter Settings/player_missile_jared_smoke.tres" id="10_nel4t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 2.23607
@@ -42,7 +43,8 @@ _data = {
 "default": SubResource("Animation_nwngl")
 }
 
-[node name="Basic Player Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+[node name="Basic Player Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
+z_index = -1
 collision_layer = 4
 collision_mask = 2
 motion_mode = 1
@@ -52,6 +54,7 @@ shipSettings = ExtResource("2_br0w1")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
+mainWeaponEmitter = NodePath("Smoke")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wn53n")
@@ -93,6 +96,10 @@ emitterSettings = ExtResource("8_6ndjb")
 [node name="Emitter2" type="Node2D" parent="."]
 script = ExtResource("7_kab68")
 emitterSettings = ExtResource("9_wv06k")
+
+[node name="Smoke" type="Node2D" parent="."]
+script = ExtResource("7_kab68")
+emitterSettings = ExtResource("10_nel4t")
 
 [node name="TargetArea" type="Area2D" parent="."]
 collision_layer = 0

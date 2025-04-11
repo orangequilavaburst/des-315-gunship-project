@@ -23,5 +23,11 @@ extends Resource
 @export var burstAngleOffsetCurve : Curve
 @export_range(0.0, 10.0) var burstShootTime : float # >=1/60
 
+# position shooting stuff
+@export var positionOffset : Vector2 = Vector2.ZERO
+@export var positionOffsetJitter : Vector2 = Vector2.ZERO
+@export var positionOffsetRotated : bool = true
+@export var positionOffsetFromCenter : bool = false
+
 # misc shooting stuff
 @export_range(0.0, 10.0) var shootTime : float = 1.0

@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://dhyjnmlcc4grh"]
+[gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://berdssp7xqce3"]
 
-[ext_resource type="Script" path="res://Scripts/ShipSettings.gd" id="1_wv2nd"]
+[ext_resource type="Script" path="res://Scripts/ShipSettings.gd" id="1_f3elo"]
 
 [sub_resource type="Curve" id="Curve_iu53x"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -11,7 +11,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [resource]
-script = ExtResource("1_wv2nd")
+script = ExtResource("1_f3elo")
 maximumLinearVelocity = 0.0
 maximumAngularVelocity = 0.0
 maximumLinearAcceleration = 0.0
@@ -24,7 +24,7 @@ linearAccelerationCurve = SubResource("Curve_bxlyd")
 angularAccelerationTime = 0.0
 angularAccelerationCurve = SubResource("Curve_iu53x")
 pointAtTarget = false
-maxHealth = 0.0
+maxHealth = 500.0
 controlType = 0
 explosionTime = 0.0
 explosionMagnitude = 0.0

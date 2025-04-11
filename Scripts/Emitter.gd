@@ -25,6 +25,13 @@ var burstAngleOffset : Vector2 # -180 - 180, basically goes from one angle to an
 var burstAngleOffsetCurve : Curve
 var burstShootTime : float # >=0.0
 
+# position shooting stuff
+
+var positionOffset : Vector2
+var positionOffsetJitter : Vector2
+var positionOffsetRotated : bool
+var positionOffsetFromCenter : bool
+
 # timers
 
 var shootTime : float # time between shots
@@ -67,19 +74,21 @@ func _process(delta):
 					shootTimer = shootTime
 					#print("Burst ended!")
 				else:
-					shoot()
 					burstsLeft -= 1
 					burstTimer = burstShootTime
+					shoot()
 					#print("Burst has " + str(burstsLeft) + " bursts left!")
 					
 		else: # doing nothing
+			burstTimer = 0.0
 			if shootReady:
 				begin_burst()
 	
 	pass
 	
 func begin_burst(ignoreCurrentlyShooting : bool = false) -> void:
-	if not (ignoreCurrentlyShooting or emitter_can_fire()):
+	var canFire : bool = emitter_can_fire()
+	if not (ignoreCurrentlyShooting or canFire):
 		return
 		
 	shootTimer = 0
@@ -93,26 +102,35 @@ func begin_burst(ignoreCurrentlyShooting : bool = false) -> void:
 func shoot() -> void:
 	
 	var startAngle : float = global_rotation_degrees + randf()*angleJitter
-	var burstNumNormalized : float = float(burstsLeft)/float(max(1.0, burstCount))
+	var burstNumNormalized : float = float(burstsLeft - 1)/float(max(1, burstCount - 1))
 	var burstAngle : float = lerp(burstAngleOffset.x, burstAngleOffset.y, burstAngleOffsetCurve.sample(burstNumNormalized))
+	
+	#if burstCount > 1:
+		#print("%d/%d: %f" % [burstsLeft, burstCount, burstNumNormalized])
 	
 	for i in range(objectCount):
 		var spreadAngle : float = lerp(-objectAngleSpread/2.0, objectAngleSpread/2.0, float(i)/max(objectCount - 1, 1)) + randf_range(-objectAngleSpreadJitter/2.0, objectAngleSpreadJitter/2.0)
 		var shootAngle = startAngle + burstAngle + spreadAngle
+		var shootOffset = positionOffset + Vector2(randf_range(-positionOffsetJitter.x/2.0, positionOffsetJitter.x/2.0), randf_range(-positionOffsetJitter.y/2.0, positionOffsetJitter.y/2.0))
+		if positionOffsetRotated:
+			shootOffset = shootOffset.rotated(deg_to_rad(shootAngle)) if positionOffsetFromCenter else shootOffset.rotated(global_rotation)
 		
 		var projectile = objectToSpawn.instantiate()
-		projectile.global_position = global_position
-		projectile.global_rotation_degrees = shootAngle
 		if projectile is ShipController and get_parent() is ShipController:
 			projectile.angle = shootAngle
 			projectile.velocity = get_parent().velocity
 			projectile.extraVelocity = get_parent().velocity
 		if parentToRoot:
 			#get_tree().root.get_children()[0].add_child(projectile)
+			projectile.global_position = global_position + shootOffset
+			projectile.global_rotation_degrees = shootAngle
+			projectile.z_index += z_index
 			get_tree().root.get_children()[0].call_deferred("add_child", projectile)
 		else:
 			#add_child(projectile)
-			call_deferred("add_child", projectile)
+			projectile.position = shootOffset
+			projectile.rotation_degrees = shootAngle - startAngle
+			get_parent().call_deferred("add_child", projectile)
 			
 	emitter_shot.emit()
 	
@@ -143,9 +161,14 @@ func apply_settings(settings : EmitterSettings = emitterSettings) -> void:
 	burstAngleOffsetCurve = settings.burstAngleOffsetCurve
 	burstShootTime = settings.burstShootTime
 	
+	positionOffset = settings.positionOffset
+	positionOffsetJitter = settings.positionOffsetJitter
+	positionOffsetRotated = settings.positionOffsetRotated
+	positionOffsetFromCenter = settings.positionOffsetFromCenter
+	
 	shootTime = settings.shootTime
 	
 	pass
 
 func emitter_can_fire() -> bool:
-	return shootTimer == 0 and burstTimer == 0
+	return shootTimer <= 0 and burstTimer <= 0

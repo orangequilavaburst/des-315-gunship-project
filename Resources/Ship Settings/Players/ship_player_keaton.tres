@@ -39,3 +39,5 @@ pointAtTarget = false
 collisionShape = SubResource("CircleShape2D_k7fh4")
 maxHealth = 150.0
 controlType = 1
+explosionTime = 0.0
+explosionMagnitude = 0.0

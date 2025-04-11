@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c3gpjfrc14gqb" path="res://Sprites/Backgrounds/bg_stars1.png" id="9_uh7mo"]
 [ext_resource type="Resource" uid="uid://cuf6y0prgxfqn" path="res://Resources/Ship Settings/Players/ship_player_roxy.tres" id="10_rtxa4"]
 [ext_resource type="Script" path="res://Scripts/ScreenAreaManager.gd" id="11_wtkdf"]
-[ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="15_uey4u"]
+[ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="15_g2h4m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
 size = Vector2(255, 199.5)
@@ -92,5 +92,5 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 25600, 24000)
 
-[node name="Snake Ship Head" parent="." instance=ExtResource("15_uey4u")]
-position = Vector2(13, 224)
+[node name="Snake Ship Head" parent="." instance=ExtResource("15_g2h4m")]
+position = Vector2(18, 232)
