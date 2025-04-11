@@ -8,6 +8,7 @@ extends Area2D
 
 @export_range(0.0, 10000.0) var selfDamage : float = 1.0
 @export var health : Health
+@export var knockbackSpeed : float = 0.0
 
 #var startupDelay : float = 0.05
 
@@ -41,4 +42,6 @@ func _on_area_entered(other: Area2D) -> void:
 		if hp.hurt(damageAmount, ignoreIFrames) > 0.0:
 			health.hurt(selfDamage, false, false)
 			get_parent().gameManager.camera.create_camera_shake(screenShakeAmount, screenShakeTime)
+			if knockbackSpeed > 0 and get_parent() is ShipController and other.get_parent() is ShipController:
+				other.get_parent().extraVelocity = (get_parent().velocity).normalized() * knockbackSpeed
 	pass # Replace with function body.

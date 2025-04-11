@@ -81,6 +81,7 @@ damageAmount = 4.0
 screenShakeAmount = 2.0
 screenShakeTime = 0.4
 health = NodePath("../Health")
+knockbackSpeed = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
 shape = SubResource("CircleShape2D_5rbfa")

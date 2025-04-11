@@ -254,7 +254,10 @@ func handle_ship_movement(delta : float, time_scale : float = 1.0) -> void:
 		controlType = shipSettings.controlType
 	match(controlType):
 		ShipSettings.ShipControlType.TANK:
-			velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity + extraVelocity
+			if health == null:
+				velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity + extraVelocity
+			else:
+				velocity = lerp(Vector2.from_angle(deg_to_rad(angle)) * linearVelocity, extraVelocity.normalized()*(extraVelocity.length() + linearVelocity), health.currentIFrames/health.maxIFrames if health.maxIFrames > 0.0 else 0.0)
 		ShipSettings.ShipControlType.ASTEROIDS:
 			if abs(thrustInput) > 0:
 				velocity += Vector2.from_angle(deg_to_rad(angle)) * linearAcceleration
@@ -295,6 +298,10 @@ func apply_settings(settings : ShipSettings) -> void:
 			health.regenTime = settings.regenTime
 			health.regenPotency = settings.regenPotency
 			health.regenThreshold = settings.regenThreshold
-	if shipSprite != null and settings is PlayerShipSettings:
-		shipSprite.texture = settings.playerShipSprite
-	
+	if settings is PlayerShipSettings:
+		if shipSprite != null:
+			shipSprite.texture = settings.playerShipSprite
+		if mainWeaponEmitter != null:
+			mainWeaponEmitter.apply_settings(shipSettings.mainWeaponSettings)
+		if subWeaponEmitter != null:
+			subWeaponEmitter.apply_settings(shipSettings.subWeaponSettings)

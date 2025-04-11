@@ -14,3 +14,7 @@ extends ShipSettings
 @export_group("Bullet Time Modifiers")
 @export_range(0.00, 1.0) var bulletTimeThreshold : float = 0.25
 @export_range(0.01, 1.0) var bulletTimeMaxMultiplier : float = 0.5
+
+@export_group("Weapon Settings")
+@export var mainWeaponSettings : EmitterSettings
+@export var subWeaponSettings : EmitterSettings

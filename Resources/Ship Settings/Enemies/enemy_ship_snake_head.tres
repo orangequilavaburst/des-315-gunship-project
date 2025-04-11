@@ -12,8 +12,8 @@ point_count = 2
 
 [resource]
 script = ExtResource("1_unwdh")
-maximumLinearVelocity = 150.0
-maximumAngularVelocity = 150.0
+maximumLinearVelocity = 162.5
+maximumAngularVelocity = 100.0
 maximumLinearAcceleration = 1000.0
 maximumAngularAcceleration = 250.0
 linearFriction = 100.0

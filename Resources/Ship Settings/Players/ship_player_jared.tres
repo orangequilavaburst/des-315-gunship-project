@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://ceydvcau3ms8h"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://ceydvcau3ms8h"]
 
 [ext_resource type="Texture2D" uid="uid://70ao0rjog33o" path="res://Sprites/Icons/icon_player_jared.png" id="1_8kke5"]
+[ext_resource type="Resource" uid="uid://f4yhg5wv6e0w" path="res://Resources/Emitter Settings/player_jared_main.tres" id="1_p8xf7"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="1_phjya"]
 [ext_resource type="Texture2D" uid="uid://dqan8rl1nnded" path="res://Sprites/Gunships/Players/gunship_player_j8-bit.png" id="2_jifj1"]
+[ext_resource type="Resource" uid="uid://dupasxr57byys" path="res://Resources/Emitter Settings/player_jared_sub.tres" id="5_mppik"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -25,6 +27,8 @@ regenTime = 2.5
 regenPotency = 5.0
 bulletTimeThreshold = 0.25
 bulletTimeMaxMultiplier = 0.5
+mainWeaponSettings = ExtResource("1_p8xf7")
+subWeaponSettings = ExtResource("5_mppik")
 maximumLinearVelocity = 150.0
 maximumAngularVelocity = 200.0
 maximumLinearAcceleration = 1000.0

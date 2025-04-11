@@ -7,6 +7,14 @@ extends Camera2D
 @export var maxVelocityOffset : float
 @export var offsetSpeed : float
 
+@export var uiControl : CanvasLayer
+
+@export var zoomRange : Vector2 = Vector2(0.5, 1.5)
+@export var zoomSpeed : float = 0.5
+@export var zoomInc : float = 0.05
+var zoomAmount : float = 1.0
+var zoomAmountCurrent : float
+
 @export var screenArea : Area2D
 var enemyAveragePosition : Vector2 = Vector2.ZERO
 var enemyPosOffset : Vector2 = Vector2.ZERO
@@ -25,6 +33,8 @@ func _ready():
 	else:
 		handle_new_focus()
 		
+	zoomAmount = 1.0
+	zoomAmountCurrent = zoomAmount
 	
 	pass # Replace with function body.
 
@@ -32,26 +42,34 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
+	zoomAmount = clamp(zoomAmount, zoomRange.x, zoomRange.y)
+	zoomAmountCurrent = move_toward(zoomAmountCurrent, zoomAmount, zoomSpeed * delta)
+	
+	zoom = Vector2.ONE * zoomAmountCurrent
+	
 	var shakeVector = Vector2.from_angle(deg_to_rad(randf()*360.0))
 	if cameraShakeTimer > 0.0:
 		cameraShakeTimer -= delta
 		if cameraShakeTimer < 0.0:
 			cameraShakeTimer = 0.0
 	
-	global_position = currentPosition + currentOffset + shakeVector*get_shake_intensity()
+	if focus != null:
+		
+		currentPosition = focus.global_position
+		
+		var targetOffset = get_target_offset()
+		currentOffset = Vector2(move_toward(currentOffset.x, targetOffset.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(currentOffset.y, targetOffset.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+		
+		#if (enemyAveragePosition + global_position) != Vector2.ZERO:
+			#enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, enemyAveragePosition.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, enemyAveragePosition.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+	
+	global_position = currentPosition + currentOffset/zoom + shakeVector*get_shake_intensity()
 	#if (enemyAveragePosition + global_position) != Vector2.ZERO:
 		#global_position += enemyPosOffset
 	
-	if focus == null:
-		return
-		
-	currentPosition = focus.global_position
-	
-	var targetOffset = get_target_offset()
-	currentOffset = Vector2(move_toward(currentOffset.x, targetOffset.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(currentOffset.y, targetOffset.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
-	
-	#if (enemyAveragePosition + global_position) != Vector2.ZERO:
-		#enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, enemyAveragePosition.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, enemyAveragePosition.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+	if uiControl != null:
+		uiControl.follow_viewport_scale = 1.0 / zoomAmountCurrent
+		#print(str(uiControl.scale) + ", " + str(uiControl.offset))
 	
 	pass
 	
@@ -65,6 +83,10 @@ func _physics_process(delta: float) -> void:
 func _draw() -> void:
 	#draw_circle(enemyAveragePosition, 4.0, Color.RED)
 	pass
+	
+func _unhandled_input(event):
+	var zoomButton : float = float(event.is_action_pressed("camera_scroll_up")) - float(event.is_action_pressed("camera_scroll_down"))
+	zoomAmount += zoomButton*zoomInc
 
 func handle_new_focus() -> void:
 	currentPosition = focus.global_position

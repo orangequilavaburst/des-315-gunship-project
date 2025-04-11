@@ -53,6 +53,7 @@ screenShakeAmount = 0.0
 screenShakeTime = 0.0
 selfDamage = 0.0
 health = NodePath("../Health")
+knockbackSpeed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_j2ih1")
