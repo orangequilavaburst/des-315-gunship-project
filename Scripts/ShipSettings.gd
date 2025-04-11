@@ -27,3 +27,5 @@ enum ShipControlType {
 @export var collisionShape : Shape2D
 @export_range(1.0, 10000.0) var maxHealth : float
 @export var controlType : ShipControlType
+@export_range(0.0, 10000.0) var explosionTime : float = 0.0
+@export_range(0.0, 10000.0) var explosionMagnitude : float = 0.0

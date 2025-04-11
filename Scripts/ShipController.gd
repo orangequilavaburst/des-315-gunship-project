@@ -76,6 +76,10 @@ var angularAccelerationCurve : Curve
 var controlType : ShipSettings.ShipControlType
 var pointAtTarget : bool
 
+#@export_subgroup("Death Effects")
+var explosionTime : float = 0.0
+var explosionMagnitude : float = 0.0
+
 @export_group("Object References")
 @export var shipInput : ShipInput
 @export var shipSettings : ShipSettings:
@@ -279,6 +283,8 @@ func apply_settings(settings : ShipSettings) -> void:
 	angularAccelerationCurve = shipSettings.angularAccelerationCurve
 	controlType = shipSettings.controlType
 	pointAtTarget = shipSettings.pointAtTarget
+	explosionTime = shipSettings.explosionTime
+	explosionMagnitude = shipSettings.explosionMagnitude
 	
 	if collisionShape != null:
 		collisionShape.shape = settings.collisionShape

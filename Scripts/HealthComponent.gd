@@ -188,6 +188,10 @@ func death() -> void:
 	for emitter in deathEmitters:
 		emitter.begin_burst()
 		#print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
+	
+	if get_parent() is ShipController:
+		gameManager.camera.create_camera_shake(get_parent().explosionMagnitude, get_parent().explosionTime)
+	
 	health_death.emit()
 	healthState = HealthState.DYING
 	

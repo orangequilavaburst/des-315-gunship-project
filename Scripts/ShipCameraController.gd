@@ -79,7 +79,7 @@ func get_target_offset() -> Vector2:
 	return cameraOffset + focus.velocity.normalized()*velOff
 
 func create_camera_shake(intensity : float, time : float) -> bool:
-	if intensity < get_shake_intensity():
+	if intensity < get_shake_intensity() or time <= 0.0:
 		return false
 	
 	cameraShakeIntensity = intensity
