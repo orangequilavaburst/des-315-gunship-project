@@ -175,6 +175,7 @@ script = ExtResource("5_022m3")
 maxHealth = 500.0
 currentHealth = 500.0
 maxIFrames = 0.05
+hurtColors = Array[Color]([])
 createPopups = false
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]

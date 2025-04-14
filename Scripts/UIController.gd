@@ -51,7 +51,8 @@ func update_ship_settings(settings : ShipSettings = shipSettings) -> void:
 	subWeaponEmitter = shipSettingsController.subWeaponEmitter
 	
 	if health != null:
-		health.health_changed.connect(update_health_info)
+		if not health.health_changed.is_connected(update_health_info):
+			health.health_changed.connect(update_health_info)
 	
 	update_player_info()
 	update_health_info()

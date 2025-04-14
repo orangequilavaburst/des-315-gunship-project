@@ -85,16 +85,18 @@ func _process(delta: float) -> void:
 			# update i-frames and play animation
 			if currentIFrames > 0.0:
 				
-				if useHurtColor:
-					if (fposmod(hurtColorTimer + hurtColorChangeTime - delta, hurtColorChangeTime) > fposmod(hurtColorTimer + hurtColorChangeTime, hurtColorChangeTime)):
-						hurtColorIndex = posmod(hurtColorIndex + 1, hurtColors.size())
-				else:
-					hurtColorIndex = 0
-				
-				if not get_parent().material.get_shader_parameter("swapColorEnabled"):
-					get_parent().material.set_shader_parameter("swapColorEnabled", true)
-				get_parent().material.set_shader_parameter("swapColorMain", hurtColors[hurtColorIndex])
-				get_parent().material.set_shader_parameter("swapColorAlt", hurtColors[posmod(hurtColorIndex + 1, hurtColors.size())])
+				if hurtColors.size() > 0:
+					
+					if useHurtColor:
+						if (fposmod(hurtColorTimer + hurtColorChangeTime - delta, hurtColorChangeTime) > fposmod(hurtColorTimer + hurtColorChangeTime, hurtColorChangeTime)):
+							hurtColorIndex = posmod(hurtColorIndex + 1, hurtColors.size())
+					else:
+						hurtColorIndex = 0
+					
+					if not get_parent().material.get_shader_parameter("swapColorEnabled"):
+						get_parent().material.set_shader_parameter("swapColorEnabled", true)
+					get_parent().material.set_shader_parameter("swapColorMain", hurtColors[hurtColorIndex])
+					get_parent().material.set_shader_parameter("swapColorAlt", hurtColors[posmod(hurtColorIndex + 1, hurtColors.size())])
 				
 				currentIFrames -= delta*gameManager.deltaTimeMultiplier
 				if currentIFrames < 0.0:

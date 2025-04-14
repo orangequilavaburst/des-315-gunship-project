@@ -31,3 +31,4 @@ extends Resource
 
 # misc shooting stuff
 @export_range(0.0, 10.0) var shootTime : float = 1.0
+@export_range(0.0, 10000.0) var recoilSpeed : float = 0.0

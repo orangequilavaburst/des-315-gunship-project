@@ -259,10 +259,11 @@ func handle_ship_movement(delta : float, time_scale : float = 1.0) -> void:
 		controlType = shipSettings.controlType
 	match(controlType):
 		ShipSettings.ShipControlType.TANK:
-			if health == null:
+			velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity + extraVelocity
+			'''if health == null:
 				velocity = Vector2.from_angle(deg_to_rad(angle)) * linearVelocity + extraVelocity
 			else:
-				velocity = lerp(Vector2.from_angle(deg_to_rad(angle)) * linearVelocity, extraVelocity.normalized()*(extraVelocity.length() + linearVelocity), health.currentIFrames/health.maxIFrames if health.maxIFrames > 0.0 else 0.0)
+				velocity = lerp(Vector2.from_angle(deg_to_rad(angle)) * linearVelocity, extraVelocity.normalized()*(extraVelocity.length() + linearVelocity), health.currentIFrames/health.maxIFrames if health.maxIFrames > 0.0 else 0.0)'''
 		ShipSettings.ShipControlType.ASTEROIDS:
 			if abs(thrustInput) > 0:
 				velocity += Vector2.from_angle(deg_to_rad(angle)) * linearAcceleration

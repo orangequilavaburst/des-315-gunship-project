@@ -14,6 +14,8 @@ var parentToRoot : bool
 var inheritParentVelocity : bool
 var alwaysFire : bool
 
+var recoilSpeed : float
+
 # angle shooting stuff
 
 var angleJitter : float # 0-360
@@ -120,6 +122,7 @@ func shoot() -> void:
 			projectile.angle = shootAngle
 			projectile.velocity = get_parent().velocity
 			projectile.extraVelocity = get_parent().velocity
+			get_parent().extraVelocity -= Vector2.from_angle(get_parent().angle) * recoilSpeed
 		if parentToRoot:
 			#get_tree().root.get_children()[0].add_child(projectile)
 			projectile.global_position = global_position + shootOffset
@@ -167,6 +170,7 @@ func apply_settings(settings : EmitterSettings = emitterSettings) -> void:
 	positionOffsetFromCenter = settings.positionOffsetFromCenter
 	
 	shootTime = settings.shootTime
+	recoilSpeed = settings.recoilSpeed
 	
 	pass
 
