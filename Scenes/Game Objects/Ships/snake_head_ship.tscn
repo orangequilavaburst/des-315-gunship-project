@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cx8f0pyf2ssoq"]
+[gd_scene load_steps=14 format=3 uid="uid://cx8f0pyf2ssoq"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_emp2e"]
 [ext_resource type="Resource" uid="uid://dj6m5ocnfr0k" path="res://Resources/Ship Settings/Enemies/enemy_ship_snake_head.tres" id="2_shyty"]
@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_tn3n7"]
 [ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_lhhxe"]
 [ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="8_3vsun"]
+[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="8_ix87d"]
+[ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="9_gxc8r"]
+[ext_resource type="Resource" uid="uid://c8ssxq0kc20kn" path="res://Resources/Emitter Settings/enemy_snake_head_shot.tres" id="10_dh80k"]
+[ext_resource type="Resource" uid="uid://biek3wpabsv7j" path="res://Resources/Emitter Settings/enemy_snake_head_deathspread.tres" id="11_3br3w"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 6.0
@@ -14,7 +18,7 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_j2ih1"]
 radius = 8.0
 
-[node name="Snake Ship Head" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+[node name="Snake Ship Head" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
@@ -25,6 +29,7 @@ shipSettings = ExtResource("2_shyty")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
+mainWeaponEmitter = NodePath("Main Weapon Emitter")
 bodySegments = 100
 bodySegmentScene = ExtResource("3_281ve")
 segmentDistanceRange = Vector2(6, 8)
@@ -40,9 +45,10 @@ texture = ExtResource("3_ok5fo")
 script = ExtResource("4_tn3n7")
 targetType = 1
 
-[node name="Health" type="Node2D" parent="."]
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
 script = ExtResource("5_lhhxe")
 maxHealth = 1.0
+deathEmitters = [NodePath("../Explosion Emitter"), NodePath("../Death Bullet Emitter")]
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 2
@@ -57,3 +63,15 @@ knockbackSpeed = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_j2ih1")
+
+[node name="Explosion Emitter" type="Node2D" parent="."]
+script = ExtResource("8_ix87d")
+emitterSettings = ExtResource("9_gxc8r")
+
+[node name="Main Weapon Emitter" type="Node2D" parent="."]
+script = ExtResource("8_ix87d")
+emitterSettings = ExtResource("10_dh80k")
+
+[node name="Death Bullet Emitter" type="Node2D" parent="."]
+script = ExtResource("8_ix87d")
+emitterSettings = ExtResource("11_3br3w")

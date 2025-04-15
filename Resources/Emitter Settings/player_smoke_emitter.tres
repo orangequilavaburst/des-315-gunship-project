@@ -26,3 +26,4 @@ positionOffsetJitter = Vector2(16, 16)
 positionOffsetRotated = true
 positionOffsetFromCenter = false
 shootTime = 0.0
+recoilSpeed = 0.0

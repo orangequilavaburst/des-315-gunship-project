@@ -1,19 +1,19 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://dyo3n7s0g4vcq"]
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bwkqiyfaise35"]
 
-[ext_resource type="PackedScene" uid="uid://cot64gks67j6g" path="res://Scenes/Game Objects/Projectiles/basic_player_projectile.tscn" id="1_ng2tn"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_vj3ft"]
+[ext_resource type="PackedScene" uid="uid://khd35qcpt1sj" path="res://Scenes/VFX/vfx_explosion_basic.tscn" id="1_svfqj"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_town7"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
 point_count = 2
 
 [resource]
-script = ExtResource("2_vj3ft")
-objectToSpawn = ExtResource("1_ng2tn")
+script = ExtResource("2_town7")
+objectToSpawn = ExtResource("1_svfqj")
 parentToRoot = true
 inheritParentVelocity = true
 alwaysFire = false
-angleJitter = 0.0
+angleJitter = 360.0
 objectCount = 1
 objectAngleSpread = 0.0
 objectAngleSpreadJitter = 0.0

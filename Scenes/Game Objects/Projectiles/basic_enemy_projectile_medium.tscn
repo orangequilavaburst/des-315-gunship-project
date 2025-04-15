@@ -1,21 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhh0qmvjv3k77"]
+[gd_scene load_steps=11 format=3 uid="uid://br4plpsbxd6nl"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_wpkk8"]
-[ext_resource type="Resource" uid="uid://c5v7sxvikql2v" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings.tres" id="2_45tv2"]
-[ext_resource type="Texture2D" uid="uid://eybmodn00yaq" path="res://Sprites/Projectiles/bullet_basic_small.png" id="3_pdi7n"]
-[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_pnjs3"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_lhhkc"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_jalxs"]
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_psu7c"]
+[ext_resource type="Resource" uid="uid://c4nblg2n1kdp5" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings_medium.tres" id="2_8cugs"]
+[ext_resource type="Texture2D" uid="uid://dhby4vffm5gat" path="res://Sprites/Projectiles/bullet_basic_medium.png" id="3_e3c43"]
+[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_mnac3"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_2ve1u"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_if7rx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
-radius = 2.23607
+radius = 3.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qftqi"]
-radius = 3.16228
+radius = 3.0
 
 [sub_resource type="Animation" id="Animation_nwngl"]
 resource_name = "default"
-length = 5.0
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,7 +22,7 @@ tracks/0/path = NodePath("Health")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(5),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -37,7 +36,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(5),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -53,9 +52,9 @@ _data = {
 [node name="Basic Enemy Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
 collision_layer = 8
 motion_mode = 1
-script = ExtResource("1_wpkk8")
+script = ExtResource("1_psu7c")
 shipInput = NodePath("Ship Input")
-shipSettings = ExtResource("2_45tv2")
+shipSettings = ExtResource("2_8cugs")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
@@ -65,20 +64,20 @@ shape = SubResource("CircleShape2D_wn53n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-texture = ExtResource("3_pdi7n")
+texture = ExtResource("3_e3c43")
 
 [node name="Ship Input" type="Node2D" parent="."]
-script = ExtResource("4_pnjs3")
+script = ExtResource("4_mnac3")
 
 [node name="Health" type="Node2D" parent="."]
-script = ExtResource("5_lhhkc")
+script = ExtResource("5_2ve1u")
 maxHealth = 1.0
 maxIFrames = 0.0
 createPopups = false
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 8
-script = ExtResource("6_jalxs")
+script = ExtResource("6_if7rx")
 health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]

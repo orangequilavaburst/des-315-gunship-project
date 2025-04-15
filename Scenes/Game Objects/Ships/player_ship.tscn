@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://egqbdmophtov"]
+[gd_scene load_steps=13 format=3 uid="uid://egqbdmophtov"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="2_53ifd"]
@@ -9,6 +9,7 @@
 [ext_resource type="Resource" uid="uid://f4yhg5wv6e0w" path="res://Resources/Emitter Settings/player_jared_main.tres" id="7_ermc7"]
 [ext_resource type="Resource" uid="uid://dupasxr57byys" path="res://Resources/Emitter Settings/player_jared_sub.tres" id="8_y8v1o"]
 [ext_resource type="Resource" uid="uid://c0pewffged2lu" path="res://Resources/Emitter Settings/player_smoke_emitter.tres" id="9_f2mh6"]
+[ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="10_y8ejj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 8.0
@@ -40,9 +41,10 @@ texture = ExtResource("2_e6ub6")
 [node name="Ship Input" type="Node2D" parent="."]
 script = ExtResource("3_fwrla")
 
-[node name="Health" type="Node2D" parent="."]
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
 script = ExtResource("6_qpi21")
 dyingType = 3
+deathEmitters = [NodePath("../Explosion Emitter")]
 
 [node name="Main Weapon Emitter" type="Node2D" parent="."]
 script = ExtResource("6_0uf70")
@@ -61,3 +63,7 @@ collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CircleShape2D_allei")
+
+[node name="Explosion Emitter" type="Node2D" parent="."]
+script = ExtResource("6_0uf70")
+emitterSettings = ExtResource("10_y8ejj")
