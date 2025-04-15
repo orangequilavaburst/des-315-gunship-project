@@ -97,8 +97,9 @@ func handle_new_focus() -> void:
 		hp.health_hurt_noargs.connect(create_camera_shake.bind(2.0, 0.25))
 
 func get_target_offset() -> Vector2:
-	var velOff = maxVelocityOffset*min(focus.velocity.length(), focus.maximumLinearVelocity)/focus.maximumLinearVelocity
-	return cameraOffset + focus.velocity.normalized()*velOff
+	var velOff : float = maxVelocityOffset*min(focus.velocity.length(), focus.maximumLinearVelocity)/focus.maximumLinearVelocity
+	var velangle : Vector2 = Vector2.from_angle(deg_to_rad(focus.angle)) if focus.shipSettings is PlayerShipSettings else focus.velocity
+	return cameraOffset + velangle.normalized()*velOff
 
 func create_camera_shake(intensity : float, time : float) -> bool:
 	if intensity < get_shake_intensity() or time <= 0.0:

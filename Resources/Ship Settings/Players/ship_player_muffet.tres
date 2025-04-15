@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://ses7pfvo1hi2"]
+
+[ext_resource type="Resource" uid="uid://b3kcjid5w1cyy" path="res://Resources/Emitter Settings/player_muffet_main.tres" id="1_xcr1d"]
+[ext_resource type="Texture2D" uid="uid://pg6np2moymmd" path="res://Sprites/Icons/icon_player_muffet.png" id="2_taskn"]
+[ext_resource type="Texture2D" uid="uid://cmcdbacpq3t8c" path="res://Sprites/Gunships/Players/gunship_player_muffet.png" id="3_mhp1g"]
+[ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="4_e41nm"]
+[ext_resource type="Resource" uid="uid://bs20cv44133bm" path="res://Resources/Emitter Settings/player_muffet_sub.tres" id="5_1ak1i"]
+
+[sub_resource type="Curve" id="Curve_5gjpg"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k7fh4"]
+
+[sub_resource type="Curve" id="Curve_yvtvy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("4_e41nm")
+playerName = "Muffet"
+playerShipSprite = ExtResource("3_mhp1g")
+playerIconSprite = ExtResource("2_taskn")
+regenThreshold = 0.325
+regenTime = 1.0
+regenPotency = 2.0
+bulletTimeThreshold = 1.0
+bulletTimeMaxMultiplier = 1.0
+mainWeaponSettings = ExtResource("1_xcr1d")
+subWeaponSettings = ExtResource("5_1ak1i")
+maximumLinearVelocity = 150.0
+maximumAngularVelocity = 150.0
+maximumLinearAcceleration = 2000.0
+maximumAngularAcceleration = 1000.0
+linearFriction = 100.0
+angularFriction = 100.0
+turningSlowdownRatio = 0.0
+linearAccelerationTime = 1.0
+linearAccelerationCurve = SubResource("Curve_yvtvy")
+angularAccelerationTime = 1.0
+angularAccelerationCurve = SubResource("Curve_5gjpg")
+pointAtTarget = false
+collisionShape = SubResource("CircleShape2D_k7fh4")
+maxHealth = 100.0
+controlType = 0
+explosionTime = 0.0
+explosionMagnitude = 0.0

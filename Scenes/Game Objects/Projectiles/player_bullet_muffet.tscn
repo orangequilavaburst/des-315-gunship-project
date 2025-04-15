@@ -1,0 +1,123 @@
+[gd_scene load_steps=15 format=3 uid="uid://xyuwjtcnvew0"]
+
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_70pbp"]
+[ext_resource type="Resource" uid="uid://cies1o2dmf6y7" path="res://Resources/Ship Settings/Projectiles/bullet_player_muffet.tres" id="2_qrr7x"]
+[ext_resource type="Texture2D" uid="uid://b71yjbi8pvc6i" path="res://Sprites/Projectiles/bullet_player_muffet.png" id="3_3viik"]
+[ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_rsu1x"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_vpk7i"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_ddnd0"]
+[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_ja13l"]
+[ext_resource type="Resource" uid="uid://bc1xhey1oq5b6" path="res://Resources/Emitter Settings/basic_player_shot_vfx.tres" id="8_acnfy"]
+[ext_resource type="Resource" uid="uid://dwmnud2m2wfrd" path="res://Resources/Emitter Settings/basic_player_shot_flash_vfx.tres" id="9_nwutx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
+radius = 2.23607
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5rbfa"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b1aeu"]
+radius = 64.0
+
+[sub_resource type="Animation" id="Animation_nwngl"]
+resource_name = "default"
+length = 5.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Health")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"instakill"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
+_data = {
+"default": SubResource("Animation_nwngl")
+}
+
+[node name="Basic Player Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+z_index = -1
+collision_layer = 4
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_70pbp")
+shipInput = NodePath("Ship Input")
+shipSettings = ExtResource("2_qrr7x")
+collisionShape = NodePath("CollisionShape2D")
+health = NodePath("Health")
+shipSprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wn53n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("3_3viik")
+
+[node name="Ship Input" type="Node2D" parent="." node_paths=PackedStringArray("targetArea")]
+script = ExtResource("4_rsu1x")
+targetArea = NodePath("../TargetArea")
+targetType = 2
+
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("hurtEmitters", "deathEmitters")]
+script = ExtResource("5_vpk7i")
+maxHealth = 1.0
+maxIFrames = 0.0
+createPopups = false
+hurtEmitters = [NodePath("../Emitter"), NodePath("../Emitter2")]
+deathEmitters = [NodePath("../Emitter"), NodePath("../Emitter2")]
+
+[node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("6_ddnd0")
+damageAmount = 4.0
+screenShakeAmount = 2.0
+screenShakeTime = 0.4
+health = NodePath("../Health")
+knockbackSpeed = 250.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactDamage"]
+shape = SubResource("CircleShape2D_5rbfa")
+
+[node name="Emitter" type="Node2D" parent="."]
+script = ExtResource("7_ja13l")
+emitterSettings = ExtResource("8_acnfy")
+
+[node name="Emitter2" type="Node2D" parent="."]
+script = ExtResource("7_ja13l")
+emitterSettings = ExtResource("9_nwutx")
+
+[node name="TargetArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
+shape = SubResource("CircleShape2D_b1aeu")
+
+[node name="LifeTimer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7i0mr")
+}
+autoplay = "default"

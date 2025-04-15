@@ -122,7 +122,7 @@ func shoot() -> void:
 			projectile.angle = shootAngle
 			projectile.velocity = get_parent().velocity
 			projectile.extraVelocity = get_parent().velocity
-			get_parent().extraVelocity -= Vector2.from_angle(get_parent().angle) * recoilSpeed
+			get_parent().extraVelocity -= Vector2.from_angle(deg_to_rad(get_parent().angle)) * recoilSpeed
 		if parentToRoot:
 			#get_tree().root.get_children()[0].add_child(projectile)
 			projectile.global_position = global_position + shootOffset

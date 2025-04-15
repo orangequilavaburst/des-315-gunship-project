@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://dd425o17e840r"]
 
-[ext_resource type="Texture2D" uid="uid://7kepygfs44t4" path="res://Sprites/Icons/icon_player_keaton.png" id="1_5ygei"]
+[ext_resource type="Texture2D" uid="uid://chjqblndjql0u" path="res://Sprites/Icons/icon_player_keaton_furry.png" id="1_yanhx"]
 [ext_resource type="Texture2D" uid="uid://b6dvmqfupor8w" path="res://Sprites/Gunships/Players/gunship_player_keaton.png" id="2_74dly"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_ixw05"]
 
@@ -18,7 +18,7 @@ point_count = 2
 script = ExtResource("3_ixw05")
 playerName = "Keaton"
 playerShipSprite = ExtResource("2_74dly")
-playerIconSprite = ExtResource("1_5ygei")
+playerIconSprite = ExtResource("1_yanhx")
 regenThreshold = 0.25
 regenTime = 10.0
 regenPotency = 10.0

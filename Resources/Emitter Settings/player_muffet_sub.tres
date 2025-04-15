@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bs20cv44133bm"]
+
+[ext_resource type="PackedScene" uid="uid://5268bqbbfagy" path="res://Scenes/Game Objects/Projectiles/player_missile_muffet.tscn" id="1_cq1vh"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_mngb7"]
+
+[sub_resource type="Curve" id="Curve_tscpp"]
+_data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_mngb7")
+objectToSpawn = ExtResource("1_cq1vh")
+parentToRoot = true
+inheritParentVelocity = true
+alwaysFire = false
+angleJitter = 0.0
+objectCount = 6
+objectAngleSpread = 180.0
+objectAngleSpreadJitter = 0.0
+burstCount = 1
+burstAngleOffset = Vector2(0, 0)
+burstAngleOffsetCurve = SubResource("Curve_tscpp")
+burstShootTime = 0.05
+positionOffset = Vector2(8, 0)
+positionOffsetJitter = Vector2(0, 0)
+positionOffsetRotated = true
+positionOffsetFromCenter = false
+shootTime = 5.0
+recoilSpeed = 0.0
