@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=8 format=3 uid="uid://g2ahncgdcfp3"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://g2ahncgdcfp3"]
 
 [ext_resource type="Resource" uid="uid://chta6vcb200pk" path="res://Resources/Emitter Settings/player_pancake_main.tres" id="1_4qfv7"]
 [ext_resource type="Texture2D" uid="uid://cdlu3g8oh5pqc" path="res://Sprites/Gunships/Players/gunship_player_flapjack.png" id="1_qgs6j"]
 [ext_resource type="Texture2D" uid="uid://0nxr7u5qnmtv" path="res://Sprites/Icons/icon_player_flapjack.png" id="2_eq3a5"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_ms1gm"]
+[ext_resource type="Resource" uid="uid://cdbkj0g60retj" path="res://Resources/Emitter Settings/player_pancake_sub.tres" id="5_hfwkl"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]
 _data = [Vector2(0, 0), 0.0, 2.41313, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -27,6 +28,7 @@ regenPotency = 1.0
 bulletTimeThreshold = 0.75
 bulletTimeMaxMultiplier = 0.9
 mainWeaponSettings = ExtResource("1_4qfv7")
+subWeaponSettings = ExtResource("5_hfwkl")
 maximumLinearVelocity = 250.0
 maximumAngularVelocity = 500.0
 maximumLinearAcceleration = 2000.0

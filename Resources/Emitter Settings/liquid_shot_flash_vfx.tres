@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://dgdxrh5iqayku"]
+
+[ext_resource type="PackedScene" uid="uid://18oyunuileh4" path="res://Scenes/VFX/vfx_liquid_projectile_flash.tscn" id="1_rk582"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_ss7qr"]
+
+[sub_resource type="Curve" id="Curve_tscpp"]
+_data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_ss7qr")
+objectToSpawn = ExtResource("1_rk582")
+parentToRoot = true
+inheritParentVelocity = true
+alwaysFire = false
+angleJitter = 72.0
+objectCount = 5
+objectAngleSpread = 360.0
+objectAngleSpreadJitter = 36.0
+burstCount = 1
+burstAngleOffset = Vector2(0, 0)
+burstAngleOffsetCurve = SubResource("Curve_tscpp")
+burstShootTime = 0.0
+positionOffset = Vector2(0, 0)
+positionOffsetJitter = Vector2(0, 0)
+positionOffsetRotated = true
+positionOffsetFromCenter = false
+shootTime = 1.0
+recoilSpeed = 0.0

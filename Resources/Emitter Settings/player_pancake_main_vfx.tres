@@ -1,18 +1,18 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bc1xhey1oq5b6"]
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bxfm6he1xdot3"]
 
-[ext_resource type="PackedScene" uid="uid://bxau2v6gkwsg2" path="res://Scenes/VFX/vfx_missile_pancake_hit.tscn" id="1_akbt2"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_g07wl"]
+[ext_resource type="PackedScene" uid="uid://blrdhuigfemjp" path="res://Scenes/VFX/vfx_missile_pancake_particle.tscn" id="1_ceio7"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_yup34"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
 point_count = 2
 
 [resource]
-script = ExtResource("2_g07wl")
-objectToSpawn = ExtResource("1_akbt2")
+script = ExtResource("2_yup34")
+objectToSpawn = ExtResource("1_ceio7")
 parentToRoot = true
 inheritParentVelocity = true
-alwaysFire = false
+alwaysFire = true
 angleJitter = 0.0
 objectCount = 1
 objectAngleSpread = 0.0
@@ -22,8 +22,8 @@ burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.0
 positionOffset = Vector2(0, 0)
-positionOffsetJitter = Vector2(0, 0)
+positionOffsetJitter = Vector2(10, 10)
 positionOffsetRotated = true
 positionOffsetFromCenter = false
-shootTime = 0.1
+shootTime = 0.05
 recoilSpeed = 0.0
