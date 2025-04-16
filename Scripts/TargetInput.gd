@@ -14,6 +14,10 @@ func _ready() -> void:
 			if ship.shipSettings is PlayerShipSettings:
 				add_target(ship)
 				break
+	elif targetType == TargetType.ENEMY:
+		for body in targetArea.get_overlapping_bodies():
+			if body is ShipController:
+				add_target(body)
 				
 	if targetArea != null:
 		targetArea.area_entered.connect(_on_area_entered)
