@@ -1,15 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://bawxbs4n1qdgw"]
+[gd_scene load_steps=17 format=3 uid="uid://coq31lrmv1nv2"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_6a8kv"]
-[ext_resource type="Resource" uid="uid://cve16xoeemuuf" path="res://Resources/Ship Settings/Projectiles/bullet_missile_jared.tres" id="2_br0w1"]
-[ext_resource type="Texture2D" uid="uid://bagsttm8i0pt1" path="res://Sprites/Projectiles/bullet_missile_jared.png" id="3_h8bji"]
-[ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_d3qnr"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_aekwk"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_s5cc7"]
-[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_kab68"]
-[ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="8_xuppn"]
-[ext_resource type="Resource" uid="uid://dwmnud2m2wfrd" path="res://Resources/Emitter Settings/basic_player_shot_flash_vfx.tres" id="9_wv06k"]
-[ext_resource type="Resource" uid="uid://bxx82xvp1pjv3" path="res://Resources/Emitter Settings/player_missile_jared_smoke.tres" id="10_nel4t"]
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_fkcwb"]
+[ext_resource type="Resource" uid="uid://d4k3jrogeg7ig" path="res://Resources/Ship Settings/Projectiles/bullet_missile_enemy_snake.tres" id="2_rpney"]
+[ext_resource type="Texture2D" uid="uid://dvwuwq2o1q5uo" path="res://Sprites/Projectiles/bullet_missile_enemy_snake.png" id="3_adli6"]
+[ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_5nuq5"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_0kj3o"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_g2y47"]
+[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_kn66m"]
+[ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="8_ogolm"]
+[ext_resource type="Resource" uid="uid://dwmnud2m2wfrd" path="res://Resources/Emitter Settings/basic_player_shot_flash_vfx.tres" id="9_x10r7"]
+[ext_resource type="Resource" uid="uid://bxx82xvp1pjv3" path="res://Resources/Emitter Settings/player_missile_jared_smoke.tres" id="10_8sumr"]
+[ext_resource type="Resource" uid="uid://biek3wpabsv7j" path="res://Resources/Emitter Settings/enemy_snake_head_deathspread.tres" id="11_pcofg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 2.23607
@@ -57,14 +58,14 @@ _data = {
 "default": SubResource("Animation_nwngl")
 }
 
-[node name="Basic Player Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
+[node name="Enemy Snake Missile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter")]
 z_index = -1
-collision_layer = 4
-collision_mask = 2
+collision_layer = 10
+collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_6a8kv")
+script = ExtResource("1_fkcwb")
 shipInput = NodePath("Ship Input")
-shipSettings = ExtResource("2_br0w1")
+shipSettings = ExtResource("2_rpney")
 collisionShape = NodePath("CollisionShape2D")
 health = NodePath("Health")
 shipSprite = NodePath("Sprite2D")
@@ -75,25 +76,25 @@ shape = SubResource("CircleShape2D_wn53n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 use_parent_material = true
-texture = ExtResource("3_h8bji")
+texture = ExtResource("3_adli6")
 
 [node name="Ship Input" type="Node2D" parent="." node_paths=PackedStringArray("targetArea")]
-script = ExtResource("4_d3qnr")
+script = ExtResource("4_5nuq5")
 targetArea = NodePath("../TargetArea")
-targetType = 2
+targetType = 1
 
 [node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("hurtEmitters", "deathEmitters")]
-script = ExtResource("5_aekwk")
+script = ExtResource("5_0kj3o")
 maxHealth = 1.0
 maxIFrames = 0.0
 createPopups = false
 hurtEmitters = [NodePath("../Emitter"), NodePath("../Emitter2")]
-deathEmitters = [NodePath("../Emitter"), NodePath("../Emitter2")]
+deathEmitters = [NodePath("../Emitter"), NodePath("../Emitter2"), NodePath("../Death Bullet Emitter")]
 
 [node name="ContactDamage" type="Area2D" parent="." node_paths=PackedStringArray("health")]
-collision_layer = 4
-collision_mask = 2
-script = ExtResource("6_s5cc7")
+collision_layer = 10
+collision_mask = 5
+script = ExtResource("6_g2y47")
 damageAmount = 4.0
 screenShakeAmount = 2.0
 screenShakeTime = 0.4
@@ -104,20 +105,19 @@ knockbackSpeed = 100.0
 shape = SubResource("CircleShape2D_5rbfa")
 
 [node name="Emitter" type="Node2D" parent="."]
-script = ExtResource("7_kab68")
-emitterSettings = ExtResource("8_xuppn")
+script = ExtResource("7_kn66m")
+emitterSettings = ExtResource("8_ogolm")
 
 [node name="Emitter2" type="Node2D" parent="."]
-script = ExtResource("7_kab68")
-emitterSettings = ExtResource("9_wv06k")
+script = ExtResource("7_kn66m")
+emitterSettings = ExtResource("9_x10r7")
 
 [node name="Smoke" type="Node2D" parent="."]
-script = ExtResource("7_kab68")
-emitterSettings = ExtResource("10_nel4t")
+script = ExtResource("7_kn66m")
+emitterSettings = ExtResource("10_8sumr")
 
 [node name="TargetArea" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
 shape = SubResource("CircleShape2D_b1aeu")
@@ -127,3 +127,7 @@ libraries = {
 "": SubResource("AnimationLibrary_7i0mr")
 }
 autoplay = "default"
+
+[node name="Death Bullet Emitter" type="Node2D" parent="."]
+script = ExtResource("7_kn66m")
+emitterSettings = ExtResource("11_pcofg")
