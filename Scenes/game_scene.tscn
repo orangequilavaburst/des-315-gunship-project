@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene load_steps=18 format=3 uid="uid://d4habyr4lifuy"]
 
 [ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://Scripts/ScreenAreaManager.gd" id="11_wtkdf"]
 [ext_resource type="Resource" uid="uid://ses7pfvo1hi2" path="res://Resources/Ship Settings/Players/ship_player_muffet.tres" id="12_wka5w"]
 [ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="15_g2h4m"]
+[ext_resource type="PackedScene" uid="uid://bl5atkgf78gh4" path="res://Scenes/Game Objects/Ships/basic_enemy_ship.tscn" id="16_c8pf8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
 size = Vector2(255, 199.5)
@@ -95,3 +96,6 @@ region_rect = Rect2(0, 0, 25600, 24000)
 
 [node name="Snake Ship Head" parent="." instance=ExtResource("15_g2h4m")]
 position = Vector2(18, 232)
+
+[node name="Basic Enemy Ship" parent="." instance=ExtResource("16_c8pf8")]
+position = Vector2(21, 169)

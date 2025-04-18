@@ -98,6 +98,7 @@ script = ExtResource("6_g2y47")
 damageAmount = 4.0
 screenShakeAmount = 2.0
 screenShakeTime = 0.4
+selfDamage = 10.0
 health = NodePath("../Health")
 knockbackSpeed = 100.0
 
