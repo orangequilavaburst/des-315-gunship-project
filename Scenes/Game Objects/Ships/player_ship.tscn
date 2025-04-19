@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://egqbdmophtov"]
+[gd_scene load_steps=14 format=3 uid="uid://egqbdmophtov"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_rkgt1"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="2_53ifd"]
@@ -16,6 +16,9 @@ radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_allei"]
 radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvfru"]
+radius = 100.0
 
 [node name="Ship" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "mainWeaponEmitter", "subWeaponEmitter", "smokeEmitter")]
 collision_mask = 10
@@ -38,8 +41,10 @@ shape = SubResource("CircleShape2D_wn53n")
 use_parent_material = true
 texture = ExtResource("2_e6ub6")
 
-[node name="Ship Input" type="Node2D" parent="."]
+[node name="Ship Input" type="Node2D" parent="." node_paths=PackedStringArray("targetArea")]
 script = ExtResource("3_fwrla")
+targetArea = NodePath("../Autoplay Collision")
+targetType = 2
 
 [node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
 script = ExtResource("6_qpi21")
@@ -67,3 +72,10 @@ shape = SubResource("CircleShape2D_allei")
 [node name="Explosion Emitter" type="Node2D" parent="."]
 script = ExtResource("6_0uf70")
 emitterSettings = ExtResource("10_y8ejj")
+
+[node name="Autoplay Collision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Autoplay Collision"]
+shape = SubResource("CircleShape2D_nvfru")
