@@ -1,6 +1,8 @@
 class_name Emitter
 extends Node2D
 
+@onready var gameManager : GameManager = get_tree().root.get_children()[0].get_children().filter(func(element): return (element is GameManager))[0]
+
 signal burst_started()
 signal emitter_shot()
 signal settings_changed(new_settings)
@@ -61,6 +63,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	delta *= gameManager.deltaTimeMultiplier
 	
 	if shootTimer > 0.0: # time between bursts
 		shootTimer -= delta

@@ -1,6 +1,6 @@
 extends ShipInput
 
-var autoplay : bool = true
+var autoplay : bool = false
 const maxDistance : float = 100.0
 const removeDistance : float = maxDistance * 2.0
 
@@ -10,7 +10,7 @@ var checkTimer = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	autoplay = false
 	# kinda tired and don't want to do this with areas just yet
 	# so just look for all player ships
 	if targetType == TargetType.PLAYER:
@@ -65,9 +65,10 @@ func _process(delta: float) -> void:
 	pass
 
 func _draw() -> void:
-	draw_line(Vector2.ZERO, (targetPosition - controller.global_position).rotated(-controller.global_rotation), Color.RED)
-	draw_line(Vector2.ZERO, Vector2.RIGHT*(targetPosition - controller.global_position).length(), Color.BLUE)
-	draw_arc(Vector2.ZERO, (targetPosition - controller.global_position).length(), 0.0, angle_difference(controller.global_rotation, (targetPosition - controller.global_position).angle()), 10, Color.RED)
+	if autoplay:
+		draw_line(Vector2.ZERO, (targetPosition - controller.global_position).rotated(-controller.global_rotation), Color.RED)
+		draw_line(Vector2.ZERO, Vector2.RIGHT*(targetPosition - controller.global_position).length(), Color.BLUE)
+		draw_arc(Vector2.ZERO, (targetPosition - controller.global_position).length(), 0.0, angle_difference(controller.global_rotation, (targetPosition - controller.global_position).angle()), 10, Color.RED)
 
 
 func _on_area_entered(other: Area2D) -> void:
@@ -94,3 +95,7 @@ func clean_up_targets() -> void:
 			targets.remove_at(index)
 		else:
 			index += 1
+
+func _unhandled_input(event):
+	if event.is_action_pressed("toggle_autoplay"):
+		autoplay = not autoplay
