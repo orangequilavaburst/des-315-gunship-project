@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://dgyqbf7ksm3jm"]
+
+[ext_resource type="PackedScene" uid="uid://khd35qcpt1sj" path="res://Scenes/VFX/vfx_explosion_basic.tscn" id="1_hhpy1"]
+[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_itvne"]
+
+[sub_resource type="Curve" id="Curve_tscpp"]
+_data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("2_itvne")
+objectToSpawn = ExtResource("1_hhpy1")
+parentToRoot = true
+inheritParentVelocity = false
+alwaysFire = false
+angleJitter = 360.0
+objectCount = 1
+objectAngleSpread = 0.0
+objectAngleSpreadJitter = 0.0
+burstCount = 100
+burstAngleOffset = Vector2(0, 0)
+burstAngleOffsetCurve = SubResource("Curve_tscpp")
+burstShootTime = 0.05
+positionOffset = Vector2(0, 0)
+positionOffsetJitter = Vector2(16, 16)
+positionOffsetRotated = true
+positionOffsetFromCenter = true
+shootTime = 0.05
+recoilSpeed = 0.0

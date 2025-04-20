@@ -55,6 +55,11 @@ var useHurtColor : bool = true
 @export var hurtEmitters : Array[Emitter] = []
 @export var healEmitters : Array[Emitter] = []
 @export var deathEmitters : Array[Emitter] = []
+@export var deathAnimEmitters : Array[Emitter] = []
+
+# death stuff
+var deathTimer : Timer
+@export var deathTime : float = 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -68,6 +73,13 @@ func _ready() -> void:
 	get_parent().material.set_shader_parameter("swapColorEnabled", false)
 	hurtColorIndex = 0
 	hurtColorTimer = 0.0
+	
+	# death timer
+	deathTimer = Timer.new()
+	deathTimer.autostart = false
+	deathTimer.one_shot = true
+	deathTimer.wait_time = deathTime
+	add_child(deathTimer)
 	
 	pass # Replace with function body.
 
@@ -115,6 +127,16 @@ func _process(delta: float) -> void:
 		
 		HealthState.DYING:
 			match(dyingType):
+				DyingTypes.CINEMATIC:
+					if deathTimer.is_stopped() and deathTimer.timeout.get_connections().size() <= 0:
+						deathTimer.timeout.connect(health_state_set.bind(HealthState.DEAD))
+						deathTimer.start()
+					pass
+				DyingTypes.PLAYER:
+					if deathTimer.is_stopped() and deathTimer.timeout.get_connections().size() <= 0:
+						deathTimer.timeout.connect(health_state_set.bind(HealthState.DEAD))
+						deathTimer.start()
+					pass
 				_:
 					healthState = HealthState.DEAD
 					pass
@@ -123,6 +145,8 @@ func _process(delta: float) -> void:
 			if dyingType != DyingTypes.PLAYER:
 				#get_parent().queue_free()
 				get_parent().call_deferred("queue_free")
+			else:
+				get_tree().reload_current_scene()
 			pass
 	
 	pass
@@ -194,6 +218,10 @@ func death() -> void:
 		emitter.begin_burst()
 		#print_rich("[b]" + get_parent().name + "[/b]'s [i]" + emitter.name + "[/i] fired on death!")
 	
+	for emitter in deathAnimEmitters:
+		emitter.alwaysFire = true
+		emitter.begin_burst(true)
+	
 	if get_parent() is ShipController:
 		gameManager.camera.create_camera_shake(get_parent().explosionMagnitude, get_parent().explosionTime)
 	
@@ -204,6 +232,9 @@ func death() -> void:
 		if ship is ShipController:
 			if self in ship.shipInput.targets:
 				ship.shipInput.remove_target(self)
+
+func health_state_set(value : HealthState) -> void:
+	healthState = value
 
 # debug
 '''

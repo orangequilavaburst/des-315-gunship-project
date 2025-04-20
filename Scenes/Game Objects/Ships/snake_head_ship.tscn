@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cx8f0pyf2ssoq"]
+[gd_scene load_steps=16 format=3 uid="uid://cx8f0pyf2ssoq"]
 
 [ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_emp2e"]
 [ext_resource type="Resource" uid="uid://dj6m5ocnfr0k" path="res://Resources/Ship Settings/Enemies/enemy_ship_snake_head.tres" id="2_shyty"]
@@ -12,6 +12,7 @@
 [ext_resource type="Resource" uid="uid://c8ssxq0kc20kn" path="res://Resources/Emitter Settings/enemy_snake_head_shot.tres" id="10_dh80k"]
 [ext_resource type="Resource" uid="uid://biek3wpabsv7j" path="res://Resources/Emitter Settings/enemy_snake_head_deathspread.tres" id="11_3br3w"]
 [ext_resource type="Resource" uid="uid://ba7p00tlnvf5f" path="res://Resources/Emitter Settings/enemy_snake_head_missile.tres" id="11_w6r3l"]
+[ext_resource type="Resource" uid="uid://dgyqbf7ksm3jm" path="res://Resources/Emitter Settings/scattered_explosion_vfx.tres" id="13_agqnv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 6.0
@@ -47,10 +48,12 @@ texture = ExtResource("3_ok5fo")
 script = ExtResource("4_tn3n7")
 targetType = 1
 
-[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters", "deathAnimEmitters")]
 script = ExtResource("5_lhhxe")
+dyingType = 2
 maxHealth = 1.0
 deathEmitters = [NodePath("../Explosion Emitter"), NodePath("../Death Bullet Emitter")]
+deathAnimEmitters = [NodePath("../Explosion Emitter2")]
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
 collision_layer = 2
@@ -81,3 +84,7 @@ emitterSettings = ExtResource("11_w6r3l")
 [node name="Death Bullet Emitter" type="Node2D" parent="."]
 script = ExtResource("8_ix87d")
 emitterSettings = ExtResource("11_3br3w")
+
+[node name="Explosion Emitter2" type="Node2D" parent="."]
+script = ExtResource("8_ix87d")
+emitterSettings = ExtResource("13_agqnv")

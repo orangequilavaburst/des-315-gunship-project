@@ -2,7 +2,7 @@ extends ShipInput
 
 var autoplay : bool = false
 const maxDistance : float = 150.0
-const removeDistance : float = maxDistance * 2.0
+const removeDistance : float = 400.0
 
 @export var targetArea : Area2D
 const checkTime : float = 5.0
