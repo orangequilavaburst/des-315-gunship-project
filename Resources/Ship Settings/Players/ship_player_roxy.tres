@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://cuf6y0prgxfqn"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://cuf6y0prgxfqn"]
 
+[ext_resource type="Resource" uid="uid://drusbr0pcjgfd" path="res://Resources/Emitter Settings/player_roxy_main.tres" id="1_8byuk"]
 [ext_resource type="Texture2D" uid="uid://dt6cmss8k76n6" path="res://Sprites/Icons/icon_player_roxy.png" id="1_kxes1"]
 [ext_resource type="Texture2D" uid="uid://qreryutj0l01" path="res://Sprites/Gunships/Players/gunship_player_roxy.png" id="2_dr8v8"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_wrsld"]
+[ext_resource type="Resource" uid="uid://bluxhogkmrt6l" path="res://Resources/Emitter Settings/player_roxy_sub.tres" id="5_42a87"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]
 _data = [Vector2(0, 0), 0.0, 3.44392, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -25,8 +27,10 @@ regenTime = 1.0
 regenPotency = 1.0
 bulletTimeThreshold = 0.2
 bulletTimeMaxMultiplier = 0.1
+mainWeaponSettings = ExtResource("1_8byuk")
+subWeaponSettings = ExtResource("5_42a87")
 maximumLinearVelocity = 300.0
-maximumAngularVelocity = 100.0
+maximumAngularVelocity = 200.0
 maximumLinearAcceleration = 1500.0
 maximumAngularAcceleration = 500.0
 linearFriction = 1000.0

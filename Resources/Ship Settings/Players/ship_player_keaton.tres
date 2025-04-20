@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=7 format=3 uid="uid://dd425o17e840r"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://dd425o17e840r"]
 
+[ext_resource type="Resource" uid="uid://dswwbavs7f7kl" path="res://Resources/Emitter Settings/player_keaton_main.tres" id="1_oenin"]
 [ext_resource type="Texture2D" uid="uid://chjqblndjql0u" path="res://Sprites/Icons/icon_player_keaton_furry.png" id="1_yanhx"]
 [ext_resource type="Texture2D" uid="uid://b6dvmqfupor8w" path="res://Sprites/Gunships/Players/gunship_player_keaton.png" id="2_74dly"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="3_ixw05"]
+[ext_resource type="Resource" uid="uid://bxeoc05etjslu" path="res://Resources/Emitter Settings/player_keaton_sub.tres" id="4_3viak"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]
 _data = [Vector2(0, 0), 0.0, 2.48625, 0, 0, Vector2(1, 1), 0.657054, 0.0, 0, 0]
@@ -24,6 +26,8 @@ regenTime = 10.0
 regenPotency = 10.0
 bulletTimeThreshold = 0.5
 bulletTimeMaxMultiplier = 0.75
+mainWeaponSettings = ExtResource("1_oenin")
+subWeaponSettings = ExtResource("4_3viak")
 maximumLinearVelocity = 200.0
 maximumAngularVelocity = 200.0
 maximumLinearAcceleration = 400.0

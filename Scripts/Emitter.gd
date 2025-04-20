@@ -125,7 +125,8 @@ func shoot() -> void:
 		if projectile is ShipController and get_parent() is ShipController:
 			projectile.angle = shootAngle
 			projectile.velocity = get_parent().velocity
-			projectile.extraVelocity = get_parent().velocity
+			if inheritParentVelocity:
+				projectile.extraVelocity = get_parent().velocity
 			get_parent().extraVelocity -= Vector2.from_angle(deg_to_rad(get_parent().angle)) * recoilSpeed
 		if parentToRoot:
 			#get_tree().root.get_children()[0].add_child(projectile)
