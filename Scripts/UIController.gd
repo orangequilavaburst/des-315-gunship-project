@@ -66,7 +66,7 @@ func update_player_info() -> void:
 func update_health_info(old_health : float = health.currentHealth, new_health : float = health.currentHealth) -> void:
 	
 	var hpText = "%" + str(healthDigits) + "d"
-	healthLabel.text = ("HEALTH " + hpText + "/" + hpText) % [new_health, health.maxHealth]
+	healthLabel.text = ("HEALTH " + hpText + "/" + hpText) % [max(0.0, new_health), health.maxHealth]
 	healthBar.min_value = 0.0
 	healthBar.max_value = health.maxHealth
 	healthBar.value = max(0.0, new_health)

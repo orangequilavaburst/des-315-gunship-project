@@ -6,6 +6,7 @@ var bulletTimeMultiplier : float = 1.0 # for the lerp
 @export var playerShips : Array[PlayerShipSettings]
 @export var player : ShipController
 @export var camera : Camera2D
+@export var swarmManager : SwarmManager
 
 @export var bulletTimeScaleMax = 0.1
 @export var bulletTimeTimeMax = 2.0
@@ -20,7 +21,7 @@ var playerShipIndex : int = 0:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	assert(playerShips.size() > 0)
+	assert(playerShips.size() > 0 and swarmManager != null)
 	
 	player.shipSettings = playerShips[playerShipIndex]
 	player.health.health_hurt.connect(player_hurt)

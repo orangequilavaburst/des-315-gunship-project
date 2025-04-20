@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	super(delta)
 	
 	if canMove:
-		input = Vector2(0.0, -1.0 if alwaysMoveForward else 0.0)
+		input = Vector2(0.0, -1.0)
 		
 		if targets.size() > 0 or targetType == TargetType.MOUSE:
 			var maxAngleDifference : float = min(90.0, (controller.maximumAngularVelocity*controller.maximumAngularVelocity / (2.0 * controller.angularFriction)) if controller.angularFriction > 0.0 else 1.0)

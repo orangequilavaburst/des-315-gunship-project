@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://cgn5p5uqdtb2h"]
+
+[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_phcug"]
+[ext_resource type="Resource" uid="uid://dyb70jes8wgl4" path="res://Resources/Ship Settings/Enemies/enemy_ship_swarm.tres" id="2_34axp"]
+[ext_resource type="Texture2D" uid="uid://11ar63t786xw" path="res://Sprites/Gunships/Enemies/gunship_enemy_swarm.png" id="3_n6hvn"]
+[ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_qf8sn"]
+[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_wa0b1"]
+[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_ak5oo"]
+[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_defl4"]
+[ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="8_gj1ks"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j2ih1"]
+radius = 4.12311
+
+[node name="Swarm Enemy" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
+platform_wall_layers = 3
+script = ExtResource("1_phcug")
+shipInput = NodePath("Ship Input")
+shipSettings = ExtResource("2_34axp")
+collisionShape = NodePath("CollisionShape2D")
+health = NodePath("Health")
+shipSprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_wn53n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+use_parent_material = true
+texture = ExtResource("3_n6hvn")
+
+[node name="Ship Input" type="Node2D" parent="."]
+script = ExtResource("4_qf8sn")
+alwaysMoveForward = false
+targetType = 1
+
+[node name="Health" type="Node2D" parent="." node_paths=PackedStringArray("deathEmitters")]
+script = ExtResource("5_wa0b1")
+maxHealth = 1.0
+deathEmitters = [NodePath("../Explosion Emitter")]
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("6_ak5oo")
+damageAmount = 5.0
+screenShakeAmount = 0.0
+screenShakeTime = 0.0
+selfDamage = 0.0
+health = NodePath("../Health")
+knockbackSpeed = 150.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_j2ih1")
+
+[node name="Explosion Emitter" type="Node2D" parent="."]
+script = ExtResource("7_defl4")
+emitterSettings = ExtResource("8_gj1ks")

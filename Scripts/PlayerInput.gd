@@ -1,7 +1,7 @@
 extends ShipInput
 
 var autoplay : bool = false
-const maxDistance : float = 100.0
+const maxDistance : float = 150.0
 const removeDistance : float = maxDistance * 2.0
 
 @export var targetArea : Area2D
@@ -46,13 +46,15 @@ func _process(delta: float) -> void:
 		var ip : Vector2 = Vector2.ZERO
 		#turning
 		if targets.size() > 0:
-			var maxAngleDifference : float = min(30.0, (controller.maximumAngularVelocity*controller.maximumAngularVelocity / (2.0 * controller.angularFriction)) if controller.angularFriction > 0.0 else 1.0)
+			var maxAngleDifference : float = min(10.0, (controller.maximumAngularVelocity*controller.maximumAngularVelocity / (2.0 * controller.angularFriction)) if controller.angularFriction > 0.0 else 1.0)
 			var angleDifference = rad_to_deg(angle_difference(deg_to_rad(controller.angle), (targetPosition - get_parent().global_position).angle()))
 			if abs(angleDifference) >= maxAngleDifference:
 				ip.x = sign(angleDifference)
 		#thrusting
 			ip.y = 1 if targetPosition.distance_to(global_position) < maxDistance else -1
 		#input
+		if ip.y == 0 and get_parent().extraVelocity.length() > 0:
+			ip.y = 1 if angle_difference(deg_to_rad(get_parent().angle), get_parent().extraVelocity.angle()) >= PI/2.0 else -1
 		input = ip
 		pass
 

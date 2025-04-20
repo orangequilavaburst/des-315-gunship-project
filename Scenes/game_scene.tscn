@@ -1,11 +1,13 @@
-[gd_scene load_steps=18 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene load_steps=33 format=3 uid="uid://d4habyr4lifuy"]
 
 [ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
+[ext_resource type="Script" path="res://Scripts/SwarmManager.gd" id="2_13kq3"]
 [ext_resource type="Script" path="res://Scripts/ShipCameraController.gd" id="2_addrj"]
 [ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="2_galva"]
 [ext_resource type="PackedScene" uid="uid://edph5llvjjkt" path="res://Scenes/UI/ui_panel.tscn" id="2_ggo0f"]
 [ext_resource type="Resource" uid="uid://ceydvcau3ms8h" path="res://Resources/Ship Settings/Players/ship_player_jared.tres" id="3_7aivu"]
+[ext_resource type="Script" path="res://Scripts/SwarmGroupResource.gd" id="3_th72d"]
 [ext_resource type="Resource" uid="uid://g2ahncgdcfp3" path="res://Resources/Ship Settings/Players/ship_player_flapjack.tres" id="4_ysg4k"]
 [ext_resource type="Resource" uid="uid://dd425o17e840r" path="res://Resources/Ship Settings/Players/ship_player_keaton.tres" id="5_sn3d5"]
 [ext_resource type="Texture2D" uid="uid://cg5ddo34oujnj" path="res://Sprites/Backgrounds/bg_stars0.png" id="8_22whn"]
@@ -15,7 +17,70 @@
 [ext_resource type="Script" path="res://Scripts/ScreenAreaManager.gd" id="11_wtkdf"]
 [ext_resource type="Resource" uid="uid://ses7pfvo1hi2" path="res://Resources/Ship Settings/Players/ship_player_muffet.tres" id="12_wka5w"]
 [ext_resource type="PackedScene" uid="uid://cx8f0pyf2ssoq" path="res://Scenes/Game Objects/Ships/snake_head_ship.tscn" id="15_g2h4m"]
-[ext_resource type="PackedScene" uid="uid://bl5atkgf78gh4" path="res://Scenes/Game Objects/Ships/basic_enemy_ship.tscn" id="16_c8pf8"]
+[ext_resource type="PackedScene" uid="uid://bl5atkgf78gh4" path="res://Scenes/Game Objects/Ships/enemy_ship_small.tscn" id="16_c8pf8"]
+[ext_resource type="PackedScene" uid="uid://bb8tbirhwlgvk" path="res://Scenes/Game Objects/Ships/enemy_ship_medium.tscn" id="17_n6670"]
+[ext_resource type="PackedScene" uid="uid://cgn5p5uqdtb2h" path="res://Scenes/Game Objects/Ships/enemy_ship_swarm.tscn" id="18_s0ndo"]
+[ext_resource type="PackedScene" uid="uid://rvk3jj0j5qee" path="res://Scenes/Game Objects/Ships/enemy_ship_tiny.tscn" id="19_ewte2"]
+
+[sub_resource type="Resource" id="Resource_v7twn"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("16_c8pf8")])
+delay = 1.0
+name = "Single Basic Enemy"
+
+[sub_resource type="Resource" id="Resource_mvsls"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8")])
+delay = 1.0
+name = "Basic Enemy Swarm"
+
+[sub_resource type="Resource" id="Resource_406fj"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("19_ewte2")])
+delay = 1.0
+name = "Small Enemy Swarm"
+
+[sub_resource type="Resource" id="Resource_2oxdt"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo")])
+delay = 0.5
+name = "Ambush"
+
+[sub_resource type="Resource" id="Resource_trcv7"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("17_n6670"), ExtResource("17_n6670")])
+delay = 1.0
+name = "Big Fellas"
+
+[sub_resource type="Resource" id="Resource_bxnmw"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("17_n6670")])
+delay = 1.0
+name = "Smorgasbord"
+
+[sub_resource type="Resource" id="Resource_twq82"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo"), ExtResource("18_s0ndo")])
+delay = 0.5
+name = "Bug Spray"
+
+[sub_resource type="Resource" id="Resource_wruf6"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("17_n6670"), ExtResource("17_n6670"), ExtResource("17_n6670"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8")])
+delay = 0.25
+name = "Rattle 'em, Boys!"
+
+[sub_resource type="Resource" id="Resource_owxwv"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("19_ewte2"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8"), ExtResource("16_c8pf8")])
+delay = 0.5
+name = "Calm before the Storm"
+
+[sub_resource type="Resource" id="Resource_iswqm"]
+script = ExtResource("3_th72d")
+enemies = Array[PackedScene]([ExtResource("15_g2h4m")])
+delay = 2.0
+name = "Boss Battle"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
 size = Vector2(255, 199.5)
@@ -25,7 +90,12 @@ size = Vector2(255, 199.5)
 [node name="Player Ship" parent="." instance=ExtResource("1_1xd0m")]
 position = Vector2(129, 145)
 
+[node name="Swarm Manager" type="Node2D" parent="."]
+script = ExtResource("2_13kq3")
+swarms = Array[ExtResource("3_th72d")]([SubResource("Resource_v7twn"), SubResource("Resource_mvsls"), SubResource("Resource_406fj"), SubResource("Resource_2oxdt"), SubResource("Resource_trcv7"), SubResource("Resource_bxnmw"), SubResource("Resource_twq82"), SubResource("Resource_wruf6"), SubResource("Resource_owxwv"), SubResource("Resource_iswqm")])
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("focus", "uiControl", "screenArea")]
+z_index = -10
 position = Vector2(127, 120)
 script = ExtResource("2_addrj")
 focus = NodePath("../Player Ship")
@@ -34,6 +104,9 @@ maxVelocityOffset = 30.0
 offsetSpeed = 40.0
 uiControl = NodePath("UI Control")
 screenArea = NodePath("Game Area")
+enemyLineColor = Color(0.205117, 0.205117, 0.205117, 1)
+enemyOffsetSpeed = 100.0
+enemyOffsetAmount = 0.1
 
 [node name="UI Control" type="CanvasLayer" parent="Camera2D"]
 follow_viewport_enabled = true
@@ -61,11 +134,12 @@ script = ExtResource("11_wtkdf")
 position = Vector2(127.5, 140.25)
 shape = SubResource("RectangleShape2D_xcauo")
 
-[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("player", "camera")]
+[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("player", "camera", "swarmManager")]
 script = ExtResource("1_fkfxw")
 playerShips = Array[ExtResource("2_galva")]([ExtResource("3_7aivu"), ExtResource("4_ysg4k"), ExtResource("5_sn3d5"), ExtResource("9_lnkf1"), ExtResource("10_rtxa4"), ExtResource("12_wka5w")])
 player = NodePath("../Player Ship")
 camera = NodePath("../Camera2D")
+swarmManager = NodePath("../Swarm Manager")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true
@@ -93,9 +167,3 @@ texture = ExtResource("8_22whn")
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 25600, 24000)
-
-[node name="Snake Ship Head" parent="." instance=ExtResource("15_g2h4m")]
-position = Vector2(18, 232)
-
-[node name="Basic Enemy Ship" parent="." instance=ExtResource("16_c8pf8")]
-position = Vector2(21, 169)

@@ -16,8 +16,13 @@ var zoomAmount : float = 1.0
 var zoomAmountCurrent : float
 
 @export var screenArea : Area2D
+@export var enemyLineColor : Color
+var offscreenEnemies : Array[Node2D]
+
 var enemyAveragePosition : Vector2 = Vector2.ZERO
 var enemyPosOffset : Vector2 = Vector2.ZERO
+@export var enemyOffsetSpeed : float = 20.0
+@export var enemyOffsetAmount : float = 0.5
 
 var currentPosition : Vector2 = Vector2.ZERO
 var currentOffset : Vector2 = Vector2.ZERO
@@ -60,12 +65,14 @@ func _process(delta):
 		var targetOffset = get_target_offset()
 		currentOffset = Vector2(move_toward(currentOffset.x, targetOffset.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(currentOffset.y, targetOffset.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
 		
-		#if (enemyAveragePosition + global_position) != Vector2.ZERO:
-			#enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, enemyAveragePosition.x, delta * offsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, enemyAveragePosition.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+		if (enemyAveragePosition + global_position) != Vector2.ZERO:
+			enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, enemyAveragePosition.x, delta * enemyOffsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, enemyAveragePosition.y, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
+		else:
+			enemyPosOffset = Vector2(move_toward(enemyPosOffset.x, 0.0, delta * enemyOffsetSpeed * gameManager.deltaTimeMultiplier), move_toward(enemyPosOffset.y, 0.0, delta * offsetSpeed * gameManager.deltaTimeMultiplier))
 	
 	global_position = currentPosition + currentOffset/zoom + shakeVector*get_shake_intensity()
-	#if (enemyAveragePosition + global_position) != Vector2.ZERO:
-		#global_position += enemyPosOffset
+	if (enemyAveragePosition + global_position) != Vector2.ZERO:
+		global_position += enemyPosOffset * enemyOffsetAmount
 	
 	if uiControl != null:
 		uiControl.follow_viewport_scale = 1.0 / zoomAmountCurrent
@@ -76,12 +83,21 @@ func _process(delta):
 func _physics_process(delta: float) -> void:
 	#if screenArea != null:
 		#screenArea.angular_damp = screenArea.angular_damp
-	#enemyAveragePosition = enemy_screen_average() - global_position
+	enemyAveragePosition = enemy_screen_average() - global_position
+	#update_nonoverlapping_bodies()
 	#print(enemyAveragePosition)
 	queue_redraw()
 	
 func _draw() -> void:
 	#draw_circle(enemyAveragePosition, 4.0, Color.RED)
+	'''
+	for child in offscreenEnemies:
+		var pos = child.global_position - global_position
+		draw_circle(pos, 4.0, Color.RED)
+	'''
+	for enemy in gameManager.swarmManager.get_children():
+		if enemy is ShipController and enemy.health.currentHealth > 0:
+			draw_line(focus.global_position - global_position, enemy.global_position - global_position, enemyLineColor)
 	pass
 	
 func _unhandled_input(event):
@@ -116,9 +132,15 @@ func get_shake_intensity() -> float:
 		return 0.0
 	return cameraShakeIntensity*(cameraShakeTimer/cameraShakeTime)
 	
+func update_nonoverlapping_bodies() -> void:
+	offscreenEnemies.clear()
+	for child in gameManager.swarmManager.get_children():
+		if child is ShipController:
+			if not (child.shipSettings is PlayerShipSettings) and child.health.maxHealth > 1.0:
+				offscreenEnemies.push_back(child)
+	offscreenEnemies.filter(func(x): return screenArea.get_overlapping_bodies().find(x) < 0)
+	
 func enemy_screen_average() -> Vector2:
-	if screenArea == null:
-		return Vector2.ZERO
 	var retval : Vector2 = Vector2.ZERO
 	var body_count : int = 0
 	'''
@@ -128,7 +150,7 @@ func enemy_screen_average() -> Vector2:
 			retval += body.global_position
 			body_count += 1
 	'''
-	for child in get_tree().root.get_children()[0].get_children():
+	for child in gameManager.swarmManager.get_children():
 		if child is ShipController:
 			if not (child.shipSettings is PlayerShipSettings) and child.health.maxHealth > 1.0:
 				retval += child.global_position
