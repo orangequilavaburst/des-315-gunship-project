@@ -3,6 +3,7 @@ extends Node2D
 
 signal swarm_started()
 signal swarm_completed()
+signal all_swarms_finished()
 
 @export var swarms : Array[SwarmGroupResource]
 
@@ -99,3 +100,5 @@ func complete_wave() -> void:
 	
 	if swarmIndex < swarms.size():
 		swarmTimer.start(swarms[swarmIndex].delay)
+	else:
+		all_swarms_finished.emit()

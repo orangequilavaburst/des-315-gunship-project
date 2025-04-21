@@ -146,7 +146,7 @@ func _process(delta: float) -> void:
 				#get_parent().queue_free()
 				get_parent().call_deferred("queue_free")
 			else:
-				get_tree().reload_current_scene()
+				gameManager._game_reset()
 			pass
 	
 	pass

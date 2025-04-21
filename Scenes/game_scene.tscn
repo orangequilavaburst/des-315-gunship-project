@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene load_steps=34 format=3 uid="uid://d4habyr4lifuy"]
 
 [ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://g2ahncgdcfp3" path="res://Resources/Ship Settings/Players/ship_player_flapjack.tres" id="4_ysg4k"]
 [ext_resource type="Resource" uid="uid://dd425o17e840r" path="res://Resources/Ship Settings/Players/ship_player_keaton.tres" id="5_sn3d5"]
 [ext_resource type="Texture2D" uid="uid://cg5ddo34oujnj" path="res://Sprites/Backgrounds/bg_stars0.png" id="8_22whn"]
+[ext_resource type="Script" path="res://Scripts/TelemetryHandler.gd" id="9_bf3wx"]
 [ext_resource type="Resource" uid="uid://ncefhfhuw361" path="res://Resources/Ship Settings/Players/ship_player_isaac.tres" id="9_lnkf1"]
 [ext_resource type="Texture2D" uid="uid://c3gpjfrc14gqb" path="res://Sprites/Backgrounds/bg_stars1.png" id="9_uh7mo"]
 [ext_resource type="Resource" uid="uid://cuf6y0prgxfqn" path="res://Resources/Ship Settings/Players/ship_player_roxy.tres" id="10_rtxa4"]
@@ -94,6 +95,12 @@ position = Vector2(129, 145)
 script = ExtResource("2_13kq3")
 swarms = Array[ExtResource("3_th72d")]([SubResource("Resource_v7twn"), SubResource("Resource_mvsls"), SubResource("Resource_406fj"), SubResource("Resource_2oxdt"), SubResource("Resource_trcv7"), SubResource("Resource_bxnmw"), SubResource("Resource_twq82"), SubResource("Resource_wruf6"), SubResource("Resource_owxwv"), SubResource("Resource_iswqm")])
 
+[node name="Telemetry Handler" type="Node2D" parent="." node_paths=PackedStringArray("playerShip", "swarmManager", "gameManager")]
+script = ExtResource("9_bf3wx")
+playerShip = NodePath("../Player Ship")
+swarmManager = NodePath("../Swarm Manager")
+gameManager = NodePath("../Game Manager")
+
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("focus", "uiControl", "screenArea")]
 z_index = -10
 position = Vector2(127, 120)
@@ -104,7 +111,7 @@ maxVelocityOffset = 30.0
 offsetSpeed = 40.0
 uiControl = NodePath("UI Control")
 screenArea = NodePath("Game Area")
-enemyLineColor = Color(0.205117, 0.205117, 0.205117, 1)
+enemyLineColor = Color(0.0941176, 0.223529, 0.345098, 1)
 enemyOffsetSpeed = 100.0
 enemyOffsetAmount = 0.1
 

@@ -1,6 +1,8 @@
 class_name GameManager
 extends Node
 
+signal game_reset()
+
 @export_range(0.0, 5.0) var deltaTimeMultiplier = 1.0
 var bulletTimeMultiplier : float = 1.0 # for the lerp
 @export var playerShips : Array[PlayerShipSettings]
@@ -61,4 +63,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					playerShipIndex += 1
 					pass
 				KEY_R:
-					get_tree().reload_current_scene()
+					_game_reset()
+					
+func _game_reset() -> void:
+	game_reset.emit()
+	get_tree().reload_current_scene()
