@@ -64,6 +64,37 @@ func _unhandled_input(event: InputEvent) -> void:
 					pass
 				KEY_R:
 					_game_reset()
+					pass
+				KEY_1:
+					playerShipIndex = 0
+					pass
+				KEY_2:
+					playerShipIndex = 1
+					pass
+				KEY_3:
+					playerShipIndex = 2
+					pass
+				KEY_4:
+					playerShipIndex = 3
+					pass
+				KEY_5:
+					playerShipIndex = 4
+					pass
+				KEY_6:
+					playerShipIndex = 5
+					pass
+				KEY_7:
+					playerShipIndex = 6
+					pass
+				KEY_8:
+					playerShipIndex = 7
+					pass
+				KEY_9:
+					playerShipIndex = 8
+					pass
+				KEY_0:
+					playerShipIndex = 9
+					pass
 					
 func _game_reset() -> void:
 	game_reset.emit()
