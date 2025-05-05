@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://cies1o2dmf6y7"]
 
-[ext_resource type="Script" path="res://Scripts/ShipSettings.gd" id="1_2etfc"]
+[ext_resource type="Script" uid="uid://c8p7p4j0fbl6a" path="res://Scripts/ShipSettings.gd" id="1_2etfc"]
 
 [sub_resource type="Curve" id="Curve_a2ffe"]
 _data = [Vector2(0, 0), 0.0, 2.83673, 0, 0, Vector2(1, 0.989472), 0.0, 0.0, 0, 0]

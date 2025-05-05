@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bc1xhey1oq5b6"]
 
 [ext_resource type="PackedScene" uid="uid://352v532iaw06" path="res://Scenes/VFX/vfx_basic_projectile_hit.tscn" id="1_hamdk"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_g07wl"]
+[ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_g07wl"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]

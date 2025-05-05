@@ -3,7 +3,7 @@
 [ext_resource type="Resource" uid="uid://b3kcjid5w1cyy" path="res://Resources/Emitter Settings/player_muffet_main.tres" id="1_xcr1d"]
 [ext_resource type="Texture2D" uid="uid://pg6np2moymmd" path="res://Sprites/Icons/icon_player_muffet.png" id="2_taskn"]
 [ext_resource type="Texture2D" uid="uid://cmcdbacpq3t8c" path="res://Sprites/Gunships/Players/gunship_player_muffet.png" id="3_mhp1g"]
-[ext_resource type="Script" path="res://Scripts/PlayerShipSettings.gd" id="4_e41nm"]
+[ext_resource type="Script" uid="uid://bg6ecjyka87ab" path="res://Scripts/PlayerShipSettings.gd" id="4_e41nm"]
 [ext_resource type="Resource" uid="uid://bs20cv44133bm" path="res://Resources/Emitter Settings/player_muffet_sub.tres" id="5_1ak1i"]
 
 [sub_resource type="Curve" id="Curve_5gjpg"]

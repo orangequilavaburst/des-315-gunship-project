@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bluxhogkmrt6l"]
 
 [ext_resource type="PackedScene" uid="uid://c3xkytjlqqdi5" path="res://Scenes/Game Objects/Projectiles/player_missile_roxy.tscn" id="1_62hy8"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_ao6md"]
+[ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_ao6md"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://mth6fcyi5l8c"]
 
 [ext_resource type="PackedScene" uid="uid://bpovqkkpkc7am" path="res://Scenes/VFX/vfx_bullet_isaac_hit.tscn" id="1_v644m"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_4akee"]
+[ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_4akee"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]

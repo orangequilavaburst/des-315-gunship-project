@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://dgyqbf7ksm3jm"]
 
 [ext_resource type="PackedScene" uid="uid://khd35qcpt1sj" path="res://Scenes/VFX/vfx_explosion_basic.tscn" id="1_hhpy1"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_itvne"]
+[ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_itvne"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://rvk3jj0j5qee"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_erb4m"]
+[ext_resource type="Script" uid="uid://dy5dwp31xm470" path="res://Scripts/ShipController.gd" id="1_erb4m"]
 [ext_resource type="Resource" uid="uid://bntq68etxmp0n" path="res://Resources/Ship Settings/Enemies/enemy_ship_tiny.tres" id="2_nad0x"]
 [ext_resource type="Texture2D" uid="uid://c4hrpubn0rkdu" path="res://Sprites/Gunships/Enemies/gunship_enemy_tiny.png" id="3_k657t"]
-[ext_resource type="Script" path="res://Scripts/TargetInput.gd" id="4_37wid"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_tmg76"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_w72ci"]
-[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_r5tiw"]
+[ext_resource type="Script" uid="uid://ck6afn8k6dcw4" path="res://Scripts/TargetInput.gd" id="4_37wid"]
+[ext_resource type="Script" uid="uid://bfk74mxolp3de" path="res://Scripts/HealthComponent.gd" id="5_tmg76"]
+[ext_resource type="Script" uid="uid://cgw7wlf7qg73i" path="res://Scripts/ContactDamageComponent.gd" id="6_w72ci"]
+[ext_resource type="Script" uid="uid://d2rohycq7nxnr" path="res://Scripts/Emitter.gd" id="7_r5tiw"]
 [ext_resource type="Resource" uid="uid://bwkqiyfaise35" path="res://Resources/Emitter Settings/basic_explosion_vfx.tres" id="8_emi2e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]

@@ -1,12 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://egi6uof5lip2"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_w64pw"]
+[ext_resource type="Script" uid="uid://dy5dwp31xm470" path="res://Scripts/ShipController.gd" id="1_w64pw"]
 [ext_resource type="Resource" uid="uid://c5v7sxvikql2v" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings.tres" id="2_55g5i"]
 [ext_resource type="Texture2D" uid="uid://3cvfa0isvics" path="res://Sprites/Projectiles/bullet_player_keaton.png" id="3_gwrjh"]
-[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_s06ia"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_0uwj5"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_2tyeh"]
-[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_7wuuj"]
+[ext_resource type="Script" uid="uid://bcuxebov1g34" path="res://Scripts/ProjectileShipInput.gd" id="4_s06ia"]
+[ext_resource type="Script" uid="uid://bfk74mxolp3de" path="res://Scripts/HealthComponent.gd" id="5_0uwj5"]
+[ext_resource type="Script" uid="uid://cgw7wlf7qg73i" path="res://Scripts/ContactDamageComponent.gd" id="6_2tyeh"]
+[ext_resource type="Script" uid="uid://d2rohycq7nxnr" path="res://Scripts/Emitter.gd" id="7_7wuuj"]
 [ext_resource type="Resource" uid="uid://bc1xhey1oq5b6" path="res://Resources/Emitter Settings/basic_player_shot_vfx.tres" id="8_tl6bl"]
 [ext_resource type="Resource" uid="uid://dwmnud2m2wfrd" path="res://Resources/Emitter Settings/basic_player_shot_flash_vfx.tres" id="9_i583w"]
 
@@ -50,8 +50,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qp1s4"]
 _data = {
-"RESET": SubResource("Animation_ohb6e"),
-"default": SubResource("Animation_3ugl8")
+&"RESET": SubResource("Animation_ohb6e"),
+&"default": SubResource("Animation_3ugl8")
 }
 
 [sub_resource type="Animation" id="Animation_nwngl"]
@@ -88,7 +88,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
 _data = {
-"default": SubResource("Animation_nwngl")
+&"default": SubResource("Animation_nwngl")
 }
 
 [node name="Player Projectile Keaton" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]

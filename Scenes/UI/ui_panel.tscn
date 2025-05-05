@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://edph5llvjjkt"]
 
 [ext_resource type="Theme" uid="uid://bum7516hd3eo3" path="res://Themes/NESTheme.tres" id="1_b1fh0"]
-[ext_resource type="Script" path="res://Scripts/UIController.gd" id="2_0s6b4"]
+[ext_resource type="Script" uid="uid://bu0o440h4cc08" path="res://Scripts/UIController.gd" id="2_0s6b4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b5mdn"]
 size = Vector2(32, 32)

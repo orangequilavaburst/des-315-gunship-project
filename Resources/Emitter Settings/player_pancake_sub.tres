@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://cdbkj0g60retj"]
 
 [ext_resource type="PackedScene" uid="uid://dp06m0ptxagx5" path="res://Scenes/Game Objects/Projectiles/player_missile_pancake.tscn" id="1_1hnxx"]
-[ext_resource type="Script" path="res://Scripts/EmitterSettings.gd" id="2_hbokk"]
+[ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_hbokk"]
 
 [sub_resource type="Curve" id="Curve_tscpp"]
 _data = [Vector2(0, 0), 0.0, 0.998921, 0, 0, Vector2(1, 1), 0.998654, 0.0, 0, 0]

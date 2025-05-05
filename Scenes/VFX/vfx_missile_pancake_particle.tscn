@@ -49,8 +49,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ha2ac"]
 _data = {
-"RESET": SubResource("Animation_qlw74"),
-"default": SubResource("Animation_ix28p")
+&"RESET": SubResource("Animation_qlw74"),
+&"default": SubResource("Animation_ix28p")
 }
 
 [node name="Pancake Missile Hit" type="Node2D"]

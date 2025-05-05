@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://br4plpsbxd6nl"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_psu7c"]
+[ext_resource type="Script" uid="uid://dy5dwp31xm470" path="res://Scripts/ShipController.gd" id="1_psu7c"]
 [ext_resource type="Resource" uid="uid://c4nblg2n1kdp5" path="res://Resources/Ship Settings/Projectiles/basic_shot_settings_medium.tres" id="2_8cugs"]
 [ext_resource type="Texture2D" uid="uid://dhby4vffm5gat" path="res://Sprites/Projectiles/bullet_basic_medium.png" id="3_e3c43"]
-[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_mnac3"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_2ve1u"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_if7rx"]
+[ext_resource type="Script" uid="uid://bcuxebov1g34" path="res://Scripts/ProjectileShipInput.gd" id="4_mnac3"]
+[ext_resource type="Script" uid="uid://bfk74mxolp3de" path="res://Scripts/HealthComponent.gd" id="5_2ve1u"]
+[ext_resource type="Script" uid="uid://cgw7wlf7qg73i" path="res://Scripts/ContactDamageComponent.gd" id="6_if7rx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wn53n"]
 radius = 3.0
@@ -46,7 +46,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
 _data = {
-"default": SubResource("Animation_nwngl")
+&"default": SubResource("Animation_nwngl")
 }
 
 [node name="Basic Enemy Projectile" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite")]

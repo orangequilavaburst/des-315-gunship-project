@@ -1,12 +1,12 @@
 [gd_scene load_steps=18 format=3 uid="uid://dp06m0ptxagx5"]
 
-[ext_resource type="Script" path="res://Scripts/ShipController.gd" id="1_veeuc"]
+[ext_resource type="Script" uid="uid://dy5dwp31xm470" path="res://Scripts/ShipController.gd" id="1_veeuc"]
 [ext_resource type="Resource" uid="uid://ofgbbls1c2w4" path="res://Resources/Ship Settings/Projectiles/bullet_missile_pancake.tres" id="2_ykbhf"]
 [ext_resource type="Texture2D" uid="uid://61416rhflon4" path="res://Sprites/Projectiles/bullet_missile_pancake.png" id="3_apo3h"]
-[ext_resource type="Script" path="res://Scripts/ProjectileShipInput.gd" id="4_chmou"]
-[ext_resource type="Script" path="res://Scripts/HealthComponent.gd" id="5_q2i1d"]
-[ext_resource type="Script" path="res://Scripts/ContactDamageComponent.gd" id="6_yeeed"]
-[ext_resource type="Script" path="res://Scripts/Emitter.gd" id="7_1dprc"]
+[ext_resource type="Script" uid="uid://bcuxebov1g34" path="res://Scripts/ProjectileShipInput.gd" id="4_chmou"]
+[ext_resource type="Script" uid="uid://bfk74mxolp3de" path="res://Scripts/HealthComponent.gd" id="5_q2i1d"]
+[ext_resource type="Script" uid="uid://cgw7wlf7qg73i" path="res://Scripts/ContactDamageComponent.gd" id="6_yeeed"]
+[ext_resource type="Script" uid="uid://d2rohycq7nxnr" path="res://Scripts/Emitter.gd" id="7_1dprc"]
 [ext_resource type="Resource" uid="uid://bc1xhey1oq5b6" path="res://Resources/Emitter Settings/basic_player_shot_vfx.tres" id="8_odg2f"]
 [ext_resource type="Resource" uid="uid://dgdxrh5iqayku" path="res://Resources/Emitter Settings/liquid_shot_flash_vfx.tres" id="9_0xxyi"]
 [ext_resource type="Resource" uid="uid://bxfm6he1xdot3" path="res://Resources/Emitter Settings/player_pancake_main_vfx.tres" id="10_tpwr4"]
@@ -51,7 +51,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7i0mr"]
 _data = {
-"default": SubResource("Animation_nwngl")
+&"default": SubResource("Animation_nwngl")
 }
 
 [sub_resource type="Animation" id="Animation_fa3oj"]
@@ -88,8 +88,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w4xs5"]
 _data = {
-"RESET": SubResource("Animation_fa3oj"),
-"default": SubResource("Animation_yuby7")
+&"RESET": SubResource("Animation_fa3oj"),
+&"default": SubResource("Animation_yuby7")
 }
 
 [node name="Bubble" type="CharacterBody2D" node_paths=PackedStringArray("shipInput", "collisionShape", "health", "shipSprite", "smokeEmitter")]

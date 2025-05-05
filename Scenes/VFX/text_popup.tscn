@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b17muhuny5idg"]
 
 [ext_resource type="Theme" uid="uid://bum7516hd3eo3" path="res://Themes/NESTheme.tres" id="1_sb8xc"]
-[ext_resource type="Script" path="res://Scripts/TextPopup.gd" id="1_uxwkp"]
+[ext_resource type="Script" uid="uid://k1mawjyj4egq" path="res://Scripts/TextPopup.gd" id="1_uxwkp"]
 [ext_resource type="FontFile" uid="uid://b0417v3dtk052" path="res://Fonts/m3x6.ttf" id="2_6u3va"]
 
 [node name="Text Popup" type="Node2D" node_paths=PackedStringArray("labelRef", "timerRef")]
