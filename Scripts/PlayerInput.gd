@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _draw() -> void:
-	if autoplay:
+	if autoplay and doDebugDraw:
 		draw_line(Vector2.ZERO, (targetPosition - controller.global_position).rotated(-controller.global_rotation), Color.RED)
 		draw_line(Vector2.ZERO, Vector2.RIGHT*(targetPosition - controller.global_position).length(), Color.BLUE)
 		draw_arc(Vector2.ZERO, (targetPosition - controller.global_position).length(), 0.0, angle_difference(controller.global_rotation, (targetPosition - controller.global_position).angle()), 10, Color.RED)
