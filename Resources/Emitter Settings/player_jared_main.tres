@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://f4yhg5wv6e0w"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://f4yhg5wv6e0w"]
 
 [ext_resource type="PackedScene" uid="uid://horpqgqovgci" path="res://Scenes/Game Objects/Projectiles/player_bullet_jared.tscn" id="1_yjlas"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_i3d8t"]
@@ -10,20 +10,10 @@ point_count = 2
 [resource]
 script = ExtResource("2_i3d8t")
 objectToSpawn = ExtResource("1_yjlas")
-parentToRoot = true
-inheritParentVelocity = true
 alwaysFire = false
-angleJitter = 0.0
-objectCount = 1
-objectAngleSpread = 0.0
-objectAngleSpreadJitter = 0.0
 burstCount = 5
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.05
 positionOffset = Vector2(8, 0)
-positionOffsetJitter = Vector2(0, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 0.5
 recoilSpeed = 10.0

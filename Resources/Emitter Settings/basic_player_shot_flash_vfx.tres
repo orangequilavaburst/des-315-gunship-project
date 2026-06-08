@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://dwmnud2m2wfrd"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://dwmnud2m2wfrd"]
 
 [ext_resource type="PackedScene" uid="uid://cikg4dprvdsl8" path="res://Scenes/VFX/vfx_basic_projectile_flash.tscn" id="1_xtt0x"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_xiao6"]
@@ -10,20 +10,10 @@ point_count = 2
 [resource]
 script = ExtResource("2_xiao6")
 objectToSpawn = ExtResource("1_xtt0x")
-parentToRoot = true
-inheritParentVelocity = true
 alwaysFire = false
 angleJitter = 72.0
 objectCount = 5
 objectAngleSpread = 360.0
 objectAngleSpreadJitter = 36.0
 burstCount = 1
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
-burstShootTime = 0.0
-positionOffset = Vector2(0, 0)
-positionOffsetJitter = Vector2(0, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
-shootTime = 1.0
-recoilSpeed = 0.0

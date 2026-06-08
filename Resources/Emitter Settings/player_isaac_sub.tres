@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://crblmfk01viox"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://crblmfk01viox"]
 
 [ext_resource type="PackedScene" uid="uid://bpm1hm4quify" path="res://Scenes/Game Objects/Projectiles/player_brimstone_isaac.tscn" id="1_xh6ic"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_yiwq4"]
@@ -13,17 +13,6 @@ objectToSpawn = ExtResource("1_xh6ic")
 parentToRoot = false
 inheritParentVelocity = false
 alwaysFire = false
-angleJitter = 0.0
-objectCount = 1
-objectAngleSpread = 0.0
-objectAngleSpreadJitter = 0.0
 burstCount = 1
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
-burstShootTime = 0.0
-positionOffset = Vector2(0, 0)
-positionOffsetJitter = Vector2(0, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 5.0
-recoilSpeed = 0.0

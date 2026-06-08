@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://cdn6wnhi4ob0m"]
+[gd_resource type="Resource" script_class="ShipSettings" format=3 uid="uid://cdn6wnhi4ob0m"]
 
 [ext_resource type="Script" uid="uid://c8p7p4j0fbl6a" path="res://Scripts/ShipSettings.gd" id="1_gff2r"]
 
@@ -12,19 +12,10 @@ point_count = 2
 
 [resource]
 script = ExtResource("1_gff2r")
-maximumLinearVelocity = 0.0
-maximumAngularVelocity = 0.0
-maximumLinearAcceleration = 0.0
-maximumAngularAcceleration = 0.0
 linearFriction = 100.0
-angularFriction = 0.0
-turningSlowdownRatio = 0.0
-linearAccelerationTime = 1.0
 linearAccelerationCurve = SubResource("Curve_mc1ns")
-angularAccelerationTime = 1.0
 angularAccelerationCurve = SubResource("Curve_a2ffe")
 pointAtTarget = true
 maxHealth = 20.0
-controlType = 0
 explosionTime = 0.5
 explosionMagnitude = 1.0

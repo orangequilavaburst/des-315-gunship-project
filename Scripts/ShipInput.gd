@@ -1,7 +1,7 @@
 class_name ShipInput
 extends Node2D
 
-const doDebugDraw : bool = false
+var doDebugDraw : bool = false
 
 enum TargetType {
 	NONE,

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bluxhogkmrt6l"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://bluxhogkmrt6l"]
 
 [ext_resource type="PackedScene" uid="uid://c3xkytjlqqdi5" path="res://Scenes/Game Objects/Projectiles/player_missile_roxy.tscn" id="1_62hy8"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_ao6md"]
@@ -10,20 +10,9 @@ point_count = 2
 [resource]
 script = ExtResource("2_ao6md")
 objectToSpawn = ExtResource("1_62hy8")
-parentToRoot = true
-inheritParentVelocity = true
 alwaysFire = false
 angleJitter = 45.0
-objectCount = 1
-objectAngleSpread = 0.0
-objectAngleSpreadJitter = 0.0
 burstCount = 12
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.1
-positionOffset = Vector2(0, 0)
-positionOffsetJitter = Vector2(0, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 3.0
-recoilSpeed = 0.0

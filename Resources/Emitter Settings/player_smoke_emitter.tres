@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://c0pewffged2lu"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://c0pewffged2lu"]
 
 [ext_resource type="PackedScene" uid="uid://dxpjk253cbajq" path="res://Scenes/VFX/vfx_big_smoke.tscn" id="1_sgpqd"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_08qhe"]
@@ -10,20 +10,8 @@ point_count = 2
 [resource]
 script = ExtResource("2_08qhe")
 objectToSpawn = ExtResource("1_sgpqd")
-parentToRoot = true
 inheritParentVelocity = false
-alwaysFire = true
-angleJitter = 0.0
-objectCount = 1
-objectAngleSpread = 0.0
-objectAngleSpreadJitter = 0.0
-burstCount = 0
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.5
-positionOffset = Vector2(0, 0)
 positionOffsetJitter = Vector2(16, 16)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 0.0
-recoilSpeed = 0.0

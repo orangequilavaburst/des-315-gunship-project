@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://cdbkj0g60retj"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://cdbkj0g60retj"]
 
 [ext_resource type="PackedScene" uid="uid://dp06m0ptxagx5" path="res://Scenes/Game Objects/Projectiles/player_missile_pancake.tscn" id="1_1hnxx"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_hbokk"]
@@ -10,20 +10,11 @@ point_count = 2
 [resource]
 script = ExtResource("2_hbokk")
 objectToSpawn = ExtResource("1_1hnxx")
-parentToRoot = true
-inheritParentVelocity = true
 alwaysFire = false
-angleJitter = 0.0
 objectCount = 8
 objectAngleSpread = 315.0
-objectAngleSpreadJitter = 0.0
 burstCount = 1
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
 burstShootTime = 0.05
-positionOffset = Vector2(0, 0)
 positionOffsetJitter = Vector2(8, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 4.0
-recoilSpeed = 0.0

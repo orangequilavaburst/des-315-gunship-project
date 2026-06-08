@@ -56,6 +56,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.pressed:
 			match(event.keycode):
+				KEY_L:
+					player.shipInput.doDebugDraw = not player.shipInput.doDebugDraw
+					pass
 				KEY_COMMA:
 					playerShipIndex -= 1
 					pass

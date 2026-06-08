@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://ceydvcau3ms8h"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" format=3 uid="uid://ceydvcau3ms8h"]
 
 [ext_resource type="Resource" uid="uid://f4yhg5wv6e0w" path="res://Resources/Emitter Settings/player_jared_main.tres" id="1_p8xf7"]
 [ext_resource type="Script" uid="uid://bg6ecjyka87ab" path="res://Scripts/PlayerShipSettings.gd" id="1_phjya"]
@@ -22,11 +22,7 @@ script = ExtResource("1_phjya")
 playerName = "J8-Bit"
 playerShipSprite = ExtResource("2_jifj1")
 playerIconSprite = ExtResource("2_iuifg")
-regenThreshold = 0.25
 regenTime = 2.5
-regenPotency = 5.0
-bulletTimeThreshold = 0.25
-bulletTimeMaxMultiplier = 0.5
 mainWeaponSettings = ExtResource("1_p8xf7")
 subWeaponSettings = ExtResource("5_mppik")
 maximumLinearVelocity = 150.0
@@ -40,9 +36,5 @@ linearAccelerationTime = 0.5
 linearAccelerationCurve = SubResource("Curve_yvtvy")
 angularAccelerationTime = 0.5
 angularAccelerationCurve = SubResource("Curve_5gjpg")
-pointAtTarget = false
 collisionShape = SubResource("CircleShape2D_k7fh4")
 maxHealth = 100.0
-controlType = 0
-explosionTime = 0.0
-explosionMagnitude = 0.0

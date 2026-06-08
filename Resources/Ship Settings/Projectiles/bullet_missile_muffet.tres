@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShipSettings" load_steps=4 format=3 uid="uid://d0trqyrj2e1pi"]
+[gd_resource type="Resource" script_class="ShipSettings" format=3 uid="uid://d0trqyrj2e1pi"]
 
 [ext_resource type="Script" uid="uid://c8p7p4j0fbl6a" path="res://Scripts/ShipSettings.gd" id="1_tuowb"]
 
@@ -23,8 +23,4 @@ linearAccelerationTime = 0.25
 linearAccelerationCurve = SubResource("Curve_mc1ns")
 angularAccelerationTime = 0.25
 angularAccelerationCurve = SubResource("Curve_a2ffe")
-pointAtTarget = false
 maxHealth = 100.0
-controlType = 0
-explosionTime = 0.0
-explosionMagnitude = 0.0

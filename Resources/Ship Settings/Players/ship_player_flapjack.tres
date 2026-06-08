@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://g2ahncgdcfp3"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" format=3 uid="uid://g2ahncgdcfp3"]
 
 [ext_resource type="Resource" uid="uid://chta6vcb200pk" path="res://Resources/Emitter Settings/player_pancake_main.tres" id="1_4qfv7"]
 [ext_resource type="Texture2D" uid="uid://cdlu3g8oh5pqc" path="res://Sprites/Gunships/Players/gunship_player_flapjack.png" id="1_qgs6j"]
@@ -22,7 +22,6 @@ script = ExtResource("3_ms1gm")
 playerName = "Pancake"
 playerShipSprite = ExtResource("1_qgs6j")
 playerIconSprite = ExtResource("2_eq3a5")
-regenThreshold = 0.25
 regenTime = 1.0
 regenPotency = 1.0
 bulletTimeThreshold = 0.75
@@ -36,13 +35,7 @@ maximumAngularAcceleration = 4000.0
 linearFriction = 1000.0
 angularFriction = 2000.0
 turningSlowdownRatio = 0.5
-linearAccelerationTime = 1.0
 linearAccelerationCurve = SubResource("Curve_yvtvy")
-angularAccelerationTime = 1.0
 angularAccelerationCurve = SubResource("Curve_5gjpg")
-pointAtTarget = false
 collisionShape = SubResource("CircleShape2D_k7fh4")
 maxHealth = 80.0
-controlType = 0
-explosionTime = 0.0
-explosionMagnitude = 0.0

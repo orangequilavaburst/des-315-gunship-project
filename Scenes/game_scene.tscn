@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d4habyr4lifuy"]
+[gd_scene format=3 uid="uid://d4habyr4lifuy"]
 
 [ext_resource type="PackedScene" uid="uid://egqbdmophtov" path="res://Scenes/Game Objects/Ships/player_ship.tscn" id="1_1xd0m"]
 [ext_resource type="Script" uid="uid://db62dpvl6wt6b" path="res://Scripts/GameManager.gd" id="1_fkfxw"]
@@ -86,22 +86,22 @@ name = "Boss Battle"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xcauo"]
 size = Vector2(255, 199.5)
 
-[node name="Game Scene" type="Node2D"]
+[node name="Game Scene" type="Node2D" unique_id=178666116]
 
-[node name="Player Ship" parent="." instance=ExtResource("1_1xd0m")]
+[node name="Player Ship" parent="." unique_id=91874916 instance=ExtResource("1_1xd0m")]
 position = Vector2(129, 145)
 
-[node name="Swarm Manager" type="Node2D" parent="."]
+[node name="Swarm Manager" type="Node2D" parent="." unique_id=327091928]
 script = ExtResource("2_13kq3")
 swarms = Array[ExtResource("3_th72d")]([SubResource("Resource_v7twn"), SubResource("Resource_mvsls"), SubResource("Resource_406fj"), SubResource("Resource_2oxdt"), SubResource("Resource_trcv7"), SubResource("Resource_bxnmw"), SubResource("Resource_twq82"), SubResource("Resource_wruf6"), SubResource("Resource_owxwv"), SubResource("Resource_iswqm")])
 
-[node name="Telemetry Handler" type="Node2D" parent="." node_paths=PackedStringArray("playerShip", "swarmManager", "gameManager")]
+[node name="Telemetry Handler" type="Node2D" parent="." unique_id=207893279 node_paths=PackedStringArray("playerShip", "swarmManager", "gameManager")]
 script = ExtResource("9_bf3wx")
 playerShip = NodePath("../Player Ship")
 swarmManager = NodePath("../Swarm Manager")
 gameManager = NodePath("../Game Manager")
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("focus", "uiControl", "screenArea")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=260380484 node_paths=PackedStringArray("focus", "uiControl", "screenArea")]
 z_index = -10
 position = Vector2(127, 120)
 script = ExtResource("2_addrj")
@@ -115,10 +115,10 @@ enemyLineColor = Color(0.0941176, 0.223529, 0.345098, 1)
 enemyOffsetSpeed = 100.0
 enemyOffsetAmount = 0.1
 
-[node name="UI Control" type="CanvasLayer" parent="Camera2D"]
+[node name="UI Control" type="CanvasLayer" parent="Camera2D" unique_id=1238805570]
 follow_viewport_enabled = true
 
-[node name="UI Panel" parent="Camera2D/UI Control" node_paths=PackedStringArray("shipSettingsController") instance=ExtResource("2_ggo0f")]
+[node name="UI Panel" parent="Camera2D/UI Control" unique_id=1137493731 node_paths=PackedStringArray("shipSettingsController") instance=ExtResource("2_ggo0f")]
 custom_minimum_size = Vector2(256, 40)
 anchors_preset = 0
 anchor_top = 0.0
@@ -130,32 +130,32 @@ pivot_offset = Vector2(0, -200)
 size_flags_horizontal = 3
 shipSettingsController = NodePath("../../../Player Ship")
 
-[node name="Game Area" type="Area2D" parent="Camera2D"]
+[node name="Game Area" type="Area2D" parent="Camera2D" unique_id=1776213459]
 position = Vector2(-127, -120)
 collision_layer = 0
 collision_mask = 15
 collision_priority = 2.0
 script = ExtResource("11_wtkdf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Game Area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Game Area" unique_id=1768300588]
 position = Vector2(127.5, 140.25)
 shape = SubResource("RectangleShape2D_xcauo")
 
-[node name="Game Manager" type="Node" parent="." node_paths=PackedStringArray("player", "camera", "swarmManager")]
+[node name="Game Manager" type="Node" parent="." unique_id=43980189 node_paths=PackedStringArray("player", "camera", "swarmManager")]
 script = ExtResource("1_fkfxw")
 playerShips = Array[ExtResource("2_galva")]([ExtResource("3_7aivu"), ExtResource("4_ysg4k"), ExtResource("5_sn3d5"), ExtResource("9_lnkf1"), ExtResource("10_rtxa4"), ExtResource("12_wka5w")])
 player = NodePath("../Player Ship")
 camera = NodePath("../Camera2D")
 swarmManager = NodePath("../Swarm Manager")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1727027722]
 follow_viewport_enabled = true
 
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1852870043]
 motion_scale = Vector2(0.25, 0.25)
 motion_mirroring = Vector2(32, 32)
 
-[node name="Stars" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+[node name="Stars" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2" unique_id=1234149300]
 texture_repeat = 2
 position = Vector2(-12800, -12000)
 texture = ExtResource("9_uh7mo")
@@ -163,11 +163,11 @@ centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 25600, 24000)
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=1458835078]
 motion_scale = Vector2(0.1, 0.1)
 motion_mirroring = Vector2(64, 64)
 
-[node name="Stars" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Stars" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=75048530]
 texture_repeat = 2
 position = Vector2(-12800, -12000)
 texture = ExtResource("8_22whn")

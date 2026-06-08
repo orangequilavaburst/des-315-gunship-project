@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PlayerShipSettings" load_steps=9 format=3 uid="uid://ncefhfhuw361"]
+[gd_resource type="Resource" script_class="PlayerShipSettings" format=3 uid="uid://ncefhfhuw361"]
 
 [ext_resource type="Resource" uid="uid://bgj2jybebf8yc" path="res://Resources/Emitter Settings/player_isaac_main.tres" id="1_dt2wn"]
 [ext_resource type="Texture2D" uid="uid://bv753pokh7vef" path="res://Sprites/Icons/icon_player_isaac.png" id="1_n2i4n"]
@@ -22,7 +22,6 @@ script = ExtResource("3_72ajr")
 playerName = "Isaac"
 playerShipSprite = ExtResource("2_51rk6")
 playerIconSprite = ExtResource("1_n2i4n")
-regenThreshold = 0.25
 regenTime = 0.0
 regenPotency = 0.0
 bulletTimeThreshold = 0.0
@@ -36,13 +35,8 @@ maximumAngularAcceleration = 1000.0
 linearFriction = 250.0
 angularFriction = 1000.0
 turningSlowdownRatio = 0.1
-linearAccelerationTime = 1.0
 linearAccelerationCurve = SubResource("Curve_yvtvy")
 angularAccelerationTime = 0.1
 angularAccelerationCurve = SubResource("Curve_5gjpg")
-pointAtTarget = false
 collisionShape = SubResource("RectangleShape2D_g1wgs")
 maxHealth = 50.0
-controlType = 0
-explosionTime = 0.0
-explosionMagnitude = 0.0

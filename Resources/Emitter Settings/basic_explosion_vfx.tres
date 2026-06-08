@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EmitterSettings" load_steps=4 format=3 uid="uid://bwkqiyfaise35"]
+[gd_resource type="Resource" script_class="EmitterSettings" format=3 uid="uid://bwkqiyfaise35"]
 
 [ext_resource type="PackedScene" uid="uid://khd35qcpt1sj" path="res://Scenes/VFX/vfx_explosion_basic.tscn" id="1_svfqj"]
 [ext_resource type="Script" uid="uid://dv7vkr6psr6uq" path="res://Scripts/EmitterSettings.gd" id="2_town7"]
@@ -10,20 +10,8 @@ point_count = 2
 [resource]
 script = ExtResource("2_town7")
 objectToSpawn = ExtResource("1_svfqj")
-parentToRoot = true
-inheritParentVelocity = true
 alwaysFire = false
 angleJitter = 360.0
-objectCount = 1
-objectAngleSpread = 0.0
-objectAngleSpreadJitter = 0.0
 burstCount = 1
-burstAngleOffset = Vector2(0, 0)
 burstAngleOffsetCurve = SubResource("Curve_tscpp")
-burstShootTime = 0.0
-positionOffset = Vector2(0, 0)
-positionOffsetJitter = Vector2(0, 0)
-positionOffsetRotated = true
-positionOffsetFromCenter = false
 shootTime = 0.1
-recoilSpeed = 0.0
