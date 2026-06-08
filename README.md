@@ -13,3 +13,8 @@ Automatically records telemetry data about the various waves and ships.
 - L: Toggle debug drawing lines for the player
 - Ctrl + A: Toggle autoplay for the player
 - R: Reset game
+
+**Other details**
+- All assets and code in the project were created by me.
+- Please don't use the code or art assets included in the game without reaching out to me first, and please don't use it to train any sort of generative AI. 
+- Features characters from games including _Undertale_, _The Binding of Isaac_, _Five Nights at Freddy's_, and _Megalocephalo_.
